@@ -1,12 +1,12 @@
 import {
 	RiHome4Line,
-	RiHome4Fill,
+	//RiHome4Fill,
 	RiMenuSearchLine,
-	RiMenuSearchFill,
+	//RiMenuSearchFill,
 	RiShoppingCartLine,
-	RiShoppingCartFill,
+	//RiShoppingCartFill,
 	RiUser3Line,
-	RiUser3Fill,
+	//RiUser3Fill,
 } from "react-icons/ri";
 
 export const NavMobile = () => {
