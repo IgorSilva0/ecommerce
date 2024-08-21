@@ -8,6 +8,7 @@ import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { Toaster } from "@/ui/shadcn/sonner";
 import { env, publicUrl } from "@/env.mjs";
 import { Footer } from "@/ui/footer/Footer";
+import { NavMobile } from "@/ui/nav/NavMobile";
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	const t = await getTranslations("Global.metadata");
@@ -42,6 +43,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 				)}
 				<SpeedInsights />
 				<Analytics />
+				<NavMobile />
 			</body>
 		</html>
 	);
