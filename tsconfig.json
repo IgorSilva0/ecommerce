@@ -37,5 +37,5 @@
 		"**/*.tsx",
 		".next/types/**/*.ts"
 	],
-	"exclude": ["node_modules", "src/script/**/*.ts"]
+	"exclude": ["node_modules", "src/script/**/*.ts", "src/utils/supabase/*.ts"]
 }

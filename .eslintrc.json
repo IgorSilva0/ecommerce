@@ -108,5 +108,5 @@
 			}
 		}
 	],
-	"ignorePatterns": ["*.js", "*.jsx", "*.mjs", "src/script/**/*.ts"]
+	"ignorePatterns": ["*.js", "*.jsx", "*.mjs", "src/script/**/*.ts", "src/utils/supabase/*.ts"]
 }

@@ -9,6 +9,8 @@ export const env = createEnv({
 		STRIPE_CURRENCY: z.string(),
 		STRIPE_WEBHOOK_SECRET: z.string().optional(),
 
+		SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
+
 		ENABLE_STRIPE_TAX: z
 			.string()
 			.optional()
@@ -23,6 +25,9 @@ export const env = createEnv({
 		NEXT_PUBLIC_NEWSLETTER_ENDPOINT: z.string().optional(),
 
 		NEXT_PUBLIC_LANGUAGE: z.string().optional().default("en"),
+
+		NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
+		NEXT_PUBLIC_SUPABASE_URL: z.string(),
 	},
 	runtimeEnv: {
 		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
@@ -37,6 +42,10 @@ export const env = createEnv({
 		ENABLE_STRIPE_TAX: process.env.ENABLE_STRIPE_TAX,
 
 		NEXT_PUBLIC_LANGUAGE: process.env.NEXT_PUBLIC_LANGUAGE,
+
+		NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+		NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+		SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
 	},
 });
 
