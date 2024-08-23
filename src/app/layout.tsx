@@ -1,12 +1,11 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { Toaster } from "@/ui/shadcn/sonner";
-import { env, publicUrl } from "@/env.mjs";
+import { publicUrl } from "@/env.mjs";
 import { Footer } from "@/ui/footer/Footer";
 import { NavMobile } from "@/ui/nav/NavMobile";
 
@@ -32,18 +31,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 						<Footer />
 					</div>
 					<Toaster position="top-center" offset={10} />
+					<NavMobile />
 				</NextIntlClientProvider>
-				{env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
-					<Script
-						async
-						src="/stats/script.js"
-						data-host-url={publicUrl + "/stats"}
-						data-website-id={env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-					/>
-				)}
 				<SpeedInsights />
 				<Analytics />
-				<NavMobile />
 			</body>
 		</html>
 	);

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { SignUpServer } from "../signup/server";
 import { Button } from "@/ui/Button";
 
@@ -13,32 +12,73 @@ export const SignUpClient = () => {
 		}
 	};
 	return (
-		<div className="flex w-full flex-1 justify-center">
-			<div className="bg-socskyblue flex w-full flex-1 flex-col items-center justify-center px-8 shadow-2xl"></div>
+		<div className="flex w-full justify-center py-10">
 			<div className="flex w-full flex-1 items-center justify-center gap-2 px-8">
 				<form
-					onSubmit={postData} // Changed from action to onSubmit for client-side form handling
+					onSubmit={postData}
 					method="POST"
-					className="animate-fade-left bg-loginblue flex w-[50%] flex-col justify-center gap-2 rounded-2xl p-10 text-foreground shadow-md"
+					className="flex w-[400px] flex-col justify-center gap-2 rounded-2xl p-10 text-foreground shadow-epic"
 				>
-					<label className="text-md text-white" htmlFor="email">
+					<label className="text-md flex items-center gap-2" htmlFor="honorificprefix">
+						Title :
+						<select
+							id="honorificprefix"
+							className="rounded-lg border bg-inherit py-0 pr-8"
+							name="honorificprefix"
+							required
+						>
+							<option value="">select</option>
+							<option value="Mr">Mr.</option>
+							<option value="Mrs">Mrs.</option>
+							<option value="Miss">Miss</option>
+							<option value="Ms">Ms.</option>
+							<option value="Dr">Dr.</option>
+							<option value="Prof">Prof.</option>
+							<option value="Mx">Mx.</option>
+						</select>
+					</label>
+					<label className="text-md" htmlFor="givenname">
+						First Name
+					</label>
+					<input
+						id="givenname"
+						className="mb-1 rounded-xl border bg-inherit px-4 py-2"
+						name="givennamee"
+						placeholder="first name"
+						type="text"
+						autoComplete="given-name"
+						required
+					/>
+					<label className="text-md" htmlFor="familyname">
+						Last Name
+					</label>
+					<input
+						id="familyname"
+						className="mb-1 rounded-xl border bg-inherit px-4 py-2"
+						name="givennamee"
+						placeholder="last name"
+						type="text"
+						autoComplete="family-name"
+						required
+					/>
+					<label className="text-md" htmlFor="email">
 						Email
 					</label>
 					<input
 						id="email"
-						className="mb-6 rounded-2xl border bg-inherit bg-white px-4 py-2 dark:text-black"
+						className="mb-1 rounded-xl border bg-inherit px-4 py-2"
 						name="email"
 						placeholder="email@example.com"
 						type="email"
 						autoComplete="email"
 						required
 					/>
-					<label className="text-md text-white" htmlFor="password">
+					<label className="text-md" htmlFor="password">
 						Password
 					</label>
 					<input
 						id="password"
-						className="mb-6 rounded-2xl border bg-inherit bg-white px-4 py-2 dark:text-black"
+						className="mb-6 rounded-xl border bg-inherit px-4 py-2"
 						type="password"
 						name="password"
 						placeholder="••••••••"
@@ -46,13 +86,9 @@ export const SignUpClient = () => {
 						minLength={6}
 						required
 					/>
-					<Button pendingText="Submitting...">Sign Up</Button>
-					<p className="mt-4 text-center text-black">
-						Already have an account?{" "}
-						<Link href="/login" className="font-bold underline hover:text-black">
-							Login
-						</Link>
-					</p>
+					<Button pendingText="Submitting..." className="self-center">
+						Sign Up
+					</Button>
 				</form>
 			</div>
 		</div>

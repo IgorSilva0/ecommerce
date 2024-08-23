@@ -16,6 +16,9 @@ const config = {
 			},
 		},
 		extend: {
+			boxShadow: {
+				epic: "0 0px 5px #000000",
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { ShoppingBagIcon } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { calculateCartTotalNetWithoutShipping } from "commerce-kit";
 import { getCartFromCookiesAction } from "@/actions/cartActions";
@@ -9,7 +9,7 @@ import { formatMoney } from "@/lib/utils";
 
 const CartFallback = () => (
 	<div className="mr-2.5 h-6 w-6 opacity-30">
-		<ShoppingBagIcon />
+		<ShoppingCart />
 	</div>
 );
 
@@ -46,7 +46,7 @@ const CartSummaryNavInner = async () => {
 							className="relative mr-2.5 block h-6 w-6"
 							prefetch={true}
 						>
-							<ShoppingBagIcon />
+							<ShoppingCart />
 							<span className="absolute bottom-0 right-0 inline-flex h-5 w-5 translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 bg-white text-center text-xs">
 								<span className="sr-only">{t("itemsInCart")}: </span>
 								{totalItems}

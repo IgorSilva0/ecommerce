@@ -4,7 +4,13 @@ import * as React from "react";
 
 // TODO https://github.com/radix-ui/primitives/issues/2769
 
-import { useState, type ComponentPropsWithRef, type KeyboardEvent, type PointerEvent } from "react";
+import {
+	useState,
+	useEffect,
+	type ComponentPropsWithRef,
+	type KeyboardEvent,
+	type PointerEvent,
+} from "react";
 import { cn } from "@/lib/utils";
 import {
 	NavigationMenu,
@@ -15,9 +21,27 @@ import {
 	NavigationMenuTrigger,
 } from "@/ui/shadcn/navigation-menu";
 import { YnsLink } from "@/ui/YnsLink";
+import { Separator } from "@/ui/separator/Separator";
+import { userConnected } from "@/utils/supabase/userConnected";
 
 export function MyAccount() {
 	const [value, setValue] = useState<string | undefined>(undefined);
+	const [connect, setConnected] = useState(false);
+
+	useEffect(() => {
+		const userON = async () => {
+			try {
+				const a = await userConnected();
+				if (a) {
+					setConnected(true);
+				}
+			} catch (error) {
+				console.error("Failed to check user connection status:", error);
+			}
+		};
+		void userON();
+	}, []);
+
 	return (
 		<NavigationMenu value={value} onValueChange={setValue}>
 			<NavigationMenuList>
@@ -28,17 +52,41 @@ export function MyAccount() {
 						My Account
 					</NavigationMenuTriggerWithFixedUX>
 					<NavigationMenuContent>
-						<ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-							<ListItem href="/products" title="All products">
-								All products in our store are listed here.
-							</ListItem>
-							<ListItem href="/category/apparel" title="Apparel">
-								All apparel products in our store.
-							</ListItem>
-							<ListItem href="/category/accessories" title="Accessories">
-								All accessories products in our store.
-							</ListItem>
-						</ul>
+						{connect ? (
+							<ul className="grid gap-3 p-4 md:w-[100px] lg:w-[200px]">
+								<ListItem href="/products" title="All Purchase History">
+									Track every order.
+								</ListItem>
+								<ListItem href="/category/apparel" title="Manage your account">
+									Settings
+								</ListItem>
+								<ListItem href="/category/accessories" title="FAQs and support">
+									Help
+								</ListItem>
+								<a
+									href="/"
+									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
+								>
+									LogOut
+								</a>
+							</ul>
+						) : (
+							<ul className="grid p-4 md:w-[100px] lg:w-[200px]">
+								<a
+									href="/login?t=Signin"
+									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
+								>
+									Sign in
+								</a>
+								<Separator text={"or"} />
+								<a
+									href="/login?t=Signup"
+									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
+								>
+									Register
+								</a>
+							</ul>
+						)}
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 			</NavigationMenuList>
