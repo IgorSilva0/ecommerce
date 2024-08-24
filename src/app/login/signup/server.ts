@@ -5,16 +5,6 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
 export const SignUpServer = async (formData: FormData) => {
-	const supabase = createClient();
-
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-
-	if (user) {
-		return redirect("/");
-	}
-
 	try {
 		const origin = headers().get("origin");
 		const email = formData.get("email") as string;

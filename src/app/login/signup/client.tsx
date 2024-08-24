@@ -1,7 +1,13 @@
-import { SignUpServer } from "../signup/server";
+import { SignUpServer } from "./server";
 import { Button } from "@/ui/Button";
 
-export const SignUpClient = () => {
+type ViewType = "Signup" | "Signin";
+
+export const SignUpClient = ({
+	setView,
+}: {
+	setView: React.Dispatch<React.SetStateAction<ViewType>>;
+}) => {
 	const postData = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
@@ -11,14 +17,20 @@ export const SignUpClient = () => {
 			console.error("Sign up failed:", error);
 		}
 	};
+
+	const changeView = () => {
+		setView("Signin");
+	};
+
 	return (
 		<div className="flex w-full justify-center py-10">
 			<div className="flex w-full flex-1 items-center justify-center gap-2 px-8">
 				<form
 					onSubmit={postData}
 					method="POST"
-					className="flex w-[400px] flex-col justify-center gap-2 rounded-2xl p-10 text-foreground shadow-epic"
+					className="flex w-[500px] flex-col justify-center gap-2 rounded-2xl px-14 pb-14 pt-10 text-foreground shadow-epic"
 				>
+					<h2 className="mb-2 text-3xl font-bold">Create your account</h2>
 					<label className="text-md flex items-center gap-2" htmlFor="honorificprefix">
 						Title :
 						<select
@@ -27,7 +39,9 @@ export const SignUpClient = () => {
 							name="honorificprefix"
 							required
 						>
-							<option value="">select</option>
+							<option value="" className="text-gray-500">
+								select
+							</option>
 							<option value="Mr">Mr.</option>
 							<option value="Mrs">Mrs.</option>
 							<option value="Miss">Miss</option>
@@ -86,9 +100,15 @@ export const SignUpClient = () => {
 						minLength={6}
 						required
 					/>
-					<Button pendingText="Submitting..." className="self-center">
-						Sign Up
+					<Button pendingText="Submitting..." className="">
+						Create account
 					</Button>
+					<p className="self-center">
+						Already have a account?{" "}
+						<button onClick={changeView} type="reset" className="mt-2 hover:text-gray-600">
+							<b>Sign in</b>
+						</button>
+					</p>
 				</form>
 			</div>
 		</div>

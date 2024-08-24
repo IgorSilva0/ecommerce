@@ -1,9 +1,6 @@
 "use client";
 
 import * as React from "react";
-
-// TODO https://github.com/radix-ui/primitives/issues/2769
-
 import {
 	useState,
 	useEffect,
@@ -12,6 +9,7 @@ import {
 	type PointerEvent,
 } from "react";
 import { cn } from "@/lib/utils";
+import { signOut } from "@/utils/supabase/signout";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -21,7 +19,6 @@ import {
 	NavigationMenuTrigger,
 } from "@/ui/shadcn/navigation-menu";
 import { YnsLink } from "@/ui/YnsLink";
-import { Separator } from "@/ui/separator/Separator";
 import { userConnected } from "@/utils/supabase/userConnected";
 
 export function MyAccount() {
@@ -41,7 +38,10 @@ export function MyAccount() {
 		};
 		void userON();
 	}, []);
-
+	const signout = async () => {
+		await signOut();
+		setConnected(false);
+	};
 	return (
 		<NavigationMenu value={value} onValueChange={setValue}>
 			<NavigationMenuList>
@@ -54,36 +54,29 @@ export function MyAccount() {
 					<NavigationMenuContent>
 						{connect ? (
 							<ul className="grid gap-3 p-4 md:w-[100px] lg:w-[200px]">
-								<ListItem href="/products" title="All Purchase History">
+								<ListItem href="/orders" title="All Purchase History">
 									Track every order.
 								</ListItem>
-								<ListItem href="/category/apparel" title="Manage your account">
+								<ListItem href="/settings" title="Manage your account">
 									Settings
 								</ListItem>
-								<ListItem href="/category/accessories" title="FAQs and support">
+								<ListItem href="/help" title="FAQs and support">
 									Help
 								</ListItem>
-								<a
-									href="/"
+								<button
+									onClick={() => signout()}
 									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
 								>
 									LogOut
-								</a>
+								</button>
 							</ul>
 						) : (
-							<ul className="grid p-4 md:w-[100px] lg:w-[200px]">
+							<ul className="grid p-4 md:w-[90px] lg:w-[180px]">
 								<a
-									href="/login?t=Signin"
+									href="/login"
 									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
 								>
 									Sign in
-								</a>
-								<Separator text={"or"} />
-								<a
-									href="/login?t=Signup"
-									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
-								>
-									Register
 								</a>
 							</ul>
 						)}

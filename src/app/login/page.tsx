@@ -5,24 +5,17 @@ import { AuthView } from "./AuthView";
 import { userConnected } from "@/utils/supabase/userConnected";
 import { Nav } from "@/ui/nav/Nav";
 
-export default async function Login({
-	searchParams,
-}: {
-	searchParams: {
-		t?: "Signup" | "Signin";
-	};
-}) {
-	const type = searchParams.t;
+export default async function Login() {
 	const user = await userConnected();
 
-	if (user || !type || !["Signin", "Signup"].includes(type)) {
+	if (user) {
 		return redirect("/");
 	}
 
 	return (
 		<div className="flex flex-col">
 			<Nav />
-			<AuthView type={type} />
+			<AuthView />
 		</div>
 	);
 }
