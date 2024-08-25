@@ -2,6 +2,8 @@ import { type Metadata } from "next/types";
 import { getTranslations } from "next-intl/server";
 import { getCartFromCookiesAction } from "@/actions/cartActions";
 import { CheckoutCard } from "@/ui/checkout/CheckoutCard";
+import { userConnected } from "@/utils/supabase/userConnected";
+import { AuthView } from "@/app/login/AuthView";
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	const t = await getTranslations("/cart.metadata");
@@ -13,8 +15,18 @@ export const generateMetadata = async (): Promise<Metadata> => {
 export default async function CartPage() {
 	const cart = await getCartFromCookiesAction();
 	if (!cart) {
-		return null;
+		return <div>No cart found.</div>; // Provide a user-friendly message or alternative UI
 	}
 
-	return <CheckoutCard cart={cart.cart} />;
+	const user = await userConnected();
+	const email = user?.email ?? "";
+
+	return user ? (
+		<CheckoutCard cart={cart.cart} userEmail={email} />
+	) : (
+		<>
+			<div>Please login before proceeding.</div>
+			<AuthView />
+		</>
+	);
 }

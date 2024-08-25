@@ -21,7 +21,13 @@ export const paymentMethods = {
 	visa,
 };
 
-export const CheckoutCard = async ({ cart }: { cart: Commerce.Cart["cart"] }) => {
+export const CheckoutCard = async ({
+	cart,
+	userEmail,
+}: {
+	cart: Commerce.Cart["cart"];
+	userEmail: string;
+}) => {
 	const shippingRates = await Commerce.shippingBrowse();
 	const t = await getTranslations("/cart.page");
 
@@ -32,6 +38,7 @@ export const CheckoutCard = async ({ cart }: { cart: Commerce.Cart["cart"] }) =>
 			<StripePayment
 				shippingRateId={cart.metadata.shippingRateId}
 				shippingRates={structuredClone(shippingRates.data)}
+				userEmail={userEmail}
 			/>
 		</section>
 	);

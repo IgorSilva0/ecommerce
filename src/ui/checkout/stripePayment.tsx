@@ -29,19 +29,29 @@ import { saveBillingAddressAction, saveShippingRateAction } from "@/ui/checkout/
 export const StripePayment = ({
 	shippingRateId,
 	shippingRates,
+	userEmail,
 }: {
 	shippingRateId?: string | null;
 	shippingRates: Commerce.ShippingRate[];
+	userEmail: string;
 }) => {
-	return <PaymentForm shippingRates={shippingRates} cartShippingRateId={shippingRateId ?? null} />;
+	return (
+		<PaymentForm
+			shippingRates={shippingRates}
+			cartShippingRateId={shippingRateId ?? null}
+			userEmail={userEmail}
+		/>
+	);
 };
 
 const PaymentForm = ({
 	shippingRates,
 	cartShippingRateId,
+	userEmail,
 }: {
 	shippingRates: Commerce.ShippingRate[];
 	cartShippingRateId: string | null;
+	userEmail: string;
 }) => {
 	const t = useTranslations("/cart.page.stripePayment");
 
@@ -212,7 +222,13 @@ const PaymentForm = ({
 
 	return (
 		<form onSubmit={handleSubmit} className="grid gap-4">
-			<LinkAuthenticationElement onReady={() => setIsLinkAuthenticationReady(true)} />
+			<LinkAuthenticationElement
+				onReady={() => setIsLinkAuthenticationReady(true)}
+				options={{
+					defaultValues: { email: userEmail },
+				}}
+				className="pointer-events-none"
+			/>
 			<AddressElement
 				options={{
 					mode: "shipping",

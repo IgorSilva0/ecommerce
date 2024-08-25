@@ -2,15 +2,29 @@
 
 import { createClient } from "./server";
 
-export const userConnected = async () => {
+type User = {
+	email: string;
+	// Add other user properties if needed
+};
+
+export const userConnected = async (data?: string): Promise<User | null> => {
 	const supabase = createClient();
 
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
+	try {
+		const { data: userData, error } = await supabase.auth.getUser();
 
-	if (user) {
-		return true;
+		if (error) {
+			console.error("Error fetching user (Not Connected):", error);
+			return null; // Gracefully handle error
+		}
+
+		if (userData.user) {
+			return userData.user as User; // Ensure `userData.user` matches the `User` type
+		}
+
+		return null; // No user connected
+	} catch (error) {
+		console.error("Error in userConnected function:", error);
+		return null; // Gracefully handle error
 	}
-	return false;
 };

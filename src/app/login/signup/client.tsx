@@ -28,9 +28,9 @@ export const SignUpClient = ({
 				<form
 					onSubmit={postData}
 					method="POST"
-					className="flex w-[500px] flex-col justify-center gap-2 rounded-2xl px-14 pb-14 pt-10 text-foreground shadow-epic"
+					className="flex flex-col justify-center gap-2 rounded-2xl px-14 pb-14 pt-10 text-foreground shadow-epic md:w-[500px]"
 				>
-					<h2 className="mb-2 text-3xl font-bold">Create your account</h2>
+					<h2 className="mb-2 text-xl font-bold md:text-3xl">Create your account</h2>
 					<label className="text-md flex items-center gap-2" htmlFor="honorificprefix">
 						Title :
 						<select

@@ -37,11 +37,13 @@ export function MyAccount() {
 			}
 		};
 		void userON();
-	}, []);
+	}, [value]);
+
 	const signout = async () => {
 		await signOut();
 		setConnected(false);
 	};
+
 	return (
 		<NavigationMenu value={value} onValueChange={setValue}>
 			<NavigationMenuList>
