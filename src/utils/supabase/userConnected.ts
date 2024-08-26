@@ -14,7 +14,7 @@ export const userConnected = async (data?: string): Promise<User | null> => {
 		const { data: userData, error } = await supabase.auth.getUser();
 
 		if (error) {
-			console.error("Error fetching user (Not Connected):", error);
+			//console.error("Error fetching user (Not Connected):", error); // logs if the user is trying to do something without auth
 			return null; // Gracefully handle error
 		}
 
