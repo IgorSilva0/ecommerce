@@ -5,14 +5,16 @@ type ViewType = "Signup" | "Signin";
 
 export const SignUpClient = ({
 	setView,
+	cart,
 }: {
 	setView: React.Dispatch<React.SetStateAction<ViewType>>;
+	cart: boolean; // optional
 }) => {
 	const postData = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		try {
-			await SignUpServer(formData);
+			await SignUpServer(formData, cart);
 		} catch (error) {
 			console.error("Sign up failed:", error);
 		}
@@ -28,7 +30,7 @@ export const SignUpClient = ({
 				<form
 					onSubmit={postData}
 					method="POST"
-					className="flex flex-col justify-center gap-2 rounded-2xl px-14 pb-14 pt-10 text-foreground shadow-epic md:w-[500px]"
+					className="flex w-[100%] flex-col justify-center gap-2 rounded-2xl px-6 py-12 text-foreground shadow-epic md:w-[500px] md:px-14"
 				>
 					<h2 className="mb-2 text-xl font-bold md:text-3xl">Create your account</h2>
 					<label className="text-md flex items-center gap-2" htmlFor="honorificprefix">
@@ -51,25 +53,25 @@ export const SignUpClient = ({
 							<option value="Mx">Mx.</option>
 						</select>
 					</label>
-					<label className="text-md" htmlFor="givenname">
+					<label className="text-md" htmlFor="firstname">
 						First Name
 					</label>
 					<input
-						id="givenname"
+						id="firstname"
 						className="mb-1 rounded-xl border bg-inherit px-4 py-2"
-						name="givennamee"
+						name="firstname"
 						placeholder="first name"
 						type="text"
 						autoComplete="given-name"
 						required
 					/>
-					<label className="text-md" htmlFor="familyname">
+					<label className="text-md" htmlFor="lastname">
 						Last Name
 					</label>
 					<input
-						id="familyname"
+						id="lastname"
 						className="mb-1 rounded-xl border bg-inherit px-4 py-2"
-						name="givennamee"
+						name="lastname"
 						placeholder="last name"
 						type="text"
 						autoComplete="family-name"

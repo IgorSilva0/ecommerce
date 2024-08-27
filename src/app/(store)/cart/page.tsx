@@ -19,14 +19,14 @@ export default async function CartPage() {
 	}
 
 	const user = await userConnected();
-	const email = user?.email ?? "";
+	const email = user?.email ?? "notloggedin@email.com";
 
 	return user ? (
 		<CheckoutCard cart={cart.cart} userEmail={email} />
 	) : (
-		<>
+		<div>
 			<div>Please login before proceeding.</div>
-			<AuthView />
-		</>
+			<AuthView cart={true} />
+		</div>
 	);
 }

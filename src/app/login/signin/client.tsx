@@ -5,14 +5,16 @@ type ViewType = "Signup" | "Signin";
 
 export const SignInClient = ({
 	setView,
+	cart,
 }: {
 	setView: React.Dispatch<React.SetStateAction<ViewType>>;
+	cart: boolean; // optional
 }) => {
 	const postData = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		try {
-			await SignInServer(formData);
+			await SignInServer(formData, cart);
 		} catch (error) {
 			console.error("Sign up failed:", error);
 		}
@@ -28,7 +30,7 @@ export const SignInClient = ({
 				<form
 					onSubmit={postData}
 					method="POST"
-					className="flex flex-col justify-center gap-2 rounded-2xl px-14 pb-14 pt-10 text-foreground shadow-epic md:w-[500px]"
+					className="flex w-[100%] flex-col justify-center gap-2 rounded-2xl px-6 py-12 text-foreground shadow-epic md:w-[500px] md:px-14"
 				>
 					<h2 className="mb-2 text-xl font-bold md:text-3xl">Access your account</h2>
 					<label className="text-md" htmlFor="email">

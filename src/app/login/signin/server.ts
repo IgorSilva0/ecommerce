@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
-export const SignInServer = async (formData: FormData) => {
+export const SignInServer = async (formData: FormData, cart: boolean) => {
 	const email = formData.get("email") as string;
 	const password = formData.get("password") as string;
 	const supabase = createClient();
@@ -16,6 +16,8 @@ export const SignInServer = async (formData: FormData) => {
 	if (error) {
 		return redirect("/login?message=Could not authenticate user");
 	}
-
+	if (cart) {
+		return;
+	}
 	return redirect("/");
 };
