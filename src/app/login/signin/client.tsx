@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { SignInServer } from "./server";
 import { Button } from "@/ui/Button";
 
@@ -10,13 +11,19 @@ export const SignInClient = ({
 	setView: React.Dispatch<React.SetStateAction<ViewType>>;
 	cart: boolean; // optional
 }) => {
+	const [invalid, setInvalid] = useState(false);
+
 	const postData = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setInvalid(false);
 		const formData = new FormData(e.currentTarget);
 		try {
-			await SignInServer(formData, cart);
+			const log = await SignInServer(formData, cart);
+			if (log) {
+				setInvalid(true);
+			}
 		} catch (error) {
-			console.error("Sign up failed:", error);
+			console.error("Sign in failed:", error);
 		}
 	};
 
@@ -61,6 +68,9 @@ export const SignInClient = ({
 					<Button pendingText="Submitting..." className="">
 						Sign In
 					</Button>
+					{invalid ? (
+						<p className="self-center font-semibold text-red-500">Invalid login credentials</p>
+					) : null}
 					<p className="self-center">
 						No account?{" "}
 						<button onClick={changeView} type="reset" className="mt-2 hover:text-gray-600">

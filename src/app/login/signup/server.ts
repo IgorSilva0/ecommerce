@@ -20,10 +20,7 @@ export const SignUpServer = async (formData: FormData, cart: boolean) => {
 		});
 
 		if (error) {
-			if (error.code === "weak_password") {
-				return "Weak Passsword";
-			}
-			return "Could not authenticate user";
+			return true;
 		}
 		if (cart) {
 			return;
@@ -31,6 +28,6 @@ export const SignUpServer = async (formData: FormData, cart: boolean) => {
 		return redirect("/"); // If success on SIGN-UP.
 	} catch (error) {
 		console.error("An unexpected error occurred during sign-up:", error);
-		return false;
+		return;
 	}
 };

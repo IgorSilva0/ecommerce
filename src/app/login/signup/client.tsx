@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { SignUpServer } from "./server";
 import { Button } from "@/ui/Button";
 
@@ -10,11 +11,17 @@ export const SignUpClient = ({
 	setView: React.Dispatch<React.SetStateAction<ViewType>>;
 	cart: boolean; // optional
 }) => {
+	const [invalid, setInvalid] = useState(false);
+
 	const postData = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setInvalid(false);
 		const formData = new FormData(e.currentTarget);
 		try {
-			await SignUpServer(formData, cart);
+			const log = await SignUpServer(formData, cart);
+			if (log) {
+				setInvalid(true);
+			}
 		} catch (error) {
 			console.error("Sign up failed:", error);
 		}
@@ -105,6 +112,9 @@ export const SignUpClient = ({
 					<Button pendingText="Submitting..." className="">
 						Create account
 					</Button>
+					{invalid ? (
+						<p className="self-center font-semibold text-red-500">User already registered</p>
+					) : null}
 					<p className="self-center">
 						Already have a account?{" "}
 						<button onClick={changeView} type="reset" className="mt-2 hover:text-gray-600">
