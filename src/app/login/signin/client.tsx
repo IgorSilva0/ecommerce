@@ -39,7 +39,7 @@ export const SignInClient = ({
 					method="POST"
 					className="flex w-[100%] flex-col justify-center gap-2 rounded-2xl px-6 py-12 text-foreground shadow-epic md:w-[500px] md:px-14"
 				>
-					<h2 className="mb-2 text-xl font-bold md:text-3xl">Access your account</h2>
+					<h2 className="mb-2 text-xl font-bold md:text-2xl">Access your account</h2>
 					<label className="text-md" htmlFor="email">
 						Email
 					</label>

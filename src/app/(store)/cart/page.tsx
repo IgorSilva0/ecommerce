@@ -17,15 +17,16 @@ export default async function CartPage() {
 	if (!cart) {
 		return <div>No cart found.</div>; // Provide a user-friendly message or alternative UI
 	}
-
 	const user = await userConnected();
 	const email = user?.email ?? "notloggedin@email.com";
 
 	return user ? (
 		<CheckoutCard cart={cart.cart} userEmail={email} />
 	) : (
-		<div>
-			<div>Please login before proceeding.</div>
+		<div className="flex flex-col justify-start">
+			<h1 className="text-center text-2xl font-bold leading-none tracking-tight">
+				Please log in before checking out.
+			</h1>
 			<AuthView cart={true} />
 		</div>
 	);
