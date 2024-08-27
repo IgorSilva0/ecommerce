@@ -5,7 +5,7 @@ import { SignUpClient as Signup } from "./signup/client";
 import { SignInClient as Signin } from "./signin/client";
 
 interface AuthViewProps {
-	cart: boolean;
+	cart?: boolean;
 }
 
 // Update the function to receive props
