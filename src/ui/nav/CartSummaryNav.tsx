@@ -8,7 +8,7 @@ import { YnsLink } from "@/ui/YnsLink";
 import { formatMoney } from "@/lib/utils";
 
 const CartFallback = () => (
-	<div className="mr-2.5 h-6 w-6 opacity-30">
+	<div className="h-6 w-6 opacity-30">
 		<ShoppingCart />
 	</div>
 );
@@ -47,7 +47,7 @@ const CartSummaryNavInner = async () => {
 							prefetch={true}
 						>
 							<ShoppingCart />
-							<span className="absolute bottom-0 right-0 inline-flex h-5 w-5 translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 bg-white text-center text-xs">
+							<span className="absolute bottom-0 right-0 inline-flex h-5 w-5 translate-x-3/4 items-center justify-center rounded-full border-2 bg-white text-center text-xs">
 								<span className="sr-only">{t("itemsInCart")}: </span>
 								{totalItems}
 							</span>
