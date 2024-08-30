@@ -20,9 +20,9 @@ export const SignInServer = async (formData: FormData, cart: boolean) => {
 		if (cart) {
 			return;
 		}
-		return redirect("/");
 	} catch (err) {
 		console.error("Error during sign-in:", err);
 		return;
 	}
+	return redirect("/"); // success on SIGN-IN.
 };

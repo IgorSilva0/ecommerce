@@ -1,21 +1,15 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { AuthView } from "./AuthView";
 import { userConnected } from "@/utils/supabase/userConnected";
 import { Nav } from "@/ui/nav/Nav";
 
 export default async function Login() {
-	const user = await userConnected();
-
-	if (user) {
-		return redirect("/");
-	}
-
+	const user: object | null = await userConnected();
 	return (
 		<div className="flex flex-col">
 			<Nav />
-			<AuthView />
+			<AuthView user={user} />
 		</div>
 	);
 }
