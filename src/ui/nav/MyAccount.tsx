@@ -56,14 +56,17 @@ export function MyAccount() {
 					<NavigationMenuContent>
 						{connect ? (
 							<ul className="grid gap-3 p-4 md:w-[100px] lg:w-[200px]">
+								<ListItem href="/orders" title="Your account dashboard">
+									Dashboard
+								</ListItem>
 								<ListItem href="/orders" title="All Purchase History">
-									Track every order.
+									Orders.
 								</ListItem>
 								<ListItem href="/settings" title="Manage your account">
 									Settings
 								</ListItem>
 								<ListItem href="/help" title="FAQs and support">
-									Help
+									Support
 								</ListItem>
 								<button
 									onClick={() => signout()}
