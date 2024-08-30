@@ -8,10 +8,11 @@ import { SignInClient as Signin } from "./signin/client";
 interface AuthViewProps {
 	cart?: boolean;
 	user?: object | null;
+	info?: string | null;
 }
 
 // Update the function to receive props
-export const AuthView: React.FC<AuthViewProps> = ({ cart = false, user = false }) => {
+export const AuthView: React.FC<AuthViewProps> = ({ cart = false, user = false, info = null }) => {
 	const [view, setView] = useState<"Signup" | "Signin">("Signin");
 	const components = { Signup, Signin };
 	const Component = components[view];
@@ -20,7 +21,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ cart = false, user = false }
 	}
 	return (
 		<div className="flex justify-center md:min-h-[80dvh]">
-			<Component setView={setView} cart={cart} />
+			<Component setView={setView} cart={cart} info={info} />
 		</div>
 	);
 };

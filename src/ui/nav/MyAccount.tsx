@@ -51,7 +51,7 @@ export function MyAccount() {
 					<NavigationMenuTriggerWithFixedUX
 						onKeyboardOpen={() => setValue((value) => (value === "shop" ? undefined : "shop"))}
 					>
-						My Account
+						<YnsLink href={"/myaccount"}>My Account</YnsLink>
 					</NavigationMenuTriggerWithFixedUX>
 					<NavigationMenuContent>
 						{connect ? (

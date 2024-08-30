@@ -7,9 +7,11 @@ type ViewType = "Signup" | "Signin";
 export const SignInClient = ({
 	setView,
 	cart,
+	info,
 }: {
 	setView: React.Dispatch<React.SetStateAction<ViewType>>;
 	cart: boolean; // optional
+	info: string | null; // optional
 }) => {
 	const [invalid, setInvalid] = useState(false);
 
@@ -33,7 +35,10 @@ export const SignInClient = ({
 
 	return (
 		<div className="flex w-full justify-center py-10">
-			<div className="flex w-full flex-1 items-center justify-center gap-2 px-8">
+			<div className="flex w-full flex-1 flex-col items-center justify-center px-8">
+				{info ? (
+					<p className="self-center pb-5 text-base font-semibold text-red-500 md:text-xl">{info}</p>
+				) : null}
 				<form
 					onSubmit={postData}
 					method="POST"
