@@ -46,12 +46,6 @@ export function NavMenu() {
 							<ListItem href="/products" title="All products">
 								All products in our store are listed here.
 							</ListItem>
-							<ListItem href="/category/apparel" title="Apparel">
-								All apparel products in our store.
-							</ListItem>
-							<ListItem href="/category/accessories" title="Accessories">
-								All accessories products in our store.
-							</ListItem>
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>

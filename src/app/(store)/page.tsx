@@ -3,9 +3,9 @@ import type { Metadata } from "next/types";
 import { getTranslations } from "next-intl/server";
 import * as Commerce from "commerce-kit";
 import { ProductList } from "@/ui/products/productList";
-import { CategoryBox } from "@/ui/CategoryBox";
-import AccessoriesImage from "@/images/accessories.jpg";
-import ApparelImage from "@/images/apparel.jpg";
+// import { CategoryBox } from "@/ui/CategoryBox";
+// import AccessoriesImage from "@/images/accessories.jpg";
+// import ApparelImage from "@/images/apparel.jpg";
 import { YnsLink } from "@/ui/YnsLink";
 import { publicUrl } from "@/env.mjs";
 
@@ -51,7 +51,7 @@ export default async function Home() {
 			</section>
 			<ProductList products={products} />
 
-			<section className="w-full py-8">
+			{/* <section className="w-full py-8">
 				<div className="grid gap-8 lg:grid-cols-2">
 					{[
 						{ categorySlug: "accessories", src: AccessoriesImage },
@@ -60,7 +60,7 @@ export default async function Home() {
 						<CategoryBox key={categorySlug} categorySlug={categorySlug} src={src} />
 					))}
 				</div>
-			</section>
+			</section> */}
 		</main>
 	);
 }
