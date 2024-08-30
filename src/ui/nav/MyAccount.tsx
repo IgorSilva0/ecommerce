@@ -56,16 +56,16 @@ export function MyAccount() {
 					<NavigationMenuContent>
 						{connect ? (
 							<ul className="grid gap-3 p-4 md:w-[100px] lg:w-[200px]">
-								<ListItem href="/orders" title="Your account dashboard">
+								<ListItem href="/myaccount" title="Your account">
 									Dashboard
 								</ListItem>
-								<ListItem href="/orders" title="All Purchase History">
-									Orders.
+								<ListItem href="/myaccount" title="All Purchase History">
+									Orders
 								</ListItem>
-								<ListItem href="/settings" title="Manage your account">
+								<ListItem href="/myaccount" title="Manage your account">
 									Settings
 								</ListItem>
-								<ListItem href="/help" title="FAQs and support">
+								<ListItem href="/myaccount" title="FAQs and support">
 									Support
 								</ListItem>
 								<button
