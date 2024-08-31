@@ -3,35 +3,45 @@
 import React, { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/ui/shadcn/card";
-import { Carousel, CarouselContent, CarouselItem } from "@/ui/shadcn/carousel";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/ui/shadcn/carousel";
 
 const carouselItems = [
 	{
 		title: "Welcome to Your New Store",
 		description: "Your one-stop destination for all your shopping needs",
 		buttonText: "Shop Now",
-		imageSrc: "https://images.unsplash.com/photo-1509057199576-632a47484ece",
+		imageSrc:
+			"https://media.istockphoto.com/id/1368355172/photo/proud-female-small-business-owner-in-front-of-the-store.jpg?s=1024x1024&w=is&k=20&c=R7y55Uza3YidBS2xhFCSAzLOEtUZtkrkeVZLgKl2G1s=",
 		imageAlt: "Storefront Image",
 	},
 	{
 		title: "Discover Amazing Products",
 		description: "Find the best deals and offers just for you",
 		buttonText: "Explore Now",
-		imageSrc: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
+		imageSrc:
+			"https://media.istockphoto.com/id/171150042/photo/sunrise-image-in-lcd-oxbow-bend-gtnp.jpg?s=2048x2048&w=is&k=20&c=i8cmxU7RJpKNTft1IxfB_wRMn7eShOLnSHU5lSLhM0M=",
 		imageAlt: "Product Display Image",
 	},
 	{
 		title: "Exclusive Collections",
 		description: "Browse our exclusive collections and latest trends",
 		buttonText: "Browse Collections",
-		imageSrc: "https://images.unsplash.com/photo-1525097487452-6278ff080c31",
+		imageSrc:
+			"https://media.istockphoto.com/id/2159558435/photo/clothes-hanging-on-a-hanger-in-a-store.jpg?s=2048x2048&w=is&k=20&c=SfimOhODFhccFJDDflu58r2Qt6NYw0Tzwqbq4sWeXac=",
 		imageAlt: "Fashion Collection Image",
 	},
 	{
 		title: "Unbeatable Prices",
 		description: "Get the best value for your money with our unbeatable prices",
 		buttonText: "Shop Deals",
-		imageSrc: "https://images.unsplash.com/photo-1542831371-29b0f74f9713",
+		imageSrc:
+			"https://media.istockphoto.com/id/2155573195/photo/shopping-cart-with-big-dollar-money-bag-extra-income-win-money-for-shopping-purchasing-power.jpg?s=2048x2048&w=is&k=20&c=CM9DLlVEaqVsRmFnfoy4US6IwiTrUbDUY8AEXTqC1jo=",
 		imageAlt: "Discount Banner Image",
 	},
 	{
@@ -89,6 +99,8 @@ export function Header() {
 					</CarouselItem>
 				))}
 			</CarouselContent>
+			<CarouselPrevious className="hidden sm:flex" />
+			<CarouselNext className="hidden sm:flex" />
 		</Carousel>
 	);
 }

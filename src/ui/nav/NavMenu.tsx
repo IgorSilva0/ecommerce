@@ -67,7 +67,7 @@ export function NavMenu() {
 				</NavigationMenuItem>
 				<NavigationMenuItem value="documentation">
 					<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-						<YnsLink href="/">Documentation</YnsLink>
+						<YnsLink href="/">Contact</YnsLink>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 			</NavigationMenuList>

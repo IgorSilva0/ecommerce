@@ -17,7 +17,7 @@ export const ProductList = async ({ products }: { products: Commerce.MappedProdu
 							<YnsLink href={`/product/${product.metadata.slug}`}>
 								<article className="overflow-hidden rounded border bg-white">
 									{product.images[0] && (
-										<div className="aspect-square w-full overflow-hidden bg-neutral-100">
+										<div className="relative aspect-square w-full overflow-hidden bg-neutral-100">
 											<Image
 												className="group-hover:rotate hover-perspective w-full bg-neutral-100 object-cover object-center transition-opacity group-hover:opacity-75"
 												src={product.images[0]}
@@ -28,6 +28,7 @@ export const ProductList = async ({ products }: { products: Commerce.MappedProdu
 												sizes="(max-width: 1024x) 100vw, (max-width: 1280px) 50vw, 700px"
 												alt=""
 											/>
+											<span className="absolute right-0 top-0 text-xl">🔥</span>
 										</div>
 									)}
 									<div className="p-4">
