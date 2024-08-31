@@ -67,10 +67,10 @@ export function Header() {
 									<div className="flex h-full w-full flex-col-reverse items-center justify-between sm:flex-row">
 										<div className="sm:px-10">
 											<h3 className="text-2xl font-semibold">{item.title}</h3>
-											<p className="text-lg text-neutral-600">{item.description}</p>
+											<p className="mb-6 text-lg text-neutral-600">{item.description}</p>
 											<a
 												href="/products"
-												className="mt-4 rounded-lg border-2 border-black bg-black px-4 py-2 font-semibold text-white hover:bg-transparent hover:text-black"
+												className="rounded-lg border-2 border-black bg-black px-4 py-2 font-semibold text-white hover:bg-transparent hover:text-black"
 											>
 												{item.buttonText}
 											</a>
