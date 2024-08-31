@@ -19,14 +19,19 @@ import { YnsLink } from "@/ui/YnsLink";
 
 const links = [
 	{
-		title: "Features",
-		href: "/",
-		description: "A list of all the features of Your Next Store.",
+		title: "Our Story",
+		href: "/ourstory",
+		description: "Learn about our company and our mission.",
 	},
 	{
-		title: "Where to buy",
-		href: "/",
-		description: "Join our community and get the latest news about our products.",
+		title: "Our Policies",
+		href: "/policies",
+		description: "Read our terms and conditions, privacy policy, and more.",
+	},
+	{
+		title: "Quality Guarantee",
+		href: "/quality",
+		description: "We guarantee the quality of our products.",
 	},
 ];
 
@@ -67,7 +72,7 @@ export function NavMenu() {
 				</NavigationMenuItem>
 				<NavigationMenuItem value="documentation">
 					<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-						<YnsLink href="/">Contact</YnsLink>
+						<YnsLink href="/help">Help</YnsLink>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 			</NavigationMenuList>

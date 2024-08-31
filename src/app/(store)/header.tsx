@@ -55,7 +55,7 @@ const carouselItems = [
 ];
 
 export function Header() {
-	const autoplay = useRef(Autoplay({ delay: 10000, stopOnInteraction: false }));
+	const autoplay = useRef(Autoplay({ delay: 8000, stopOnInteraction: false }));
 
 	return (
 		<Carousel
