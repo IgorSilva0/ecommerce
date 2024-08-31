@@ -10,6 +10,7 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/ui/shadcn/carousel";
+import { YnsLink } from "@/ui/YnsLink";
 
 const carouselItems = [
 	{
@@ -78,12 +79,12 @@ export function Header() {
 										<div className="sm:px-10">
 											<h3 className="text-2xl font-semibold">{item.title}</h3>
 											<p className="mb-6 text-lg text-neutral-600">{item.description}</p>
-											<a
+											<YnsLink
 												href="/products"
 												className="rounded-lg border-2 border-black bg-black px-4 py-2 font-semibold text-white hover:bg-transparent hover:text-black"
 											>
 												{item.buttonText}
-											</a>
+											</YnsLink>
 										</div>
 										<div className="sm:py-4">
 											<img

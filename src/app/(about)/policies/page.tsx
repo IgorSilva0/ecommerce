@@ -1,14 +1,15 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa6";
+import { YnsLink } from "@/ui/YnsLink";
 
 export default function Policies() {
 	return (
 		<div className="text-center">
 			<h1 className="bg-neutral-200 py-5 text-3xl font-bold">Our Policies</h1>
 			<div className="rounded-lg bg-white p-6 shadow-md">
-				<a href="/" className="text-2xl hover:text-gray-500">
+				<YnsLink href="/" className="text-2xl hover:text-gray-500">
 					<FaArrowLeft />
-				</a>
+				</YnsLink>
 				<section className="mb-8">
 					<h2 className="mb-4 text-2xl font-semibold">Return and Refund Policy</h2>
 					<p className="mb-4 text-lg">
@@ -97,13 +98,13 @@ export default function Policies() {
 					</p>
 				</section>
 				<div className="flex w-full justify-center">
-					<a
+					<YnsLink
 						href="/"
 						className="mt-8 flex w-fit items-center justify-center gap-2 rounded-lg border-2 border-black bg-black px-5 py-1 text-lg text-white transition-all hover:bg-transparent hover:text-black"
 					>
 						<FaArrowLeft className="text-lg" />
 						Return
-					</a>
+					</YnsLink>
 				</div>
 			</div>
 		</div>

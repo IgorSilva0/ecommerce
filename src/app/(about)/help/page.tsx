@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Nav } from "@/ui/nav/Nav";
+import { YnsLink } from "@/ui/YnsLink";
 
 export default function Help() {
 	return (
@@ -16,13 +17,13 @@ export default function Help() {
 					className="mt-5 overflow-hidden rounded-full"
 				/>
 				<div className="flex w-full justify-center">
-					<a
+					<YnsLink
 						href="/"
 						className="mb-4 mt-8 flex w-fit items-center justify-center gap-2 rounded-lg border-2 border-black bg-black px-5 py-1 text-lg text-white transition-all hover:bg-transparent hover:text-black"
 					>
 						<FaArrowLeft className="text-lg" />
 						Return
-					</a>
+					</YnsLink>
 				</div>
 			</div>
 		</>
