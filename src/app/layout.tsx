@@ -21,12 +21,14 @@ export const generateMetadata = async (): Promise<Metadata> => {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	const locale = await getLocale();
 	const messages = await getMessages();
-
 	return (
 		<html lang={locale} className="h-full antialiased">
 			<body className="flex min-h-full flex-col">
 				<NextIntlClientProvider messages={messages}>
-					<div className="flex min-h-full flex-col bg-neutral-50" vaul-drawer-wrapper="">
+					<div
+						className="flex min-h-full flex-col bg-neutral-50 dark:bg-slate-700"
+						vaul-drawer-wrapper=""
+					>
 						{children}
 						<Footer />
 					</div>

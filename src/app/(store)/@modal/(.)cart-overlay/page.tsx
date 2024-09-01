@@ -27,7 +27,7 @@ export default async function CartModalPage({ searchParams }: { searchParams: { 
 		<CartAsideContainer withAnimations={true}>
 			<div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
 				<div className="flex items-center justify-between">
-					<h2 className="text-lg font-semibold text-neutral-700">{t("title")}</h2>
+					<h2 className="text-lg font-semibold text-neutral-700 dark:text-white">{t("title")}</h2>
 					<YnsLink replace href="/cart" className="text-sm text-muted-foreground underline">
 						{t("openFullView")}
 					</YnsLink>
@@ -76,7 +76,7 @@ export default async function CartModalPage({ searchParams }: { searchParams: { 
 			<div className="border-t border-neutral-200 px-4 py-6 sm:px-6">
 				<div
 					id="cart-overlay-description"
-					className="flex justify-between text-base font-medium text-neutral-900"
+					className="flex justify-between text-base font-medium text-neutral-900 dark:text-white"
 				>
 					<p>{t("total")}</p>
 					<p>
@@ -87,8 +87,14 @@ export default async function CartModalPage({ searchParams }: { searchParams: { 
 						})}
 					</p>
 				</div>
-				<p className="mt-0.5 text-sm text-neutral-500">{t("shippingAndTaxesInfo")}</p>
-				<Button asChild={true} size={"lg"} className="mt-6 w-full rounded-full text-lg">
+				<p className="mt-0.5 text-sm text-neutral-500 dark:text-red-300">
+					{t("shippingAndTaxesInfo")}
+				</p>
+				<Button
+					asChild={true}
+					size={"lg"}
+					className="mt-6 w-full rounded-full border-2 text-lg transition-all dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-black"
+				>
 					<YnsLink href="/cart">{t("goToPaymentButton")}</YnsLink>
 				</Button>
 			</div>

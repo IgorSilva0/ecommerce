@@ -15,7 +15,7 @@ export const ProductList = async ({ products }: { products: Commerce.MappedProdu
 					return (
 						<li key={product.id} className="group">
 							<YnsLink href={`/product/${product.metadata.slug}`}>
-								<article className="overflow-hidden rounded border bg-white">
+								<article className="overflow-hidden rounded border bg-white dark:bg-slate-800">
 									{product.images[0] && (
 										<div className="relative aspect-square w-full overflow-hidden bg-white">
 											<Image
@@ -32,8 +32,10 @@ export const ProductList = async ({ products }: { products: Commerce.MappedProdu
 										</div>
 									)}
 									<div className="p-4">
-										<h2 className="text-lg font-semibold text-neutral-700">{product.name}</h2>
-										<footer className="text-sm font-medium text-neutral-900">
+										<h2 className="text-lg font-semibold text-neutral-700 dark:text-white">
+											{product.name}
+										</h2>
+										<footer className="text-sm font-medium text-neutral-900 dark:text-white">
 											{product.default_price.unit_amount && (
 												<p>
 													{formatMoney({

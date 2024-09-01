@@ -47,7 +47,7 @@ const CartSummaryNavInner = async () => {
 							prefetch={true}
 						>
 							<ShoppingCart />
-							<span className="absolute bottom-0 right-0 inline-flex h-5 w-5 translate-x-3/4 items-center justify-center rounded-full border-2 bg-white text-center text-xs">
+							<span className="absolute bottom-0 right-0 inline-flex h-5 w-5 translate-x-3/4 items-center justify-center rounded-full border-2 bg-white text-center text-xs dark:text-black">
 								<span className="sr-only">{t("itemsInCart")}: </span>
 								{totalItems}
 							</span>
@@ -62,7 +62,11 @@ const CartSummaryNavInner = async () => {
 						</YnsLink>
 					</div>
 				</TooltipTrigger>
-				<TooltipContent side="left" sideOffset={25}>
+				<TooltipContent
+					side="bottom"
+					sideOffset={20}
+					className="dark:border-2 dark:border-black dark:bg-slate-700 dark:text-white"
+				>
 					<p>{t("totalItems", { count: totalItems })}</p>
 					<p>
 						{t("total")}: {formatMoney({ amount: total, currency: cart.cart.currency, locale })}

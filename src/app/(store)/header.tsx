@@ -74,14 +74,16 @@ export function Header() {
 					<CarouselItem key={index}>
 						<div className="p-1">
 							<Card>
-								<CardContent className="flex h-[30rem] cursor-grab items-center justify-center p-6 sm:h-[24rem]">
+								<CardContent className="flex h-[30rem] cursor-grab items-center justify-center p-6 dark:bg-slate-800 sm:h-[24rem]">
 									<div className="flex h-full w-full flex-col-reverse items-center justify-between sm:flex-row">
 										<div className="sm:px-10">
 											<h3 className="text-2xl font-semibold">{item.title}</h3>
-											<p className="mb-6 text-lg text-neutral-600">{item.description}</p>
+											<p className="mb-6 text-lg text-neutral-600 dark:text-neutral-300">
+												{item.description}
+											</p>
 											<YnsLink
 												href="/products"
-												className="rounded-lg border-2 border-black bg-black px-4 py-2 font-semibold text-white hover:bg-transparent hover:text-black"
+												className="rounded-lg border-2 border-black bg-black px-4 py-2 font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
 											>
 												{item.buttonText}
 											</YnsLink>

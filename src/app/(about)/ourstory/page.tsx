@@ -5,8 +5,8 @@ import { YnsLink } from "@/ui/YnsLink";
 export default function OurStory() {
 	return (
 		<div className="text-center">
-			<h1 className="bg-neutral-200 py-5 text-3xl font-bold">Our Story</h1>
-			<div className="rounded-lg bg-white p-6 shadow-md">
+			<h1 className="bg-neutral-200 py-5 text-3xl font-bold dark:bg-slate-800">Our Story</h1>
+			<div className="rounded-lg bg-white p-6 shadow-md dark:bg-slate-700">
 				<YnsLink href="/" className="text-2xl hover:text-gray-500">
 					<FaArrowLeft />
 				</YnsLink>
@@ -85,7 +85,7 @@ export default function OurStory() {
 				<div className="flex w-full justify-center">
 					<YnsLink
 						href="/"
-						className="mt-8 flex w-fit items-center justify-center gap-2 rounded-lg border-2 border-black bg-black px-5 py-1 text-lg text-white transition-all hover:bg-transparent hover:text-black"
+						className="mt-8 flex w-fit items-center justify-center gap-2 rounded-lg border-2 border-black bg-black px-5 py-1 text-lg text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
 					>
 						<FaArrowLeft className="text-lg" />
 						Return

@@ -34,7 +34,9 @@ export const CheckoutCard = async ({
 	return (
 		<section className="max-w-md pb-12">
 			<h2 className="text-3xl font-bold leading-none tracking-tight">{t("checkoutTitle")}</h2>
-			<p className="mb-4 mt-2 text-sm text-muted-foreground">{t("checkoutDescription")}</p>
+			<p className="mb-4 mt-2 text-sm text-muted-foreground dark:text-neutral-300">
+				{t("checkoutDescription")}
+			</p>
 			<StripePayment
 				shippingRateId={cart.metadata.shippingRateId}
 				shippingRates={structuredClone(shippingRates.data)}

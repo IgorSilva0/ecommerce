@@ -14,7 +14,7 @@ export const AddToCartButton = ({ productId }: { productId: string }) => {
 		<Button
 			size="lg"
 			type="submit"
-			className="w-full rounded-full text-lg"
+			className="w-full rounded-full border-2 text-lg transition-all dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-black"
 			onClick={async () => {
 				startTransition(() => router.push(`/cart-overlay?add=${productId}`));
 			}}

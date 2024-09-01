@@ -38,7 +38,9 @@ export const ShippingRatesSection = ({
 						className={cn(
 							"grid content-end items-end rounded-md border-2 border-muted px-2 py-2 transition-colors",
 							`has-[[aria-checked="true"]]:border-foreground/60`,
-							isPending ? "cursor-wait" : "cursor-pointer hover:bg-neutral-50",
+							isPending
+								? "cursor-wait"
+								: "cursor-pointer hover:bg-neutral-50 dark:hover:text-black",
 						)}
 					>
 						<RadioGroupItem value={rate.id} className="sr-only" />

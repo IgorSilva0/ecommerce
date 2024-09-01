@@ -70,7 +70,7 @@ export function MyAccount() {
 								</ListItem>
 								<button
 									onClick={() => signout()}
-									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
+									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-slate-700 dark:text-white dark:hover:bg-white dark:hover:text-black"
 								>
 									LogOut
 								</button>
@@ -79,7 +79,7 @@ export function MyAccount() {
 							<ul className="grid p-4 md:w-[90px] lg:w-[180px]">
 								<YnsLink
 									href="/login"
-									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black"
+									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-slate-700 dark:text-white dark:hover:bg-white dark:hover:text-black"
 								>
 									Sign in
 								</YnsLink>

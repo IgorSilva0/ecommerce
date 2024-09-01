@@ -42,7 +42,7 @@ export const SignInClient = ({
 				<form
 					onSubmit={postData}
 					method="POST"
-					className="flex w-[100%] flex-col justify-center gap-2 rounded-2xl px-6 py-12 text-foreground shadow-epic md:w-[500px] md:px-14"
+					className="flex w-[100%] flex-col justify-center gap-2 rounded-2xl px-6 py-12 text-foreground shadow-epic dark:bg-slate-800 md:w-[500px] md:px-14"
 				>
 					<h2 className="mb-2 text-xl font-bold md:text-2xl">Access your account</h2>
 					<label className="text-md" htmlFor="email">
@@ -70,7 +70,10 @@ export const SignInClient = ({
 						minLength={6}
 						required
 					/>
-					<Button pendingText="Submitting..." className="">
+					<Button
+						pendingText="Submitting..."
+						className="border-2 transition-all dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-black"
+					>
 						Sign In
 					</Button>
 					{invalid ? (
@@ -78,11 +81,18 @@ export const SignInClient = ({
 					) : null}
 					<p className="self-center">
 						No account?{" "}
-						<button onClick={changeView} type="reset" className="mt-2 hover:text-gray-600">
+						<button
+							onClick={changeView}
+							type="reset"
+							className="mt-2 hover:text-gray-600 dark:hover:text-gray-300"
+						>
 							<b>Create One!</b>
 						</button>
 					</p>
-					<a type="reset" className="self-center hover:text-gray-600">
+					<a
+						type="reset"
+						className="cursor-pointer self-center hover:text-gray-600 dark:hover:text-gray-300"
+					>
 						Forgot your password?
 					</a>
 				</form>

@@ -44,7 +44,6 @@ export const generateMetadata = async ({
 	return {
 		title: t("title", { productName }),
 		description: product.description,
-		// https://github.com/vercel/next.js/pull/65366
 		alternates: { canonical: canonical.toString() },
 	} satisfies Metadata;
 };
@@ -131,7 +130,7 @@ export default async function SingleProductPage({
 					{product.images.map((image) => (
 						<Image
 							key={image}
-							className="w-full rounded-lg bg-neutral-100 object-cover object-center transition-opacity"
+							className="w-full rounded-lg bg-neutral-200 object-cover object-center transition-opacity dark:bg-slate-800"
 							src={image}
 							width={700}
 							height={700}

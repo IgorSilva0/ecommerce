@@ -19,7 +19,7 @@ export default async function CartPage() {
 	}
 	const user = await userConnected();
 	const email = user?.email ?? "notloggedin@email.com";
-	const info = "Please sign in or sign up before checking out.";
+	const info = "Please sign in before checking out";
 
 	return user ? (
 		<CheckoutCard cart={cart.cart} userEmail={email} />
