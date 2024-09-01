@@ -141,7 +141,6 @@ const PaymentForm = ({
 
 			const validatedBillingAddress = addressSchema.safeParse(billingAddress);
 			const validatedShippingAddress = addressSchema.safeParse(shippingAddress);
-			console.log({ validatedBillingAddress, validatedShippingAddress });
 
 			// when billing address form is visible we display billing errors inline under fields
 			if (!validatedBillingAddress.success && !sameAsShipping) {
@@ -165,6 +164,7 @@ const PaymentForm = ({
 					taxId: validatedBillingAddress.data.taxId,
 				});
 			}
+
 			const result = await stripe.confirmPayment({
 				elements,
 				redirect: "if_required",
@@ -227,7 +227,7 @@ const PaymentForm = ({
 				options={{
 					defaultValues: { email: userEmail },
 				}}
-				className="pointer-events-none"
+				className="pointer-events-none rounded-lg p-2 dark:bg-slate-300"
 			/>
 			<AddressElement
 				options={{
@@ -254,6 +254,7 @@ const PaymentForm = ({
 					});
 				}}
 				onReady={() => setIsAddressReady(true)}
+				className="rounded-lg p-2 dark:bg-slate-300"
 			/>
 
 			{readyToRender && (
@@ -273,7 +274,7 @@ const PaymentForm = ({
 
 			{readyToRender && (
 				<Label
-					className="flex flex-row items-center gap-x-2"
+					className="flex flex-row items-center gap-x-2 rounded-lg p-2 dark:bg-slate-900"
 					aria-controls="billingAddressCollapsibleContent"
 					aria-expanded={!sameAsShipping}
 				>
@@ -291,13 +292,16 @@ const PaymentForm = ({
 
 			{readyToRender && (
 				<Collapsible className="" open={!sameAsShipping}>
-					<CollapsibleContent id="billingAddressCollapsibleContent" className="CollapsibleContent">
+					<CollapsibleContent
+						id="billingAddressCollapsibleContent"
+						className="CollapsibleContent rounded-lg p-2 dark:bg-slate-300 dark:text-black"
+					>
 						<fieldset
 							aria-hidden={sameAsShipping}
 							tabIndex={sameAsShipping ? -1 : undefined}
 							className={`grid gap-6 rounded-lg border p-4`}
 						>
-							<legend className="-ml-1 whitespace-nowrap px-1 text-sm font-medium">
+							<legend className="-ml-1 whitespace-nowrap px-1 text-base font-semibold">
 								{t("billingAddressTitle")}
 							</legend>
 							<BillingAddressSection
@@ -312,6 +316,7 @@ const PaymentForm = ({
 
 			<PaymentElement
 				onReady={() => setIsPaymentReady(true)}
+				className="rounded-lg p-2 dark:bg-slate-300"
 				options={{
 					fields: {
 						billingDetails: {
@@ -321,7 +326,12 @@ const PaymentForm = ({
 				}}
 			/>
 			{formErrorMessage && (
-				<Alert variant="destructive" className="mt-2" aria-live="polite" aria-atomic>
+				<Alert
+					variant="destructive"
+					className="mt-2 dark:border-red-500 dark:bg-red-100 dark:font-semibold dark:text-red-500"
+					aria-live="polite"
+					aria-atomic
+				>
 					<AlertCircle className="-mt-1 h-4 w-4" />
 					<AlertTitle>{t("errorTitle")}</AlertTitle>
 					<AlertDescription>{formErrorMessage}</AlertDescription>

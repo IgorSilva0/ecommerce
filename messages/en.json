@@ -177,7 +177,9 @@
 			"taxId": "Tax ID",
 			"paymentMethod": "Payment method",
 			"cardBrand": "Card brand",
-			"last4CardDigitsLabel": "Card number ending in"
+			"last4CardDigitsLabel": "Card number ending in",
+			"shippingFee": "Shipping fee",
+			"tax": "Tax"
 		},
 		"paymentStatus": {
 			"canceled": "Canceled",

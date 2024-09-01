@@ -37,7 +37,10 @@ export function CountrySelect({
 					return (
 						<Popover open={open} onOpenChange={setOpen}>
 							<PopoverTrigger asChild>
-								<Button variant="outline" className="mt-3 w-full justify-between text-base">
+								<Button
+									variant="outline"
+									className="mt-3 w-full justify-between text-base dark:text-white"
+								>
 									{selectedCountry ? <>{selectedCountry.label}</> : "Select country…"}
 									<CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 								</Button>
