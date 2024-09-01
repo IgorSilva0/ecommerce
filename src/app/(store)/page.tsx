@@ -22,7 +22,7 @@ export default async function Home() {
 			<div className="mt-10 flex w-full justify-center">
 				<YnsLink
 					href="/products"
-					className="bg-primary-500 w-fit rounded-lg border-2 border-black bg-black px-12 py-3 text-base font-semibold text-white transition-all hover:bg-transparent hover:text-black"
+					className="bg-primary-500 w-fit rounded-lg border-2 border-black bg-black px-10 py-2 text-base font-semibold text-white transition-all hover:bg-transparent hover:text-black"
 				>
 					View All Products
 				</YnsLink>

@@ -4,6 +4,7 @@ import { SeoH1 } from "@/ui/SeoH1";
 import { SearchNav } from "@/ui/nav/SearchNav";
 import { NavMenu } from "@/ui/nav/NavMenu";
 import { YnsLink } from "@/ui/YnsLink";
+import { Switch } from "@/ui/shadcn/switch";
 
 export const Categories = [
 	{ name: "Apparel", slug: "apparel" },
@@ -30,6 +31,9 @@ export const Nav = () => {
 						</div>
 						<div className="hidden md:block">
 							<CartSummaryNav />
+						</div>
+						<div className="absolute right-4 top-0 flex items-center pl-4 sm:pr-2 md:relative md:right-0 md:pr-0">
+							<Switch id="airplane-mode" className="relative w-12" />
 						</div>
 					</div>
 				</div>
