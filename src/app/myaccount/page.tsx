@@ -116,7 +116,7 @@ export default function MyAccount() {
 								<YnsLink href={"/myaccount"} className="">
 									<HomeIcon className="h-5 w-5 text-primary transition-all hover:text-slate-300" />
 								</YnsLink>
-								<h2 className="text-center text-2xl font-semibold">Order history</h2>
+								<h2 className="text-center text-2xl font-semibold">Orders</h2>
 								<div />
 							</div>
 							<div className="flex justify-evenly">
