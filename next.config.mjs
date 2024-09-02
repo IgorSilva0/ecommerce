@@ -20,6 +20,7 @@ const nextConfig = {
 			{ hostname: "files.stripe.com" },
 			{ hostname: "d1wqzb5bdbcre6.cloudfront.net" },
 			{ hostname: "*.blob.vercel-storage.com" },
+			{ hostname: "media.istockphoto.com" },
 		],
 		formats: ["image/avif", "image/webp"],
 	},

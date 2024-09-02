@@ -16,6 +16,9 @@ const config = {
 			},
 		},
 		extend: {
+			dropShadow: {
+				epic: "0 0 2px #000000",
+			},
 			boxShadow: {
 				epic: "0 0 10px #00000050",
 			},

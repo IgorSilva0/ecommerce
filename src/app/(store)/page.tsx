@@ -17,7 +17,13 @@ export default async function Home() {
 			<section className="rounded">
 				<Header />
 			</section>
-			<h2 className="my-10 text-center text-3xl font-semibold">Featured Products</h2>
+			<div className="relative mt-5 flex items-center justify-center sm:mt-7">
+				<span className="absolute -bottom-1 left-1/2 h-8 w-36 -translate-x-1/2 scale-x-150 transform rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-80 blur-sm"></span>
+
+				<h2 className="relative z-20 text-center font-bold text-white drop-shadow-epic sm:text-xl">
+					Featured Products
+				</h2>
+			</div>
 			<ProductList products={products} />
 			<div className="mt-10 flex w-full justify-center">
 				<YnsLink
