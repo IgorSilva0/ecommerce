@@ -9,7 +9,7 @@ import {
 	MoreVertical,
 	Package2,
 	PanelLeft,
-	Search,
+	SearchIcon,
 	Settings,
 	ShoppingCart,
 	Truck,
@@ -45,26 +45,28 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/shadcn/tabs";
 import { TooltipProvider } from "@/ui/shadcn/tooltip";
 import { YnsLink } from "@/ui/YnsLink";
 import { SeoH1 } from "@/ui/SeoH1";
+import { Switch } from "@/ui/shadcn/switch";
 
 export default function MyAccount() {
 	return (
 		<TooltipProvider>
-			<div className="flex min-h-screen w-full flex-col bg-muted/40">
-				<div className="flex flex-col sm:gap-4">
-					<header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 dark:bg-slate-900 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 sm:py-4">
-						<YnsLink href="/">
-							<SeoH1 className="-mt-0.5 whitespace-nowrap pr-5 text-xl font-bold">
-								Your New Store
-							</SeoH1>
-						</YnsLink>
-						<div className="relative ml-auto flex-1 md:grow-0">
-							<Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-							<Input
-								type="search"
-								placeholder="Search..."
-								className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-							/>
-						</div>
+			<header className="sticky top-0 z-50 border-b bg-white pb-5 pt-4 shadow-epic dark:bg-slate-900 md:pb-4">
+				<div className="relative mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 px-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-[30px] sm:px-6 md:flex md:flex-nowrap lg:px-8">
+					<YnsLink href="/">
+						<SeoH1 className="-mt-0.5 whitespace-nowrap pr-5 text-xl font-bold">
+							Your New Store
+						</SeoH1>
+					</YnsLink>
+					<div className="relative ml-auto w-full flex-1 md:grow-0">
+						<Input
+							type="search"
+							placeholder="Search for orders..."
+							className="w-full rounded-lg bg-background pl-4 pr-10 md:w-[150px] lg:w-[300px]"
+						/>
+						<SearchIcon className="absolute right-2 top-2 h-5 w-5" />
+					</div>
+					<div className="absolute -top-1 right-[15px] flex items-center gap-6 md:relative md:right-0 md:top-0 md:gap-7">
+						<Switch className="relative w-12" />
 						<Sheet>
 							<SheetTrigger asChild>
 								<Button size="icon" variant="outline" className="">
@@ -109,8 +111,12 @@ export default function MyAccount() {
 								</nav>
 							</SheetContent>
 						</Sheet>
-					</header>
-					<main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
+					</div>
+				</div>
+			</header>
+			<div className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pb-6 pt-6 sm:px-6 lg:px-8">
+				<div className="flex max-w-7xl flex-col items-center sm:gap-4">
+					<main className="grid flex-1 items-start md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
 						<div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
 							<div className="flex items-center justify-between">
 								<YnsLink href={"/myaccount"} className="">

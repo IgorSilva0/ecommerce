@@ -15,7 +15,7 @@ export const Nav = () => {
 	return (
 		<>
 			<header className="sticky top-0 z-50 border-b bg-white pb-2 pt-4 shadow-epic dark:bg-slate-900 md:pb-4">
-				<div className="relative mx-auto grid max-w-7xl grid-cols-1 items-start gap-2 px-4 sm:flex-row sm:flex-wrap sm:items-center sm:px-6 md:flex md:flex-nowrap lg:px-8">
+				<div className="relative mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 px-4 sm:flex-row sm:flex-wrap sm:items-center sm:px-6 md:flex md:flex-nowrap lg:px-8">
 					<YnsLink href="/">
 						<SeoH1 className="-mt-0.5 whitespace-nowrap pr-5 text-xl font-bold">
 							Your New Store
@@ -31,11 +31,11 @@ export const Nav = () => {
 						<div className="hidden md:block">
 							<MyAccount />
 						</div>
-						<div className="hidden md:block">
-							<CartSummaryNav />
+						<div className="absolute right-4 top-1 flex items-center sm:pr-2 md:relative md:right-0 md:top-0 md:pr-0">
+							<Switch className="relative w-12" />
 						</div>
-						<div className="absolute right-4 top-0 flex items-center pl-4 sm:pr-2 md:relative md:right-0 md:pr-0">
-							<Switch id="airplane-mode" className="relative w-12" />
+						<div className="hidden pl-1.5 md:block">
+							<CartSummaryNav />
 						</div>
 					</div>
 				</div>
