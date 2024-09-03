@@ -130,7 +130,7 @@ export default async function SingleProductPage({
 					{product.images.map((image) => (
 						<Image
 							key={image}
-							className="w-full rounded-lg bg-neutral-200 object-cover object-center transition-opacity dark:bg-slate-800"
+							className="w-full rounded-lg bg-neutral-200 object-cover object-center transition-opacity dark:bg-slate-900"
 							src={image}
 							width={700}
 							height={700}

@@ -15,7 +15,7 @@ export const ProductList = async ({ products }: { products: Commerce.MappedProdu
 					return (
 						<li key={product.id} className="group">
 							<YnsLink href={`/product/${product.metadata.slug}`}>
-								<article className="overflow-hidden rounded border bg-white dark:bg-slate-800">
+								<article className="overflow-hidden rounded border bg-white dark:bg-slate-900">
 									{product.images[0] && (
 										<div className="relative aspect-square w-full overflow-hidden bg-white">
 											<Image

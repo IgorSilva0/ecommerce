@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 			<body className="flex min-h-full flex-col dark:bg-slate-700">
 				<NextIntlClientProvider messages={messages}>
 					<div
-						className="flex min-h-full flex-col bg-neutral-50 dark:bg-slate-700"
+						className="flex min-h-full flex-col bg-neutral-50 dark:bg-slate-800"
 						vaul-drawer-wrapper=""
 					>
 						{children}
