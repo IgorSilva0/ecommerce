@@ -26,6 +26,7 @@ export const ShippingRatesSection = ({
 				className="grid max-w-md gap-4 xs:grid-cols-3"
 				value={optimisticValue ?? undefined}
 				onValueChange={(newValue) => {
+					console.log("newValue", typeof newValue);
 					transition(() => {
 						setOptimisticValue(newValue);
 						return onChange(newValue);
@@ -36,17 +37,21 @@ export const ShippingRatesSection = ({
 					<label
 						key={rate.id}
 						className={cn(
-							"grid content-end items-end rounded-md border-2 border-muted px-2 py-2 transition-colors",
+							"grid content-end items-end rounded-md border-2 border-muted px-2 py-2 transition-colors dark:bg-slate-500",
 							`has-[[aria-checked="true"]]:border-foreground/60`,
+							`has-[[aria-checked="true"]]:bg-gray-200`,
+							`has-[[aria-checked="true"]]:dark:border-white`,
+							`has-[[aria-checked="true"]]:dark:bg-slate-500`,
+							`has-[[aria-checked="true"]]:dark:text-white`,
 							isPending
 								? "cursor-wait"
-								: "cursor-pointer hover:bg-neutral-50 dark:hover:text-black",
+								: "cursor-pointer hover:bg-gray-200 dark:bg-slate-200 dark:text-black",
 						)}
 					>
 						<RadioGroupItem value={rate.id} className="sr-only" />
 						<p className="text-sm font-medium">{rate.display_name}</p>
 						{rate.delivery_estimate && (
-							<p className="text-xs text-muted-foreground">
+							<p className="text-xs">
 								<FormatDeliveryEstimate estimate={rate.delivery_estimate} />
 							</p>
 						)}

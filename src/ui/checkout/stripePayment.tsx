@@ -12,6 +12,7 @@ import { Loader2, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import type * as Commerce from "commerce-kit";
+import { orderToDB } from "./order";
 import { Button } from "@/ui/shadcn/button";
 import { Alert, AlertTitle, AlertDescription } from "@/ui/shadcn/alert";
 import { clearCartCookieAction } from "@/actions/cartActions";
@@ -203,6 +204,8 @@ const PaymentForm = ({
 				setIsLoading(false);
 				setFormErrorMessage(result.error.message ?? t("unexpectedError"));
 			} else {
+				// add order to database
+				await orderToDB(result.paymentIntent.id);
 				// clear cart cookie after successful payment for payment methods that do not require redirect
 				// for payment methods that require redirect, we clear the cookie on the success page
 				await clearCartCookieAction();
@@ -227,7 +230,7 @@ const PaymentForm = ({
 				options={{
 					defaultValues: { email: userEmail },
 				}}
-				className="pointer-events-none rounded-lg p-2 dark:bg-slate-300"
+				className="rounded-lg p-2 dark:bg-slate-300"
 			/>
 			<AddressElement
 				options={{
