@@ -107,34 +107,6 @@ export default async function OrderDetailsPage({
 						</article>
 					</li>
 				))}
-				{order.order.taxBreakdown[0]!.taxAmount && (
-					<li className="py-8">
-						<article className="grid grid-cols-[auto,1fr] grid-rows-[repeat(auto,3)] justify-start gap-x-4 sm:gap-x-8">
-							<h3 className="row-start-1 font-semibold leading-none text-neutral-700 dark:text-white">
-								{order.order.taxBreakdown[0]!.taxType.toUpperCase()}
-							</h3>
-							<div className="col-start-1 row-span-3 row-start-1 mt-0.5 flex w-16 flex-col items-center justify-center sm:mt-0 sm:w-32">
-								<h2 className="text-sm font-semibold text-neutral-700 dark:text-white">
-									{t("tax")}
-								</h2>
-							</div>
-							<footer className="row-start-3 mt-2 self-end">
-								<dl className="grid grid-cols-[max-content,auto] gap-2 sm:grid-cols-3">
-									<div className="max-sm:col-span-2 max-sm:grid max-sm:grid-cols-subgrid">
-										<dt className="text-sm font-semibold text-foreground">{t("price")}</dt>
-										<dd className="text-sm text-accent-foreground">
-											{formatMoney({
-												amount: order.order.taxBreakdown[0]?.taxAmount ?? 0,
-												currency: order.order.currency,
-												locale,
-											})}
-										</dd>
-									</div>
-								</dl>
-							</footer>
-						</article>
-					</li>
-				)}
 				{order.shippingRate?.fixed_amount && (
 					<li className="py-8">
 						<article className="grid grid-cols-[auto,1fr] grid-rows-[repeat(auto,3)] justify-start gap-x-4 sm:gap-x-8">
@@ -155,6 +127,34 @@ export default async function OrderDetailsPage({
 											{formatMoney({
 												amount: order.shippingRate.fixed_amount.amount ?? 0,
 												currency: order.shippingRate.fixed_amount.currency,
+												locale,
+											})}
+										</dd>
+									</div>
+								</dl>
+							</footer>
+						</article>
+					</li>
+				)}
+				{order.order.taxBreakdown[0]!.taxAmount && (
+					<li className="py-8">
+						<article className="grid grid-cols-[auto,1fr] grid-rows-[repeat(auto,3)] justify-start gap-x-4 sm:gap-x-8">
+							<h3 className="row-start-1 font-semibold leading-none text-neutral-700 dark:text-white">
+								{order.order.taxBreakdown[0]!.taxType.toUpperCase()}
+							</h3>
+							<div className="col-start-1 row-span-3 row-start-1 mt-0.5 flex w-16 flex-col items-center justify-center sm:mt-0 sm:w-32">
+								<h2 className="text-sm font-semibold text-neutral-700 dark:text-white">
+									{t("tax")}
+								</h2>
+							</div>
+							<footer className="row-start-3 mt-2 self-end">
+								<dl className="grid grid-cols-[max-content,auto] gap-2 sm:grid-cols-3">
+									<div className="max-sm:col-span-2 max-sm:grid max-sm:grid-cols-subgrid">
+										<dt className="text-sm font-semibold text-foreground">{t("price")}</dt>
+										<dd className="text-sm text-accent-foreground">
+											{formatMoney({
+												amount: order.order.taxBreakdown[0]?.taxAmount ?? 0,
+												currency: order.order.currency,
 												locale,
 											})}
 										</dd>

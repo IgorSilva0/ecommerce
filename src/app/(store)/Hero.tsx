@@ -56,7 +56,7 @@ const carouselItems = [
 	},
 ];
 
-export function Header() {
+export function Hero() {
 	const autoplay = useRef(Autoplay({ delay: 8000, stopOnInteraction: false }));
 
 	return (

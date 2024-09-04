@@ -14,7 +14,7 @@ const CartFallback = async () => {
 			<TooltipProvider>
 				<Tooltip>
 					<TooltipTrigger asChild>
-						<ShoppingCart className="h-5 w-5" />
+						<ShoppingCart className="h-5 w-5 cursor-help" />
 					</TooltipTrigger>
 					<TooltipContent
 						side="bottom"

@@ -2,7 +2,7 @@ import type { Metadata } from "next/types";
 import * as Commerce from "commerce-kit";
 import { ProductList } from "@/ui/products/productList";
 import { publicUrl } from "@/env.mjs";
-import { Header } from "@/app/(store)/header";
+import { Hero } from "@/app/(store)/Hero";
 import { YnsLink } from "@/ui/YnsLink";
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default async function Home() {
 	return (
 		<main>
 			<section className="rounded">
-				<Header />
+				<Hero />
 			</section>
 			<div className="relative mt-5 flex items-center justify-center sm:mt-7">
 				<span className="absolute -bottom-1 left-1/2 h-8 w-36 -translate-x-1/2 scale-x-150 transform rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-80 blur-sm"></span>
