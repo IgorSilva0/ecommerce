@@ -277,7 +277,7 @@ const PaymentForm = ({
 
 			{readyToRender && (
 				<Label
-					className="flex flex-row items-center gap-x-2 rounded-lg p-2 dark:bg-slate-900"
+					className="flex flex-row items-center gap-x-2 rounded-lg p-2 dark:bg-slate-950"
 					aria-controls="billingAddressCollapsibleContent"
 					aria-expanded={!sameAsShipping}
 				>

@@ -24,11 +24,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 	const messages = await getMessages();
 	return (
 		<html lang={locale} className="h-full antialiased">
-			<body className="flex min-h-full flex-col">
+			<body className="flex min-h-full flex-col dark:bg-slate-950">
 				<Theme attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<NextIntlClientProvider messages={messages}>
 						<div
-							className="flex min-h-full flex-col bg-neutral-50 dark:bg-slate-800"
+							className="flex min-h-full flex-col bg-neutral-50 dark:bg-slate-900"
 							vaul-drawer-wrapper=""
 						>
 							{children}

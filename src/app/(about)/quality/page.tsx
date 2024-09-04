@@ -8,10 +8,10 @@ export default function Quality() {
 		<>
 			<Nav />
 			<div className="text-center">
-				<h1 className="bg-neutral-200 py-5 text-3xl font-bold dark:bg-slate-800">
+				<h1 className="bg-neutral-200 py-5 text-3xl font-bold dark:bg-slate-900">
 					Quality Guarantee
 				</h1>
-				<div className="rounded-lg bg-white p-6 shadow-md dark:bg-slate-700">
+				<div className="rounded-lg bg-white p-6 shadow-md dark:bg-slate-800">
 					<YnsLink href="/" className="text-2xl hover:text-gray-500">
 						<FaArrowLeft />
 					</YnsLink>

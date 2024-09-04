@@ -6,7 +6,7 @@ const ICON_SIZE = 24;
 
 export const NavMobile = () => {
 	return (
-		<nav className="sticky bottom-0 flex w-full justify-between bg-white px-4 py-3 text-xs dark:bg-slate-900 md:hidden">
+		<nav className="sticky bottom-0 flex w-full justify-between bg-white px-4 py-3 text-xs dark:bg-slate-950 md:hidden">
 			<YnsLink href="/" className="flex flex-col items-center" aria-label="Home">
 				<RiHome4Line size={ICON_SIZE} />
 				<p>Home</p>

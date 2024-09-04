@@ -76,7 +76,7 @@ export default async function SingleProductPage({
 							asChild
 							className="inline-flex min-h-12 min-w-12 items-center justify-center"
 						>
-							<YnsLink href="/">{t("allProducts")}</YnsLink>
+							<YnsLink href="/products">{t("allProducts")}</YnsLink>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					{category && (
@@ -129,7 +129,7 @@ export default async function SingleProductPage({
 					{product.images.map((image) => (
 						<Image
 							key={image}
-							className="w-full rounded-lg bg-neutral-200 object-cover object-center transition-opacity dark:bg-slate-900"
+							className="w-full rounded-lg bg-neutral-200 object-cover object-center transition-opacity dark:bg-slate-950"
 							src={image}
 							width={700}
 							height={700}
