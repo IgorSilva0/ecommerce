@@ -2,10 +2,10 @@ import React from "react";
 import { MyAccount } from "./MyAccount";
 import { CartSummaryNav } from "@/ui/nav/CartSummaryNav";
 import { YnsLink } from "@/ui/YnsLink";
-import { Switch } from "@/ui/shadcn/switch";
 import { NavMenu } from "@/ui/nav/NavMenu";
 import { SearchNav } from "@/ui/nav/SearchNav";
 import { NavMobileTop } from "@/ui/nav/NavMobileTop";
+import { ThemeSwitch } from "@/ui/theme/ThemeSwitch";
 
 export const Categories = [
 	{ name: "Apparel", slug: "apparel" },
@@ -30,15 +30,16 @@ export const Nav: React.FC<NavProps> = ({ Menu, Search }) => {
 
 					<div className="row-start-2 flex w-full items-center justify-start gap-x-6 md:w-auto">
 						{Search ?? <SearchNav />}
-						<div className="absolute -top-1 right-[15px] flex items-center gap-6 md:relative md:right-0 md:top-0 md:gap-7">
-							<Switch className="relative w-12" />
-							<NavMobileTop />
-						</div>
+
 						<div className="hidden md:block">
 							<MyAccount />
 						</div>
-						<div className="hidden pl-1.5 md:block">
+						<div className="hidden rounded-md border border-input bg-background p-[7px] shadow-sm hover:bg-accent hover:text-accent-foreground md:block">
 							<CartSummaryNav />
+						</div>
+						<div className="absolute -top-1 right-[15px] flex items-center gap-6 md:relative md:right-0 md:top-0 md:gap-7">
+							<ThemeSwitch />
+							<NavMobileTop />
 						</div>
 					</div>
 				</div>

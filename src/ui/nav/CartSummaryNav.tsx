@@ -7,11 +7,27 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/ui/s
 import { YnsLink } from "@/ui/YnsLink";
 import { formatMoney } from "@/lib/utils";
 
-const CartFallback = () => (
-	<div className="h-6 w-6 opacity-30">
-		<ShoppingCart />
-	</div>
-);
+const CartFallback = async () => {
+	const t = await getTranslations("Global.nav.cartSummary");
+	return (
+		<div className="opacity-90">
+			<TooltipProvider>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<ShoppingCart className="h-5 w-5" />
+					</TooltipTrigger>
+					<TooltipContent
+						side="bottom"
+						sideOffset={20}
+						className="dark:border-2 dark:border-black dark:bg-slate-700 dark:text-white"
+					>
+						<p>{t("empty")}</p>
+					</TooltipContent>
+				</Tooltip>
+			</TooltipProvider>
+		</div>
+	);
+};
 
 export const CartSummaryNav = () => {
 	return (
@@ -43,10 +59,10 @@ const CartSummaryNavInner = async () => {
 						<YnsLink
 							href="/cart-overlay"
 							scroll={false}
-							className="relative mr-2.5 block h-6 w-6"
+							className="relative mr-2.5 block"
 							prefetch={true}
 						>
-							<ShoppingCart />
+							<ShoppingCart className="h-5 w-5" />
 							<span className="absolute bottom-0 right-0 inline-flex h-5 w-5 translate-x-3/4 items-center justify-center rounded-full border-2 bg-white text-center text-xs dark:text-black">
 								<span className="sr-only">{t("itemsInCart")}: </span>
 								{totalItems}
