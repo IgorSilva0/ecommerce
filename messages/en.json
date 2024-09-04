@@ -33,6 +33,10 @@
 				"title": "Search",
 				"placeholder": "Search for products…"
 			},
+			"searchOrders": {
+				"title": "Search",
+				"placeholder": "Search for orders…"
+			},
 			"cartSummary": {
 				"itemsInCart": "Items in cart",
 				"total": "Total",

@@ -26,7 +26,6 @@ export const ShippingRatesSection = ({
 				className="grid max-w-md gap-4 xs:grid-cols-3"
 				value={optimisticValue ?? undefined}
 				onValueChange={(newValue) => {
-					console.log("newValue", typeof newValue);
 					transition(() => {
 						setOptimisticValue(newValue);
 						return onChange(newValue);

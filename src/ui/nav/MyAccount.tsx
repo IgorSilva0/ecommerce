@@ -22,7 +22,6 @@ import { YnsLink } from "@/ui/YnsLink";
 import { userConnected } from "@/utils/supabase/userConnected";
 
 export function MyAccount() {
-	const [value, setValue] = useState<string | undefined>(undefined);
 	const [connect, setConnected] = useState(false);
 
 	useEffect(() => {
@@ -37,7 +36,7 @@ export function MyAccount() {
 			}
 		};
 		void userON();
-	}, [value]);
+	}, []);
 
 	const signout = async () => {
 		await signOut();
@@ -45,22 +44,15 @@ export function MyAccount() {
 	};
 
 	return (
-		<NavigationMenu value={value} onValueChange={setValue}>
+		<NavigationMenu>
 			<NavigationMenuList>
-				<NavigationMenuItem value="shop">
-					<NavigationMenuTriggerWithFixedUX
-						onKeyboardOpen={() => setValue((value) => (value === "shop" ? undefined : "shop"))}
-					>
-						<YnsLink href={connect ? "/myaccount" : "/login"}>My Account</YnsLink>
-					</NavigationMenuTriggerWithFixedUX>
+				<NavigationMenuItem value="myaccount">
+					<NavigationMenuTriggerWithFixedUX>My Account</NavigationMenuTriggerWithFixedUX>
 					<NavigationMenuContent>
 						{connect ? (
 							<ul className="grid gap-3 p-4 md:w-[100px] lg:w-[200px]">
-								<ListItem href="/myaccount" title="Your account">
+								<ListItem href="/myaccount" title="Orders History">
 									Dashboard
-								</ListItem>
-								<ListItem href="/myaccount" title="All Purchase History">
-									Orders
 								</ListItem>
 								<ListItem href="/myaccount" title="Manage your account">
 									Settings
