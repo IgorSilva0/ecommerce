@@ -1,6 +1,5 @@
 import { MyAccount } from "./MyAccount";
 import { CartSummaryNav } from "@/ui/nav/CartSummaryNav";
-import { SeoH1 } from "@/ui/SeoH1";
 import { SearchNav } from "@/ui/nav/SearchNav";
 import { NavMenu } from "@/ui/nav/NavMenu";
 import { YnsLink } from "@/ui/YnsLink";
@@ -17,9 +16,7 @@ export const Nav = () => {
 			<header className="sticky top-0 z-50 border-b bg-white pb-2 pt-4 shadow-epic dark:bg-slate-900 md:pb-4">
 				<div className="relative mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 px-4 sm:flex-row sm:flex-wrap sm:items-center sm:px-6 md:flex md:flex-nowrap lg:px-8">
 					<YnsLink href="/">
-						<SeoH1 className="-mt-0.5 whitespace-nowrap pr-5 text-xl font-bold">
-							Your New Store
-						</SeoH1>
+						<h1 className="-mt-0.5 whitespace-nowrap pr-5 text-xl font-bold">Your New Store</h1>
 					</YnsLink>
 
 					<div className="row-start-3 sm:mr-auto">

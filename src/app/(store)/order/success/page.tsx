@@ -4,7 +4,6 @@ import { type PaymentIntent } from "@stripe/stripe-js";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import * as Commerce from "commerce-kit";
-import { Markdown } from "@/ui/Markdown";
 import { findMatchingCountry } from "@/lib/countries";
 import { paymentMethods } from "@/ui/checkout/CheckoutCard";
 import { Badge } from "@/ui/shadcn/badge";
@@ -73,7 +72,7 @@ export default async function OrderDetailsPage({
 								/>
 							))}
 							<div className="prose row-start-2 text-secondary-foreground">
-								<Markdown source={line.product.description || ""} />
+								{line.product.description}
 							</div>
 							<footer className="row-start-3 mt-2 self-end">
 								<dl className="grid grid-cols-[max-content,auto] gap-2 sm:grid-cols-3">

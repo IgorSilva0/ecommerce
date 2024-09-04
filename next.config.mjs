@@ -24,7 +24,7 @@ const nextConfig = {
 		],
 		formats: ["image/avif", "image/webp"],
 	},
-	transpilePackages: ["next-mdx-remote", "commerce-kit"],
+	transpilePackages: ["commerce-kit"],
 	experimental: {
 		esmExternals: true,
 		mdxRs: true,

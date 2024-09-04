@@ -1,9 +1,6 @@
 {
-	"$schema": "https://json.schemastore.org/package",
-	"name": "yournextstore",
+	"name": "yournewstore",
 	"version": "1.12.0",
-	"license": "AGPL-3.0-only",
-	"private": true,
 	"type": "module",
 	"scripts": {
 		"dev": "next dev",
@@ -52,7 +49,6 @@
 		"nanoid": "5.0.7",
 		"next": "15.0.0-canary.115",
 		"next-intl": "3.17.3",
-		"next-mdx-remote": "5.0.0",
 		"next-themes": "0.3.0",
 		"react": "19.0.0-rc-49496d49-20240814",
 		"react-dom": "19.0.0-rc-49496d49-20240814",

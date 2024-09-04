@@ -3,7 +3,6 @@ import Image from "next/image";
 import { type Metadata } from "next/types";
 import { getLocale, getTranslations } from "next-intl/server";
 import * as Commerce from "commerce-kit";
-import { Markdown } from "@/ui/Markdown";
 import { JsonLd, mappedProductToJsonLd } from "@/ui/JsonLd";
 import {
 	Breadcrumb,
@@ -145,9 +144,7 @@ export default async function SingleProductPage({
 				<div className="grid gap-8 lg:col-span-5">
 					<section>
 						<h2 className="sr-only">{t("descriptionTitle")}</h2>
-						<div className="prose text-secondary-foreground">
-							<Markdown source={product.description || ""} />
-						</div>
+						<div className="prose text-secondary-foreground">{product.description}</div>
 					</section>
 
 					{variants.length > 1 && (
