@@ -1,16 +1,9 @@
 import { redirect } from "next/navigation";
 import { TooltipProvider } from "@/ui/shadcn/tooltip";
-import { YnsLink } from "@/ui/YnsLink";
-import {
-	Breadcrumb,
-	BreadcrumbList,
-	BreadcrumbItem,
-	BreadcrumbSeparator,
-	BreadcrumbPage,
-} from "@/ui/shadcn/breadcrumb";
 import { userConnected } from "@/utils/supabase/userConnected";
 import { Nav } from "@/ui/nav/Nav";
 import { SearchOrders } from "@/ui/nav/SearchOrders";
+import { NavMenuOrders } from "@/ui/nav/NavMenuOrders";
 
 export default async function MyAccountLayout({ children }: { children: React.ReactNode }) {
 	const user = await userConnected();
@@ -20,29 +13,10 @@ export default async function MyAccountLayout({ children }: { children: React.Re
 
 	return (
 		<TooltipProvider>
-			<div>
-				<Nav Menu={true} Search={<SearchOrders />} />
-				<Breadcrumb className="mx-auto max-w-7xl px-8 pt-5">
-					<BreadcrumbList>
-						<BreadcrumbItem>
-							<YnsLink href="/">Shop</YnsLink>
-						</BreadcrumbItem>
-						<BreadcrumbSeparator />
-						<BreadcrumbItem>
-							<BreadcrumbPage>Orders</BreadcrumbPage>
-						</BreadcrumbItem>
-						<BreadcrumbSeparator />
-						<BreadcrumbItem>
-							<YnsLink href="/myaccount/settings">Settings</YnsLink>
-						</BreadcrumbItem>
-						<BreadcrumbSeparator />
-						<BreadcrumbItem>
-							<YnsLink href="/myaccount/help">Help</YnsLink>
-						</BreadcrumbItem>
-					</BreadcrumbList>
-				</Breadcrumb>
+			<Nav Menu={<NavMenuOrders />} Search={<SearchOrders />} />
+			<main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pb-6 pt-6 sm:px-6 lg:px-8">
 				{children}
-			</div>
+			</main>
 		</TooltipProvider>
 	);
 }

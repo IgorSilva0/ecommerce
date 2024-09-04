@@ -57,14 +57,11 @@ export function MyAccount() {
 								<ListItem href="/myaccount" title="Manage your account">
 									Settings
 								</ListItem>
-								<ListItem href="/myaccount" title="FAQs and support">
-									Support
-								</ListItem>
 								<button
 									onClick={() => signout()}
 									className="mx-2 cursor-pointer rounded-md border-2 border-black bg-black py-2 text-center text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-slate-700 dark:text-white dark:hover:bg-white dark:hover:text-black"
 								>
-									LogOut
+									Logout
 								</button>
 							</ul>
 						) : (
