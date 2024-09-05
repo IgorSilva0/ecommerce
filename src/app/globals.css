@@ -150,3 +150,17 @@ input[type="search" i]::-webkit-search-cancel-button {
 c1 {
 	color: #00000052;
 }
+
+.custom-pie-chart text {
+	fill: black !important; /* Forcefully override the inline fill color */
+}
+.dark .custom-pie-chart text {
+	fill: white !important; /* Forcefully override the inline fill color */
+}
+
+.dark .no-stroke path {
+	stroke: none !important; /* Forcefully override the inline stroke color */
+}
+.no-stroke path {
+	stroke: none !important; /* Forcefully override the inline stroke color */
+}

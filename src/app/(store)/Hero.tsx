@@ -75,7 +75,7 @@ export function Hero() {
 					<CarouselItem key={index}>
 						<div className="">
 							<Card>
-								<CardContent className="flex h-[25rem] cursor-grab items-center justify-center p-6 dark:bg-slate-950 sm:h-[24rem]">
+								<CardContent className="flex h-[25rem] cursor-grab items-center justify-center rounded-lg p-6 dark:bg-slate-950 sm:h-[24rem]">
 									<div className="flex h-full w-full flex-col-reverse items-start justify-between sm:flex-row sm:items-center">
 										<div className="mb-2 sm:px-10">
 											<h3 className="text-lg font-semibold sm:text-2xl">{item.title}</h3>
@@ -95,7 +95,7 @@ export function Hero() {
 												alt={item.imageAlt}
 												width={400}
 												height={300}
-												className="h-[12rem] w-[25rem] rounded-xl object-cover sm:h-[21rem] sm:w-[30rem]"
+												className="h-[12rem] w-[25rem] rounded-lg object-cover sm:h-[21rem] sm:w-[30rem]"
 											/>
 										</div>
 									</div>

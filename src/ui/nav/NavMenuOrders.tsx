@@ -31,7 +31,7 @@ export function NavMenuOrders() {
 				</NavigationMenuItem>
 				<NavigationMenuItem value="Help">
 					<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-						<YnsLink href="/myaccount/help">Help</YnsLink>
+						<YnsLink href="/help">Help</YnsLink>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 			</NavigationMenuList>
