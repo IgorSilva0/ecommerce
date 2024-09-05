@@ -24,7 +24,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 	const messages = await getMessages();
 	return (
 		<html lang={locale} className="h-full antialiased">
-			<body className="flex min-h-full flex-col dark:bg-slate-950">
+			<body className="flex min-h-full flex-col bg-white dark:bg-slate-950">
 				<Theme attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<NextIntlClientProvider messages={messages}>
 						<div
