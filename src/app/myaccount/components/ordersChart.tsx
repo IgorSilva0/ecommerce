@@ -105,7 +105,7 @@ const valueFormatter = (value: number | null) => `${value}mm`;
 
 export function OrdersChart() {
 	return (
-		<div className="flex flex-col-reverse items-center gap-5 py-8 lg:flex-row">
+		<div className="my-8 flex max-h-[300px] flex-col-reverse items-center gap-5 lg:flex-row">
 			<BarChart
 				dataset={dataset}
 				xAxis={[
@@ -127,7 +127,7 @@ export function OrdersChart() {
 					},
 				]}
 				{...otherSetting}
-				className="w-full rounded-lg bg-white md:w-2/3"
+				className="w-2/3 rounded-lg bg-white"
 			/>
 
 			<PieChart
@@ -149,8 +149,7 @@ export function OrdersChart() {
 						cx: 120,
 					},
 				]}
-				height={200}
-				className="custom-pie-chart no-stroke w-full sm:w-2/4 lg:w-1/3"
+				className="custom-pie-chart no-stroke h-[300px] w-1/3"
 			/>
 		</div>
 	);

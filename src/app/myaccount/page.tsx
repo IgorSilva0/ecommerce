@@ -16,7 +16,7 @@ export default function Orders() {
 					<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 				</div>
 				<OrdersChart />
-				<div className="flex flex-col gap-8 lg:flex-row lg:gap-8">
+				<div className="flex flex-col gap-8 lg:flex-row">
 					<OrdersTable />
 					<OrderDetails />
 				</div>
