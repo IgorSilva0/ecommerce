@@ -127,7 +127,9 @@ export function OrdersChart() {
 					},
 				]}
 				{...otherSetting}
-				className="w-2/3 rounded-lg bg-white"
+				height={300}
+				width={800}
+				className="rounded-lg bg-white"
 			/>
 
 			<PieChart
@@ -149,7 +151,9 @@ export function OrdersChart() {
 						cx: 120,
 					},
 				]}
-				className="custom-pie-chart no-stroke h-[300px] w-1/3"
+				height={300}
+				width={400}
+				className="custom-pie-chart no-stroke"
 			/>
 		</div>
 	);
