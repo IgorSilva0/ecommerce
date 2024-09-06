@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight, Copy, CreditCard, MoreVertical, Truck } from "lucide-react";
+import { type OrdersDataResponse } from "../utils/types";
 import { Button } from "@/ui/shadcn/button";
 import {
 	Card,
@@ -18,7 +19,7 @@ import {
 import { Pagination, PaginationContent, PaginationItem } from "@/ui/shadcn/pagination";
 import { Separator } from "@/ui/shadcn/separator";
 
-export function OrderDetails() {
+export function OrderDetails({ data }: { data: OrdersDataResponse }) {
 	return (
 		<div className="flex justify-center">
 			<Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">

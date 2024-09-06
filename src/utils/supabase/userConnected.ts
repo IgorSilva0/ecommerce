@@ -3,6 +3,7 @@
 import { createClient } from "./server";
 
 type User = {
+	id: string;
 	email: string;
 	// Add other user properties if needed
 };

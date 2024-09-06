@@ -21,7 +21,7 @@ export async function orderToDB(searchPrms: string) {
 				items: order!.lines,
 				shipping_details: [order!.order.shipping],
 				delivery_status: "Pending",
-				parcel_tracking: "N/A",
+				//parcel_tracking: null,
 				total_price: order!.order.amount,
 				currency: order!.order.currency,
 				payment_method_details: [order!.order.payment_method],

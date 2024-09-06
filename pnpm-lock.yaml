@@ -285,6 +285,9 @@ importers:
       tailwindcss:
         specifier: 3.4.9
         version: 3.4.9
+      tailwindcss-animated:
+        specifier: 1.1.2
+        version: 1.1.2(tailwindcss@3.4.9)
       tsx:
         specifier: 4.17.0
         version: 4.17.0
@@ -5265,6 +5268,11 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
 
+  tailwindcss-animated@1.1.2:
+    resolution: {integrity: sha512-SI4owS5ojserhgEYIZA/uFVdNjU2GMB2P3sjtjmFA52VxoUi+Hht6oR5+RdT+CxrX9cNNYEa+vbTWHvN9zbj3w==}
+    peerDependencies:
+      tailwindcss: '>=3.1.0'
+
   tailwindcss@3.4.9:
     resolution: {integrity: sha512-1SEOvRr6sSdV5IDf9iC+NU4dhwdqzF4zKKq3sAbasUWHEM6lsMhX+eNN5gkPx1BvLFEnZQEUFbXnGj8Qlp83Pg==}
     engines: {node: '>=14.0.0'}
@@ -6511,7 +6519,7 @@ snapshots:
 
   '@mui/material@6.0.2(@emotion/react@11.13.3(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1))(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1))(react-dom@19.0.0-rc-49496d49-20240814(react@19.0.0-rc-49496d49-20240814))(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1)':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.6
       '@mui/core-downloads-tracker': 6.0.2
       '@mui/system': 6.0.2(@emotion/react@11.13.3(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1))(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1))(react@19.0.0-rc-49496d49-20240814)(types-react@19.0.0-rc.1)
       '@mui/types': 7.2.16(types-react@19.0.0-rc.1)
@@ -10931,6 +10939,10 @@ snapshots:
   tailwind-merge@2.5.2: {}
 
   tailwindcss-animate@1.0.7(tailwindcss@3.4.9):
+    dependencies:
+      tailwindcss: 3.4.9
+
+  tailwindcss-animated@1.1.2(tailwindcss@3.4.9):
     dependencies:
       tailwindcss: 3.4.9
 
