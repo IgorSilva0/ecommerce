@@ -104,7 +104,7 @@ const valueFormatter = (value: number | null) => `${value}mm`;
 
 export function OrdersChart() {
 	return (
-		<div className="my-8 grid gap-8 object-cover md:max-h-[300px] md:grid-cols-4 lg:grid-cols-3">
+		<div className="grid select-none gap-8 border bg-muted/70 object-cover shadow dark:bg-slate-950 md:max-h-[300px] md:grid-cols-4 lg:grid-cols-3">
 			<BarChart
 				dataset={dataset}
 				xAxis={[
@@ -118,16 +118,19 @@ export function OrdersChart() {
 								: `${month} 2023`,
 					},
 				]}
+				barLabel={"value"}
+				borderRadius={5}
 				series={[
 					{
 						dataKey: "seoul",
 						label: "Seoul rainfall",
 						valueFormatter,
+						highlightScope: { highlight: "item", fade: "global" },
 					},
 				]}
 				{...otherSetting}
 				height={300}
-				className="row-start-2 max-h-[300px] rounded-lg md:col-span-2 md:row-start-1"
+				className="lines-chart custom-fill row-start-2 ml-5 max-h-[300px] rounded-lg md:col-span-2 md:row-start-1"
 			/>
 
 			<PieChart
@@ -146,11 +149,18 @@ export function OrdersChart() {
 						startAngle: -45,
 						highlightScope: { fade: "global", highlight: "item" },
 						faded: { innerRadius: 50, additionalRadius: -5, color: "gray" },
-						cx: 120,
+						cx: "65%",
 					},
 				]}
+				slotProps={{
+					legend: {
+						direction: "row",
+						position: { vertical: "top", horizontal: "middle" },
+						padding: 8,
+					},
+				}}
 				height={300}
-				className="custom-pie-chart no-stroke md:col-span-2 lg:col-start-3"
+				className="custom-fill no-stroke md:col-span-2 lg:col-span-1 lg:col-start-3"
 			/>
 		</div>
 	);

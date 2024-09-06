@@ -151,10 +151,10 @@ c1 {
 	color: #00000052;
 }
 
-.custom-pie-chart text {
+.custom-fill text {
 	fill: black !important; /* Forcefully override the inline fill color */
 }
-.dark .custom-pie-chart text {
+.dark .custom-fill text {
 	fill: white !important; /* Forcefully override the inline fill color */
 }
 
@@ -163,4 +163,12 @@ c1 {
 }
 .no-stroke path {
 	stroke: none !important; /* Forcefully override the inline stroke color */
+}
+
+.dark .lines-chart line {
+	stroke: #ffffff2e;
+}
+
+.lines-chart line {
+	stroke: #0000002e;
 }
