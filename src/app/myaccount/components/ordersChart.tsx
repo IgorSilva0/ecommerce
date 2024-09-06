@@ -4,7 +4,6 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { PieChart } from "@mui/x-charts/PieChart";
 
 const otherSetting = {
-	height: 300,
 	yAxis: [{ label: "rainfall (mm)" }],
 	grid: { horizontal: true },
 	sx: {
@@ -105,7 +104,7 @@ const valueFormatter = (value: number | null) => `${value}mm`;
 
 export function OrdersChart() {
 	return (
-		<div className="my-8 flex max-h-[300px] max-w-full flex-col-reverse items-center gap-5 md:flex-row">
+		<div className="my-8 grid gap-8 object-cover md:max-h-[300px] md:grid-cols-4 lg:grid-cols-3">
 			<BarChart
 				dataset={dataset}
 				xAxis={[
@@ -128,8 +127,7 @@ export function OrdersChart() {
 				]}
 				{...otherSetting}
 				height={300}
-				width={800}
-				className="w-full rounded-lg sm:w-auto"
+				className="row-start-2 max-h-[300px] rounded-lg md:col-span-2 md:row-start-1"
 			/>
 
 			<PieChart
@@ -152,8 +150,7 @@ export function OrdersChart() {
 					},
 				]}
 				height={300}
-				width={400}
-				className="custom-pie-chart no-stroke"
+				className="custom-pie-chart no-stroke md:col-span-2 lg:col-start-3"
 			/>
 		</div>
 	);
