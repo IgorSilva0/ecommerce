@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, EyeOff, Eye, ListFilter } from "lucide-react";
+import { Loader2, EyeOff, Eye, ListFilter, Filter } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { OrdersTable } from "./components/ordersTable";
 import { type OrdersDataResponse } from "./utils/types";
@@ -21,7 +21,8 @@ import { OrdersData } from "@/app/myaccount/utils/data";
 export default function Orders() {
 	const [displayCharts, setDisplayCharts] = useState(true);
 	const [ordersData, setOrdersData] = useState<OrdersDataResponse>([]);
-	const [filter, setFilter] = React.useState<string>("2024");
+	const [filterYear, setFilterYear] = React.useState<string>("2024");
+	const [filterType, setFilterType] = React.useState<string>("Orders");
 	const [fadeOut, setFadeOut] = useState(false);
 
 	const toggleCharts = () => {
@@ -62,15 +63,31 @@ export default function Orders() {
 					<div className="flex gap-2">
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
-								<Button variant="outline" size="sm" className="h-7 gap-1 text-sm">
+								<Button variant="outline" size="sm" className="h-7 gap-2 text-sm">
 									<ListFilter className="h-3.5 w-3.5" />
-									<span className="sr-only sm:not-sr-only">Filter ({filter})</span>
+									<span className="sr-only sm:not-sr-only">{filterType}</span>
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end">
 								<DropdownMenuLabel>Filter by</DropdownMenuLabel>
 								<DropdownMenuSeparator />
-								<DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
+								<DropdownMenuRadioGroup value={filterType} onValueChange={setFilterType}>
+									<DropdownMenuRadioItem value="Orders">Orders</DropdownMenuRadioItem>
+									<DropdownMenuRadioItem value="Amount">Amount</DropdownMenuRadioItem>
+								</DropdownMenuRadioGroup>
+							</DropdownMenuContent>
+						</DropdownMenu>
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant="outline" size="sm" className="h-7 gap-2 text-sm">
+									<Filter className="h-3.5 w-3.5" />
+									<span className="sr-only sm:not-sr-only"> {filterYear} </span>
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align="end">
+								<DropdownMenuLabel>Filter by</DropdownMenuLabel>
+								<DropdownMenuSeparator />
+								<DropdownMenuRadioGroup value={filterYear} onValueChange={setFilterYear}>
 									<DropdownMenuRadioItem value="2024">2024</DropdownMenuRadioItem>
 									<DropdownMenuRadioItem value="2023">2023</DropdownMenuRadioItem>
 									<DropdownMenuRadioItem value="2022">2022</DropdownMenuRadioItem>
@@ -84,15 +101,15 @@ export default function Orders() {
 							onClick={() => toggleCharts()}
 						>
 							{displayCharts ? (
-								<>
+								<div className="flex items-center gap-2">
 									<EyeOff className="h-3.5 w-3.5" />
-									<span className="">Hide Charts</span>
-								</>
+									<span className="sr-only sm:not-sr-only">Hide Charts</span>
+								</div>
 							) : (
-								<>
+								<div className="flex items-center gap-2">
 									<Eye className="h-3.5 w-3.5" />
-									<span className="">Show Charts</span>
-								</>
+									<span className="sr-only sm:not-sr-only">Show Charts</span>
+								</div>
 							)}
 						</Button>
 					</div>
@@ -100,7 +117,7 @@ export default function Orders() {
 
 				{displayCharts ? (
 					<div className={`fade-down ${fadeOut ? "fade-out" : ""}`}>
-						<OrdersChart data={ordersData} filter={filter} />
+						<OrdersChart data={ordersData} filterYear={filterYear} filterType={filterType} />
 					</div>
 				) : null}
 

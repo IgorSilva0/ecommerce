@@ -170,6 +170,28 @@ input[type="search" i]::-webkit-search-cancel-button {
 	}
 }
 
+@keyframes bgSwap {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 140% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+.niceBtn {
+	background: inherit;
+	border-radius: 6px;
+	background: linear-gradient(-90deg, #007cf0, #00dfd8, #ff0080, #007cf0);
+	background-size: 400% 100%;
+	border: none;
+	padding: 5;
+	margin: 0;
+	animation: bgSwap 8s ease-in-out infinite;
+}
+
 /* Apply the fade-out animation to the element */
 .fade-out {
 	animation: fadeOut 0.3s ease-out forwards; /* 3 seconds duration, ease-out effect */
@@ -199,4 +221,31 @@ c1 {
 
 .lines-chart line {
 	stroke: #0000002e;
+}
+
+/* Define the keyframes for the rainbow animation */
+/* Define the keyframes for the rainbow animation with movement */
+@keyframes rainbowIcon {
+	0% {
+		color: #d92d02; /* Holiday rainbow red */
+		transform: scale(1) translate(0, 0);
+	}
+	50% {
+		color: #50c581; /* Holiday rainbow green */
+		transform: scale(0.8) translate(0, 10px);
+	}
+
+	100% {
+		color: #d92d02; /* Holiday rainbow red */
+		transform: scale(1) translate(0, 0);
+	}
+}
+
+/* Apply the animation to your star icon */
+.rainBow {
+	animation: rainbowIcon 5s infinite;
+	display: inline-block;
+	transition:
+		color 0.3s ease,
+		transform 0.3s ease;
 }

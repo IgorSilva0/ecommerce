@@ -10,7 +10,8 @@ export const metadata = {
 } satisfies Metadata;
 
 export default async function Home() {
-	const products = await Commerce.productBrowse({ first: 6 });
+	const products = await Commerce.productBrowse({ last: 1 });
+	const randomProducts = products.sort(() => 0.5 - Math.random()).slice(0, 3);
 
 	return (
 		<main>
@@ -24,7 +25,7 @@ export default async function Home() {
 					Featured Products
 				</h2>
 			</div>
-			<ProductList products={products} />
+			<ProductList products={randomProducts} />
 			<div className="mt-10 flex w-full justify-center">
 				<YnsLink
 					href="/products"

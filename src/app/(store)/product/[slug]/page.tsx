@@ -129,7 +129,7 @@ export default async function SingleProductPage({
 					{product.images.map((image) => (
 						<Image
 							key={image}
-							className="w-full rounded-lg bg-neutral-200 object-cover object-center transition-opacity dark:bg-slate-950"
+							className="w-full rounded-lg bg-gray-100 object-cover object-center transition-opacity dark:bg-slate-800/50"
 							src={image}
 							width={700}
 							height={700}
@@ -163,8 +163,9 @@ export default async function SingleProductPage({
 													prefetch={true}
 													href={`/product/${variant.metadata.slug}?variant=${variant.metadata.variant}`}
 													className={cn(
-														"flex cursor-pointer items-center justify-center gap-2 rounded-md border p-2 transition-colors hover:bg-neutral-100",
-														isSelected && "border-black bg-neutral-50 font-medium",
+														"flex cursor-pointer items-center justify-center gap-2 rounded-md border p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-slate-800",
+														isSelected &&
+															"border-black bg-neutral-50 font-medium dark:border-white dark:bg-slate-700",
 													)}
 													aria-selected={isSelected}
 												>

@@ -14,6 +14,8 @@ export interface Product {
 	livemode: boolean;
 	metadata: {
 		slug: string;
+		category: string;
+		variant: string;
 	};
 	tax_code: string;
 	shippable: boolean;

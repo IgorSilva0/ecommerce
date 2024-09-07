@@ -14,17 +14,26 @@ const otherSetting = {
 	},
 };
 
-const valueFormatter = (value: string | number | null) => `${value} orders`;
-
 export function OrdersChart({
 	data,
-	filter,
+	filterYear,
+	filterType,
 }: {
 	data: OrdersDataResponse;
-	filter: React.SetStateAction<string>;
+	filterYear: React.SetStateAction<string>;
+	filterType: React.SetStateAction<string>;
 }) {
-	const barData = barDataSet(data, Number(filter));
-	// const pieData = pieDataSet(data);
+	const barData = barDataSet(data, Number(filterYear));
+	const valueFormatter = (value: string | number | null) =>
+		`${
+			filterType === "Orders"
+				? `${value} orders`
+				: `£${value!.toLocaleString("en-GB", {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2,
+					})}`
+		}`;
+	//const pieData = pieDataSet(data, Number(filterYear));
 
 	return (
 		<div className="grid select-none gap-8 border bg-muted/70 object-cover shadow dark:bg-slate-950 md:max-h-[300px] md:grid-cols-4 lg:grid-cols-3">
@@ -38,20 +47,30 @@ export function OrdersChart({
 						valueFormatter: (month: string, context) =>
 							context.location === "tick"
 								? `${month.slice(0, 3)}`
-								: `Total spent in ${month} : £${barData
-										.find((d) => d.month === month)
-										?.value.toLocaleString("en-GB", {
-											minimumFractionDigits: 2,
-											maximumFractionDigits: 2,
-										})}`,
+								: filterType === "Orders"
+									? `Total spent in ${month} : £${barData
+											.find((d) => d.month === month)
+											?.value.toLocaleString("en-GB", {
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+											})}`
+									: `Total orders in ${month} : ${
+											barData.find((d) => d.month === month)?.orders
+										} orders`,
 					},
 				]}
-				barLabel={"value"}
+				barLabel={(item, context) => {
+					if (filterType === "Orders") {
+						return item.value?.toString();
+					}
+					return "£";
+				}}
 				borderRadius={5}
 				series={[
 					{
-						dataKey: `orders`,
-						label: `Purchase Summary`,
+						dataKey: `${filterType === "Orders" ? "orders" : "value"}`,
+						// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+						label: `Purchase Summary for ${filterYear}`,
 						valueFormatter,
 						highlightScope: { highlight: "item", fade: "global" },
 					},
@@ -67,7 +86,7 @@ export function OrdersChart({
 						data: [
 							{ value: 10.5, label: "Electronics" },
 							{ value: 15.73, label: "Fashion" },
-							{ value: 20.31, label: "Example C" },
+							{ value: 20.31, label: "Sports" },
 						],
 
 						innerRadius: 50,

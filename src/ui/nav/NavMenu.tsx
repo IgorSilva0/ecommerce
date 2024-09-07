@@ -51,6 +51,15 @@ export function NavMenu() {
 							<ListItem href="/products" title="All products">
 								All products in our store are listed here.
 							</ListItem>
+							<ListItem href="/category/fashion" title="Tech Fashion">
+								Show off your coding passion with our jackets, tees, and hats.
+							</ListItem>
+							<ListItem href="/category/sports" title="Sports & Fitness">
+								Gear up for every activity, from gym workouts to biking.
+							</ListItem>
+							<ListItem href="/category/electronics	" title="Electronics">
+								Discover the latest in gadgets, gear, and tech essentials.
+							</ListItem>
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>

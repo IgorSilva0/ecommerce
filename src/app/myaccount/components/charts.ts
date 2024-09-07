@@ -43,5 +43,8 @@ export function barDataSet(data: OrdersDataResponse, selectedYear: number) {
 }
 
 export function pieDataSet(data: OrdersDataResponse, selectedYear: number) {
+	const num = 4801 / 100;
+
+	console.log(num);
 	return null;
 }

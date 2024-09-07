@@ -41,7 +41,7 @@ export default async function CartModalPage({ searchParams }: { searchParams: { 
 								className="grid grid-cols-[4rem,1fr,max-content] grid-rows-[auto,auto] gap-x-4 gap-y-2 py-6"
 							>
 								{line.product.images[0] ? (
-									<div className="col-span-1 row-span-2 bg-neutral-100">
+									<div className="col-span-1 row-span-2 bg-slate-100 dark:bg-slate-800">
 										<Image
 											className="aspect-square rounded-md object-cover"
 											src={line.product.images[0]}

@@ -22,7 +22,7 @@ export async function orderToDB(searchPrms: string) {
 				shipping_details: [order!.order.shipping],
 				delivery_status: "Pending",
 				//parcel_tracking: null,
-				total_price: order!.order.amount,
+				total_price: order!.order.amount / 100,
 				currency: order!.order.currency,
 				payment_method_details: [order!.order.payment_method],
 				shipping_rate: [order!.shippingRate],

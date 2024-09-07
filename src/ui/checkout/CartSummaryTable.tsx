@@ -72,7 +72,7 @@ export const CartSummaryTable = ({ cart }: { cart: Commerce.Cart }) => {
 								<TableCell className="hidden sm:table-cell sm:w-24">
 									{line.product.images[0] && (
 										<Image
-											className="aspect-square rounded-md object-cover"
+											className="aspect-square rounded-md bg-slate-100 object-cover dark:bg-slate-800"
 											src={line.product.images[0]}
 											width={96}
 											height={96}
