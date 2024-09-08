@@ -17,23 +17,19 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/ui/shadcn/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/shadcn/tabs";
-import { ordersToTable } from "@/app/myaccount/components/orders";
+//import { ordersToTable } from "@/app/myaccount/components/orders";
 
 export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 	const [filterYear, setFilterYear] = useState("2024");
 	const [filterStatus, setFilterStatus] = useState("All");
 
-	const [dateRange, setDateRange] = useState("Year");
+	//const [dateRange, setDateRange] = useState("Year");
 
-	const dataset = ordersToTable(data, Number(filterYear), filterStatus, dateRange);
+	//const dataset = ordersToTable(data, Number(filterYear), filterStatus, dateRange);
 	return (
 		<div className="mt-8 flex flex-col gap-8 lg:flex-row">
 			<div className="grid flex-1 auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-				<Tabs
-					defaultValue="Year"
-					onValueChange={setDateRange}
-					className="rounded-t-xl border bg-muted/70 shadow"
-				>
+				<Tabs defaultValue="Year" className="rounded-t-xl border bg-muted/70 shadow">
 					<div className="flex items-center px-5 pb-3 pt-5">
 						<TabsList>
 							<TabsTrigger value="Week">Week</TabsTrigger>
