@@ -2,7 +2,7 @@ import { File, Filter, ListFilter } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { type OrdersDataResponse } from "../utils/types";
 import { OrderDetails } from "./orderDetails";
-import { ordersToTable, exportToCSV, exportToJSON, type OrderExportData } from "./orders";
+import { ordersToTable, exportTableToCSV, exportToJSON, type OrderExportData } from "./orders";
 import { Badge } from "@/ui/shadcn/badge";
 import { Button } from "@/ui/shadcn/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/shadcn/card";
@@ -35,9 +35,14 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 		return () => clearTimeout(timer);
 	}, [filterYear, filterStatus]);
 
-	const handleExport = (x: boolean) => {
-		if (x) exportToCSV(dataset);
-		else exportToJSON(dataset);
+	const handleExport = async (x: boolean) => {
+		if (!dataset.length) return;
+		try {
+			if (x) await exportTableToCSV(dataset);
+			else await exportToJSON(dataset);
+		} catch (error) {
+			console.error("Export error:", error);
+		}
 	};
 
 	const handleRowClick = (index: number, order: OrderExportData) => {
@@ -95,10 +100,12 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end">
-									<DropdownMenuLabel>File type</DropdownMenuLabel>
-									<DropdownMenuSeparator />
-									<DropdownMenuItem onClick={() => handleExport(true)}>.CSV</DropdownMenuItem>
-									<DropdownMenuItem onClick={() => handleExport(false)}>.JSON</DropdownMenuItem>
+									<DropdownMenuItem onClick={() => handleExport(true)}>
+										Export as CSV
+									</DropdownMenuItem>
+									<DropdownMenuItem onClick={() => handleExport(false)}>
+										Export as JSON
+									</DropdownMenuItem>
 									<DropdownMenuSeparator />
 								</DropdownMenuContent>
 							</DropdownMenu>

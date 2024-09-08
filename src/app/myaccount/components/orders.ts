@@ -1,4 +1,4 @@
-import { type OrdersDataResponse } from "@/app/myaccount/utils/types";
+import { type Order, type OrdersDataResponse } from "../utils/types";
 
 export type OrderExportData = {
 	order_id: string;
@@ -11,7 +11,10 @@ export type OrderExportData = {
 	orderTotal: string;
 };
 
-const formatDate = (x: string) => new Date(x).toISOString().slice(0, 10).replace(/-/g, "/");
+const formatDate = (x: string) =>
+	new Intl.DateTimeFormat("en-GB", { year: "numeric", month: "numeric", day: "numeric" }).format(
+		new Date(x),
+	);
 
 export function ordersToTable(data: OrdersDataResponse, filterYear: number, filterStatus: string) {
 	// Creates a dataset with the required fields
@@ -46,7 +49,9 @@ export function ordersToTable(data: OrdersDataResponse, filterYear: number, filt
 	return sortedData;
 }
 
-export const exportToCSV = (data: OrderExportData[], filename = "orders.csv") => {
+//////////// Export from OrdersTable to .CSV /////////////
+
+export const exportTableToCSV = async (data: OrderExportData[], filename = "orders.csv") => {
 	const csvContent =
 		"data:text/csv;charset=utf-8," +
 		data
@@ -72,7 +77,61 @@ export const exportToCSV = (data: OrderExportData[], filename = "orders.csv") =>
 	document.body.removeChild(link);
 };
 
-export const exportToJSON = (data: OrderExportData[], filename = "orders.json") => {
+//////////// Export from OrderDetails .CSV /////////////
+
+export const exportOrderDetailsToCSV = async (data: Order, filename = `${data.order_id}.csv`) => {
+	// Define the CSV headers
+	const headers = [
+		"ID",
+		"User ID",
+		"Order ID",
+		"Product Names",
+		"Quantity",
+		"Total Price",
+		"Delivery Status",
+		"Order Date",
+		"Currency",
+		"Shipping City",
+		"Shipping Country",
+	];
+
+	// Convert a single Order object to a CSV row
+	const convertToCSVRow = (row: Order) =>
+		[
+			row.id,
+			row.order_id,
+			row.items.map((item) => item.product.name).join("; "),
+			row.items.reduce((sum, item) => sum + item.quantity, 0),
+			row.total_price.toFixed(2),
+			row.delivery_status,
+			new Date(row.created_at).toLocaleDateString("en-GB", {
+				day: "2-digit",
+				month: "2-digit",
+				year: "numeric",
+			}),
+			row.currency.toUpperCase(),
+			row.shipping_details[0]?.address.city ?? "",
+			row.shipping_details[0]?.address.country ?? "",
+		].join(",");
+
+	// Create the CSV content for a single Order
+	const csvContent =
+		"data:text/csv;charset=utf-8," + [headers.join(","), convertToCSVRow(data)].join("\n");
+
+	// Create a link element and set its href to the CSV content
+	const link = document.createElement("a");
+	link.href = encodeURI(csvContent);
+	link.download = filename;
+
+	// Append the link to the document body, click it to trigger download, then remove it
+	document.body.appendChild(link);
+	link.click();
+	document.body.removeChild(link);
+};
+
+///////////// Export Json ////////////
+
+export const exportToJSON = async (data: OrderExportData[] | Order, filename = "orders.json") => {
 	// Convert the data array to a JSON string
 	const jsonContent = JSON.stringify(data, null, 2);
 

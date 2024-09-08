@@ -12,7 +12,7 @@ const CartFallback = async () => {
 	return (
 		<div className="opacity-90">
 			<TooltipProvider>
-				<Tooltip>
+				<Tooltip delayDuration={100}>
 					<TooltipTrigger asChild>
 						<ShoppingCart className="h-5 w-5 cursor-help" />
 					</TooltipTrigger>

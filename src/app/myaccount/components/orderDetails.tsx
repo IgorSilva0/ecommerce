@@ -1,6 +1,7 @@
-import { ChevronLeft, ChevronRight, Copy, CreditCard, MoreVertical, Truck } from "lucide-react";
-import { type OrdersDataResponse } from "../utils/types";
-import { type OrderExportData } from "./orders";
+import { ChevronLeft, ChevronRight, Copy, CreditCard, MoreVertical, Check } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { type OrdersDataResponse, type Order } from "../utils/types";
+import { exportOrderDetailsToCSV, exportToJSON, type OrderExportData } from "./orders";
 import { Button } from "@/ui/shadcn/button";
 import {
 	Card,
@@ -19,6 +20,12 @@ import {
 } from "@/ui/shadcn/dropdown-menu";
 import { Pagination, PaginationContent, PaginationItem } from "@/ui/shadcn/pagination";
 import { Separator } from "@/ui/shadcn/separator";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/ui/shadcn/tooltip";
+
+const formatDate = (x: string) =>
+	new Intl.DateTimeFormat("en-GB", { year: "numeric", month: "long", day: "numeric" }).format(
+		new Date(x),
+	);
 
 export function OrderDetails({
 	data,
@@ -27,29 +34,88 @@ export function OrderDetails({
 	data: OrdersDataResponse;
 	selectedRow: OrderExportData | null;
 }) {
+	const [order, setOrder] = useState<Order | undefined>(undefined);
+	const [copyOrderId, setCopyOrderId] = useState(false);
+	const [date, setDate] = useState<string | undefined>(undefined);
+
+	useEffect(() => {
+		if (selectedRow) {
+			try {
+				const order = data.find((order) => order.order_id === selectedRow.order_id);
+				if (order) setDate(formatDate(order.created_at));
+				setOrder(order);
+			} catch (error) {
+				console.error("Error on SelectedRow,data Use Effect:", error);
+			}
+		}
+	}, [selectedRow, data]);
+
+	const handleExport = async (type: boolean) => {
+		if (!order) return;
+		try {
+			if (type)
+				await exportOrderDetailsToCSV(order); // Await if async
+			else await exportToJSON(order); // Await if async
+		} catch (error) {
+			console.error("Export error:", error);
+		}
+	};
+
+	const handleCopy = async (text: string) => {
+		try {
+			await navigator.clipboard.writeText(text);
+			setCopyOrderId(true);
+			setTimeout(() => setCopyOrderId(false), 1500);
+		} catch (error) {
+			console.error("Failed to copy text to clipboard:", error);
+		}
+	};
+
 	return (
 		<div className="flex justify-center">
 			<Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
 				<CardHeader className="flex flex-row items-start bg-muted/70">
-					<div className="grid gap-0.5">
+					<div className="grid gap-0.5 fade-in">
 						<CardTitle className="group flex items-center gap-2 text-lg">
-							Order Oe31b70H
-							<Button
-								size="icon"
-								variant="outline"
-								className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100"
-							>
-								<Copy className="h-3 w-3" />
+							Order id:
+							<div className="rounded bg-gray-200 px-1 py-1 text-xs dark:bg-slate-950">
+								{order ? (
+									<>
+										<TooltipProvider>
+											<Tooltip delayDuration={100}>
+												<TooltipTrigger asChild>
+													<span
+														onClick={() => handleCopy(order.order_id)}
+														className="flex cursor-pointer items-center gap-2"
+													>
+														{order.order_id}
+														{copyOrderId ? (
+															<Check className="h-5 w-5 text-green-500" />
+														) : (
+															<Copy className="niceBtn h-5 w-5 text-white" />
+														)}
+													</span>
+												</TooltipTrigger>
+												<TooltipContent
+													side="bottom"
+													align="end"
+													sideOffset={10}
+													className="dark:border-2 dark:border-black dark:bg-slate-700 dark:text-white"
+												>
+													<p>Copy Order ID</p>
+												</TooltipContent>
+											</Tooltip>
+										</TooltipProvider>
+									</>
+								) : (
+									<span className="animate-pulse">Loading...</span>
+								)}
 								<span className="sr-only">Copy Order ID</span>
-							</Button>
+							</div>
 						</CardTitle>
-						<CardDescription>Date: November 23, 2023</CardDescription>
+						<CardDescription>Date: {date}</CardDescription>
 					</div>
-					<div className="ml-auto flex items-center gap-1">
-						<Button size="sm" variant="outline" className="h-8 gap-1">
-							<Truck className="h-3.5 w-3.5" />
-							<span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Track Order</span>
-						</Button>
+					<div className="!mt-0 ml-auto flex items-center gap-1">
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
 								<Button size="icon" variant="outline" className="h-8 w-8">
@@ -58,10 +124,14 @@ export function OrderDetails({
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end">
-								<DropdownMenuItem>Edit</DropdownMenuItem>
-								<DropdownMenuItem>Export</DropdownMenuItem>
+								<DropdownMenuItem>Track Order</DropdownMenuItem>
 								<DropdownMenuSeparator />
-								<DropdownMenuItem>Trash</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => handleExport(true)}>
+									Export as CSV
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => handleExport(false)}>
+									Export as JSON
+								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
 					</div>
