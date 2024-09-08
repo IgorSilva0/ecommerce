@@ -79,7 +79,7 @@ export const exportTableToCSV = async (data: OrderExportData[], filename = `orde
 
 //////////// Export from OrderDetails .CSV /////////////
 
-export const exportOrderDetailsToCSV = async (data: Order, filename = "order.json") => {
+export const exportOrderDetailsToCSV = async (data: Order, filename = "order.csv") => {
 	// Define the CSV headers
 	const headers = [
 		"ID",
