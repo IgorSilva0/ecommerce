@@ -37,7 +37,7 @@ export function OrdersChart({
 		}`;
 
 	return (
-		<div className="grid select-none gap-8 border bg-muted/70 object-cover shadow dark:bg-slate-950 md:max-h-[300px] md:grid-cols-4 lg:grid-cols-3">
+		<div className="grid select-none gap-8 border border-t-0 bg-muted/10 object-cover shadow dark:bg-slate-950 md:max-h-[300px] md:grid-cols-4 lg:grid-cols-3">
 			<BarChart
 				dataset={barData}
 				xAxis={[

@@ -1,13 +1,15 @@
 import { File, Filter, ListFilter } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { type OrdersDataResponse } from "../utils/types";
 import { OrderDetails } from "./orderDetails";
+import { ordersToTable, exportToCSV, exportToJSON, type OrderExportData } from "./orders";
 import { Badge } from "@/ui/shadcn/badge";
 import { Button } from "@/ui/shadcn/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/shadcn/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/shadcn/card";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuRadioGroup,
 	DropdownMenuRadioItem,
@@ -16,26 +18,39 @@ import {
 } from "@/ui/shadcn/dropdown-menu";
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/ui/shadcn/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/shadcn/tabs";
-//import { ordersToTable } from "@/app/myaccount/components/orders";
+import { Tabs, TabsContent } from "@/ui/shadcn/tabs";
 
 export function OrdersTable({ data }: { data: OrdersDataResponse }) {
+	const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(0);
+	const [selectedRow, setSelectedRow] = useState<OrderExportData | null>(null);
 	const [filterYear, setFilterYear] = useState("2024");
 	const [filterStatus, setFilterStatus] = useState("All");
+	const [loading, setLoading] = useState(true);
+	const dataset = ordersToTable(data, Number(filterYear), filterStatus);
+	if (dataset.length && !selectedRow) setSelectedRow(dataset[0] ?? null);
 
-	//const [dateRange, setDateRange] = useState("Year");
+	useEffect(() => {
+		setLoading(true);
+		const timer = setTimeout(() => setLoading(false), 1500);
+		return () => clearTimeout(timer);
+	}, [filterYear, filterStatus]);
 
-	//const dataset = ordersToTable(data, Number(filterYear), filterStatus, dateRange);
+	const handleExport = (x: boolean) => {
+		if (x) exportToCSV(dataset);
+		else exportToJSON(dataset);
+	};
+
+	const handleRowClick = (index: number, order: OrderExportData) => {
+		setSelectedRowIndex(index);
+		setSelectedRow(order);
+	};
+
 	return (
 		<div className="mt-8 flex flex-col gap-8 lg:flex-row">
 			<div className="grid flex-1 auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-				<Tabs defaultValue="Year" className="rounded-t-xl border bg-muted/70 shadow">
+				<Tabs defaultValue="all" className="rounded-t-xl border bg-muted/70 shadow">
 					<div className="flex items-center px-5 pb-3 pt-5">
-						<TabsList>
-							<TabsTrigger value="Week">Week</TabsTrigger>
-							<TabsTrigger value="Month">Month</TabsTrigger>
-							<TabsTrigger value="Year">Year</TabsTrigger>
-						</TabsList>
+						<h2 className="text-xl font-semibold">Purchase History</h2>
 						<div className="ml-auto flex items-center gap-2">
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
@@ -72,166 +87,107 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 									</DropdownMenuRadioGroup>
 								</DropdownMenuContent>
 							</DropdownMenu>
-							<Button size="sm" variant="outline" className="h-7 gap-1 text-sm">
-								<File className="h-3.5 w-3.5" />
-								<span className="sr-only sm:not-sr-only">Export</span>
-							</Button>
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<Button variant="outline" size="sm" className="h-7 gap-2 text-sm">
+										<File className="h-3.5 w-3.5" />
+										<span className="sr-only sm:not-sr-only">Export</span>
+									</Button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent align="end">
+									<DropdownMenuLabel>File type</DropdownMenuLabel>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem onClick={() => handleExport(true)}>.CSV</DropdownMenuItem>
+									<DropdownMenuItem onClick={() => handleExport(false)}>.JSON</DropdownMenuItem>
+									<DropdownMenuSeparator />
+								</DropdownMenuContent>
+							</DropdownMenu>
 						</div>
 					</div>
-					<TabsContent value="Year">
-						<Card x-chunk="dashboard-05-chunk-3" className="rounded-none border-0 shadow-none">
-							<CardHeader className="px-7">
-								<CardTitle>Orders</CardTitle>
-								<CardDescription>Your Recent Orders.</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<Table>
-									<TableHeader>
-										<TableRow>
-											<TableHead>Dispatch to</TableHead>
-											<TableHead className="hidden sm:table-cell">Delivery</TableHead>
-											<TableHead className="hidden sm:table-cell">Status</TableHead>
-											<TableHead className="hidden md:table-cell">Date</TableHead>
-											<TableHead className="text-right">Total</TableHead>
-										</TableRow>
-									</TableHeader>
-									<TableBody>
-										<TableRow className="bg-accent">
-											<TableCell>
-												<div className="font-medium">Liam Johnson</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													liam@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Sale</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="secondary">
-													Fulfilled
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-											<TableCell className="text-right">$250.00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>
-												<div className="font-medium">Olivia Smith</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													olivia@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Refund</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="outline">
-													Declined
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-											<TableCell className="text-right">$150.00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>
-												<div className="font-medium">Noah Williams</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													noah@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Subscription</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="secondary">
-													Fulfilled
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-25</TableCell>
-											<TableCell className="text-right">$350.00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>
-												<div className="font-medium">Emma Brown</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													emma@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Sale</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="secondary">
-													Fulfilled
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-26</TableCell>
-											<TableCell className="text-right">$450.00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>
-												<div className="font-medium">Liam Johnson</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													liam@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Sale</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="secondary">
-													Fulfilled
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-											<TableCell className="text-right">$250.00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>
-												<div className="font-medium">Liam Johnson</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													liam@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Sale</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="secondary">
-													Fulfilled
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-											<TableCell className="text-right">$250.00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>
-												<div className="font-medium">Olivia Smith</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													olivia@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Refund</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="outline">
-													Declined
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-											<TableCell className="text-right">$150.00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>
-												<div className="font-medium">Emma Brown</div>
-												<div className="hidden text-sm text-muted-foreground md:inline">
-													emma@example.com
-												</div>
-											</TableCell>
-											<TableCell className="hidden sm:table-cell">Sale</TableCell>
-											<TableCell className="hidden sm:table-cell">
-												<Badge className="text-xs" variant="secondary">
-													Fulfilled
-												</Badge>
-											</TableCell>
-											<TableCell className="hidden md:table-cell">2023-06-26</TableCell>
-											<TableCell className="text-right">$450.00</TableCell>
-										</TableRow>
-									</TableBody>
-								</Table>
-							</CardContent>
-						</Card>
-					</TabsContent>
+					{!loading ? (
+						<TabsContent value="all" className="select-none">
+							<Card
+								x-chunk="dashboard-05-chunk-3"
+								className="fade-down rounded-none border-0 shadow-none"
+							>
+								<CardContent>
+									<Table>
+										<TableHeader>
+											<TableRow>
+												<TableHead>Dispatch to</TableHead>
+												<TableHead className="hidden sm:table-cell">Delivery</TableHead>
+												<TableHead className="hidden sm:table-cell">Status</TableHead>
+												<TableHead className="hidden md:table-cell">Date</TableHead>
+												<TableHead className="text-right">Total</TableHead>
+											</TableRow>
+										</TableHeader>
+										<TableBody>
+											{dataset.length ? (
+												dataset.map((order, index) => (
+													<TableRow
+														key={index}
+														onClick={() => handleRowClick(index, order)}
+														className={
+															selectedRowIndex === index
+																? "cursor-pointer bg-gray-200 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-800"
+																: "cursor-pointer"
+														}
+													>
+														<TableCell>
+															<div className="font-medium">{order.dispatchedToName}</div>
+															<div className="hidden text-sm text-muted-foreground md:inline">
+																{order.dispatchedToCity}, {order.dispatchedToCountry}
+															</div>
+														</TableCell>
+														<TableCell className="hidden sm:table-cell">
+															<Badge
+																className="border-gray-400 dark:border-gray-500"
+																variant="secondary"
+															>
+																{order.deliveryStatus}
+															</Badge>
+														</TableCell>
+														<TableCell className="hidden sm:table-cell">
+															<Badge
+																className="border-gray-400 dark:border-gray-500"
+																variant="secondary"
+															>
+																{order.orderStatus}
+															</Badge>
+														</TableCell>
+														<TableCell className="hidden md:table-cell">
+															{order.orderDate}
+														</TableCell>
+														<TableCell className="text-right">£{order.orderTotal}</TableCell>
+													</TableRow>
+												))
+											) : (
+												<TableRow>
+													<TableCell colSpan={5} className="text-center text-base">
+														No orders found.
+													</TableCell>
+												</TableRow>
+											)}
+										</TableBody>
+									</Table>
+								</CardContent>
+							</Card>
+						</TabsContent>
+					) : (
+						<TabsContent value="all" className="fade-down">
+							<Card
+								x-chunk="dashboard-05-chunk-3"
+								className="flex justify-center rounded-none border-0 shadow-none"
+							>
+								<CardHeader className="px-7">
+									<CardTitle className="animate-pulse">Loading...</CardTitle>
+								</CardHeader>
+							</Card>
+						</TabsContent>
+					)}
 				</Tabs>
 			</div>
-			<OrderDetails data={data} />
+			<OrderDetails data={data} selectedRow={selectedRow} />
 		</div>
 	);
 }
