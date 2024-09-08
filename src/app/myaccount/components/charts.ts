@@ -42,9 +42,40 @@ export function barDataSet(data: OrdersDataResponse, selectedYear: number) {
 	return dataset;
 }
 
-export function pieDataSet(data: OrdersDataResponse, selectedYear: number) {
-	const num = 4801 / 100;
+const categorys = ["electronics", "fashion", "sports"];
 
-	console.log(num);
-	return null;
+export function pieDataSet(data: OrdersDataResponse, selectedYear: number) {
+	const dataset = categorys.map((category) => ({
+		category,
+		orders: 0, // Orders made in that category
+		year: selectedYear,
+	}));
+
+	data.forEach((order) => {
+		const createdAt = new Date(order.created_at);
+		const year = createdAt.getUTCFullYear();
+
+		order.items.forEach((item) => {
+			const category = item.product.metadata.category;
+			const categoryData = dataset.find((d) => d.category === category);
+
+			if (categoryData && year === selectedYear) {
+				categoryData.orders++;
+			}
+		});
+	});
+
+	// Calculate total orders for the selected year
+	const totalOrders = dataset.reduce((sum, entry) => sum + entry.orders, 0);
+
+	// Transform the dataset into the final pie chart format
+	const pieChartData = dataset.map((entry) => {
+		const percentage = totalOrders > 0 ? (entry.orders / totalOrders) * 100 : 0;
+		return {
+			value: parseFloat(percentage.toFixed(2)), // ensure the value is a float with 2 decimal places
+			label: entry.category.charAt(0).toUpperCase() + entry.category.slice(1), // capitalize the label
+		};
+	});
+
+	return pieChartData;
 }

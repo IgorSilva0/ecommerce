@@ -3,7 +3,7 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { type OrdersDataResponse } from "../utils/types";
-import { barDataSet } from "./charts";
+import { barDataSet, pieDataSet } from "./charts";
 
 const otherSetting = {
 	grid: { horizontal: true },
@@ -24,6 +24,8 @@ export function OrdersChart({
 	filterType: React.SetStateAction<string>;
 }) {
 	const barData = barDataSet(data, Number(filterYear));
+	const pieData = pieDataSet(data, Number(filterYear));
+
 	const valueFormatter = (value: string | number | null) =>
 		`${
 			filterType === "Orders"
@@ -33,7 +35,6 @@ export function OrdersChart({
 						maximumFractionDigits: 2,
 					})}`
 		}`;
-	//const pieData = pieDataSet(data, Number(filterYear));
 
 	return (
 		<div className="grid select-none gap-8 border bg-muted/70 object-cover shadow dark:bg-slate-950 md:max-h-[300px] md:grid-cols-4 lg:grid-cols-3">
@@ -83,20 +84,22 @@ export function OrdersChart({
 			<PieChart
 				series={[
 					{
-						data: [
-							{ value: 10.5, label: "Electronics" },
-							{ value: 15.73, label: "Fashion" },
-							{ value: 20.31, label: "Sports" },
-						],
-
+						data: pieData,
 						innerRadius: 50,
 						outerRadius: 100,
-						paddingAngle: 5,
 						cornerRadius: 5,
+						paddingAngle: 1,
 						startAngle: -45,
+						endAngle: 315,
 						highlightScope: { fade: "global", highlight: "item" },
 						faded: { innerRadius: 50, additionalRadius: -5, color: "gray" },
+						valueFormatter: (item: { value: number }) => `${item.value} %`,
 						cx: "65%",
+
+						arcLabel: (item) => `${item.value}%`,
+						arcLabelMinAngle: 20,
+						arcLabelRadius: "55%",
+						...data,
 					},
 				]}
 				slotProps={{

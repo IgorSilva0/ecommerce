@@ -170,6 +170,7 @@ export interface Order {
 	shipping_rate: ShippingRate[];
 	shipping_details: ShippingDetails[];
 	payment_method_details: PaymentMethodDetails[];
+	order_status: string;
 }
 
 // Define the possible responses for the OrdersData function
