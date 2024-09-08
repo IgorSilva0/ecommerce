@@ -51,7 +51,7 @@ export function ordersToTable(data: OrdersDataResponse, filterYear: number, filt
 
 //////////// Export from OrdersTable to .CSV /////////////
 
-export const exportTableToCSV = async (data: OrderExportData[], filename = "orders.csv") => {
+export const exportTableToCSV = async (data: OrderExportData[], filename = `order.csv`) => {
 	const csvContent =
 		"data:text/csv;charset=utf-8," +
 		data
@@ -79,7 +79,7 @@ export const exportTableToCSV = async (data: OrderExportData[], filename = "orde
 
 //////////// Export from OrderDetails .CSV /////////////
 
-export const exportOrderDetailsToCSV = async (data: Order, filename = `${data.order_id}.csv`) => {
+export const exportOrderDetailsToCSV = async (data: Order, filename = "order.json") => {
 	// Define the CSV headers
 	const headers = [
 		"ID",
@@ -131,7 +131,7 @@ export const exportOrderDetailsToCSV = async (data: Order, filename = `${data.or
 
 ///////////// Export Json ////////////
 
-export const exportToJSON = async (data: OrderExportData[] | Order, filename = "orders.json") => {
+export const exportToJSON = async (data: OrderExportData[] | Order, filename = "order.json") => {
 	// Convert the data array to a JSON string
 	const jsonContent = JSON.stringify(data, null, 2);
 
