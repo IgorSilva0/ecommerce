@@ -1,7 +1,13 @@
-import { ChevronLeft, ChevronRight, Copy, CreditCard, MoreVertical, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Copy, MoreVertical, Check } from "lucide-react";
+import { SiGooglepay, SiVisa } from "react-icons/si";
 import React, { useEffect, useState } from "react";
 import { type OrdersDataResponse, type Order } from "../utils/types";
-import { exportOrderDetailsToCSV, exportToJSON, type OrderExportData } from "./orders";
+import {
+	exportOrderDetailsToCSV,
+	exportToJSON,
+	isSameAddress,
+	type OrderExportData,
+} from "./orders";
 import { Button } from "@/ui/shadcn/button";
 import {
 	Card,
@@ -74,7 +80,7 @@ export function OrderDetails({
 		}
 	};
 
-	return (
+	return order ? (
 		<div className="flex justify-center">
 			<Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
 				<CardHeader className="flex flex-row items-start bg-muted/90 p-5 sm:px-6">
@@ -116,7 +122,7 @@ export function OrderDetails({
 								<span className="sr-only">Copy Order ID</span>
 							</div>
 						</CardTitle>
-						<CardDescription>Date: {date}</CardDescription>
+						<CardDescription>Created: {date}</CardDescription>
 					</div>
 					<div className="!mt-0 ml-auto flex items-center gap-1">
 						<DropdownMenu>
@@ -157,23 +163,40 @@ export function OrderDetails({
 							<li className="flex items-center justify-between">
 								<span className="text-muted-foreground">Subtotal</span>
 								<span>
-									{order?.items.map((item) => {
-										const price = item.product.default_price.unit_amount * item.quantity;
-										return price;
-									})}
+									{order
+										? formatPrice(
+												order.items.reduce((total, item) => {
+													const price = item.product.default_price.unit_amount * item.quantity;
+													return total + price;
+												}, 0),
+											)
+										: null}
 								</span>
 							</li>
 							<li className="flex items-center justify-between">
 								<span className="text-muted-foreground">Shipping</span>
-								<span>$5.00</span>
+								<span>
+									{order?.shipping_rate.map((item) =>
+										item ? formatPrice(item.fixed_amount.amount) : "Free",
+									)}
+								</span>
 							</li>
 							<li className="flex items-center justify-between">
 								<span className="text-muted-foreground">Tax</span>
-								<span>$25.00</span>
+								<span>
+									{order?.tax.map((item) => (item ? formatPrice(item.taxAmount) : "N/A"))}
+								</span>
 							</li>
 							<li className="flex items-center justify-between font-semibold">
 								<span className="text-muted-foreground">Total</span>
-								<span>$329.00</span>
+								<span>
+									{order
+										? `£ ${order.total_price.toLocaleString("gbp-GB", {
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+											})}`
+										: null}
+								</span>
 							</li>
 						</ul>
 					</div>
@@ -182,34 +205,60 @@ export function OrderDetails({
 						<div className="grid gap-3">
 							<div className="font-semibold">Shipping Information</div>
 							<address className="grid gap-0.5 not-italic text-muted-foreground">
-								<span>Liam Johnson</span>
-								<span>1234 Main St.</span>
-								<span>Anytown, CA 12345</span>
+								<span>{order?.shipping_details[0]!.name}</span>
+								<span>{order?.shipping_details[0]!.address.line1}</span>
+								<span>
+									{order
+										? `
+										${order.shipping_details[0]!.address.city}, 
+										${order?.shipping_details[0]!.address.country} - 
+										${order?.shipping_details[0]!.address.postal_code}`
+										: null}
+								</span>
 							</address>
 						</div>
 						<div className="grid auto-rows-max gap-3">
 							<div className="font-semibold">Billing Information</div>
-							<div className="text-muted-foreground">Same as shipping address</div>
+							{order &&
+							isSameAddress(
+								order.shipping_details[0]?.address,
+								order?.payment_method_details[0]?.billing_details.address,
+							) ? (
+								<div className="text-muted-foreground">Same as shipping</div>
+							) : (
+								<address className="grid gap-0.5 not-italic text-muted-foreground">
+									<span>{order?.payment_method_details[0]?.billing_details.name}</span>
+									<span>{order?.payment_method_details[0]?.billing_details.address.line1}</span>
+									<span>
+										{order
+											? `
+											${order.payment_method_details[0]?.billing_details.address.city}, 
+											${order?.payment_method_details[0]?.billing_details.address.country} - 
+											${order?.payment_method_details[0]?.billing_details.address.postal_code}`
+											: null}
+									</span>
+								</address>
+							)}
 						</div>
 					</div>
 					<Separator className="my-4" />
 					<div className="grid gap-3">
-						<div className="font-semibold">Customer Information</div>
+						<div className="font-semibold">Contact Information</div>
 						<dl className="grid gap-3">
 							<div className="flex items-center justify-between">
-								<dt className="text-muted-foreground">Customer</dt>
-								<dd>Liam Johnson</dd>
+								<dt className="text-muted-foreground">Name</dt>
+								<dd>{order ? order.payment_method_details[0]?.billing_details.name : null}</dd>
 							</div>
 							<div className="flex items-center justify-between">
 								<dt className="text-muted-foreground">Email</dt>
-								<dd>
-									<a href="mailto:">liam@acme.com</a>
-								</dd>
+								<dd>{order ? order.payment_method_details[0]?.billing_details.email : null}</dd>
 							</div>
 							<div className="flex items-center justify-between">
 								<dt className="text-muted-foreground">Phone</dt>
 								<dd>
-									<a href="tel:">+1 234 567 890</a>
+									{order?.payment_method_details[0]?.billing_details.phone ?? (
+										<span className="text-muted-foreground">Not provided</span>
+									)}
 								</dd>
 							</div>
 						</dl>
@@ -219,18 +268,32 @@ export function OrderDetails({
 						<div className="font-semibold">Payment Information</div>
 						<dl className="grid gap-3">
 							<div className="flex items-center justify-between">
-								<dt className="flex items-center gap-1 text-muted-foreground">
-									<CreditCard className="h-4 w-4" />
-									Visa
-								</dt>
-								<dd>**** **** **** 4532</dd>
+								{order ? (
+									<>
+										<dt className="flex items-center gap-1 text-muted-foreground">
+											{order?.payment_method_details[0]?.card.wallet !== null &&
+											order?.payment_method_details[0]?.card.wallet.type === "google_pay" ? (
+												<SiGooglepay className="h-8 w-8" />
+											) : null}
+											{order?.payment_method_details[0]?.card.brand === "mastercard" ? (
+												<div className="relative ml-1 flex items-start">
+													<span className="h-4 w-4 rounded-full bg-rose-600"></span>
+													<span className="h-4 w-4 -translate-x-1 rounded-full bg-orange-400"></span>
+												</div>
+											) : (
+												<SiVisa className="h-8 w-8 text-blue-600" />
+											)}
+										</dt>
+										<dd>**** **** **** {order?.payment_method_details[0]?.card.last4}</dd>
+									</>
+								) : null}
 							</div>
 						</dl>
 					</div>
 				</CardContent>
 				<CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
 					<div className="text-xs text-muted-foreground">
-						Updated <time dateTime="2023-11-23">November 23, 2023</time>
+						Updated : <time>{date}</time>
 					</div>
 					<Pagination className="ml-auto mr-0 w-auto">
 						<PaginationContent>
@@ -251,5 +314,5 @@ export function OrderDetails({
 				</CardFooter>
 			</Card>
 		</div>
-	);
+	) : null;
 }

@@ -116,7 +116,9 @@ export interface PaymentMethodDetails {
 			address_line1_check: string;
 			address_postal_code_check: string;
 		};
-		wallet: unknown;
+		wallet: {
+			type: string;
+		};
 		country: string;
 		funding: string;
 		exp_year: number;

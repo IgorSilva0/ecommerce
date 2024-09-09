@@ -16,6 +16,31 @@ const formatDate = (x: string) =>
 		new Date(x),
 	);
 
+export const isSameAddress = (
+	shippingAddress?: {
+		line1?: string;
+		line2?: string;
+		city?: string;
+		state?: string;
+		postal_code?: string;
+		country?: string;
+	},
+	billingAddress?: {
+		line1?: string;
+		line2?: string;
+		city?: string;
+		state?: string;
+		postal_code?: string;
+		country?: string;
+	},
+) =>
+	shippingAddress?.line1 === billingAddress?.line1 &&
+	shippingAddress?.line2 === billingAddress?.line2 &&
+	shippingAddress?.city === billingAddress?.city &&
+	shippingAddress?.state === billingAddress?.state &&
+	shippingAddress?.postal_code === billingAddress?.postal_code &&
+	shippingAddress?.country === billingAddress?.country;
+
 export function ordersToTable(data: OrdersDataResponse, filterYear: number, filterStatus: string) {
 	// Creates a dataset with the required fields
 	const dataset = data.map((order) => ({

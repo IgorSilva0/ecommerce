@@ -24,6 +24,8 @@ export default function Orders() {
 	const [filterYear, setFilterYear] = React.useState<string>("2024");
 	const [filterType, setFilterType] = React.useState<string>("Orders");
 	const [fadeOut, setFadeOut] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [startShopping, setStartShopping] = useState(false);
 
 	const toggleCharts = () => {
 		if (!fadeOut) {
@@ -47,6 +49,22 @@ export default function Orders() {
 			}
 		};
 		void userId();
+	}, []);
+
+	useEffect(() => {
+		const timer = () => {
+			setLoading(true);
+			const loadingTimeout = setTimeout(() => {
+				setLoading(false);
+				setTimeout(() => {
+					setStartShopping(true);
+				}, 3000);
+			}, 1500);
+			return () => {
+				clearTimeout(loadingTimeout);
+			};
+		};
+		timer();
 	}, []);
 
 	return (
@@ -114,16 +132,27 @@ export default function Orders() {
 						</Button>
 					</div>
 				</div>
-
-				{displayCharts ? (
+				{loading ? (
+					<div className="flex items-center justify-center border border-t-0 bg-white/80 py-6 shadow dark:bg-slate-950">
+						<span className="animate-pulse font-semibold">Loading...</span>
+					</div>
+				) : ordersData.length && displayCharts ? (
 					<div className={`fade-down ${fadeOut ? "fade-out" : ""}`}>
 						<OrdersChart data={ordersData} filterYear={filterYear} filterType={filterType} />
 					</div>
-				) : null}
-
+				) : !displayCharts ? null : (
+					<div className="fade-down flex items-center justify-center border border-t-0 bg-white/80 py-6 shadow dark:bg-slate-950">
+						<span>No data found.</span>
+					</div>
+				)}
 				<div>
 					<OrdersTable data={ordersData} />
 				</div>
+				{!loading && !ordersData.length && startShopping ? (
+					<div className="flex justify-center py-10">
+						<Button>Start Shopping!</Button>
+					</div>
+				) : null}
 			</main>
 		</TooltipProvider>
 	);

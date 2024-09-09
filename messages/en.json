@@ -105,7 +105,7 @@
 			"title": "{categoryName} Category · Your New Store"
 		},
 		"page": {
-			"title": "Category: {categoryName}"
+			"title": "{categoryName}"
 		}
 	},
 	"/cart": {

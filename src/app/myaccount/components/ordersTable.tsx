@@ -117,17 +117,19 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 								x-chunk="dashboard-05-chunk-3"
 								className="fade-down rounded-none border-0 shadow-none"
 							>
-								<CardContent>
+								<CardContent className={!dataset.length ? "pt-6" : ""}>
 									<Table>
-										<TableHeader>
-											<TableRow>
-												<TableHead>Dispatch to</TableHead>
-												<TableHead className="hidden sm:table-cell">Delivery</TableHead>
-												<TableHead className="hidden sm:table-cell">Status</TableHead>
-												<TableHead className="hidden md:table-cell">Date</TableHead>
-												<TableHead className="text-right">Total</TableHead>
-											</TableRow>
-										</TableHeader>
+										{dataset.length ? (
+											<TableHeader>
+												<TableRow>
+													<TableHead>Dispatch to</TableHead>
+													<TableHead className="hidden sm:table-cell">Delivery</TableHead>
+													<TableHead className="hidden sm:table-cell">Status</TableHead>
+													<TableHead className="hidden md:table-cell">Date</TableHead>
+													<TableHead className="text-right">Total</TableHead>
+												</TableRow>
+											</TableHeader>
+										) : null}
 										<TableBody>
 											{dataset.length ? (
 												dataset.map((order, index) => (
@@ -170,7 +172,7 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 												))
 											) : (
 												<TableRow>
-													<TableCell colSpan={5} className="text-center text-base">
+													<TableCell colSpan={5} rowSpan={4} className="text-center text-base">
 														No orders found.
 													</TableCell>
 												</TableRow>
