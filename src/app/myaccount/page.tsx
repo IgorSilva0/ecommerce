@@ -58,7 +58,7 @@ export default function Orders() {
 					<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 				</div>
 
-				<div className="mt-8 flex w-full items-center justify-between rounded-t-xl border border-b-0 bg-muted/80 px-5 py-4 sm:px-6">
+				<div className="mt-8 flex w-full items-center justify-between rounded-t-xl border border-b-0 bg-muted/90 p-5 sm:px-6">
 					<h2 className="text-xl font-semibold">Overview Charts</h2>
 					<div className="flex gap-2">
 						<DropdownMenu>

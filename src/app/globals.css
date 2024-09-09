@@ -225,27 +225,66 @@ c1 {
 
 /* Define the keyframes for the rainbow animation */
 /* Define the keyframes for the rainbow animation with movement */
-@keyframes rainbowIcon {
+@keyframes rainbowIcon1 {
 	0% {
-		color: #d92d02; /* Holiday rainbow red */
-		transform: scale(1) translate(0, 0);
+		transform: scale(1) translate(0, 0) rotate(0deg);
 	}
 	50% {
-		color: #50c581; /* Holiday rainbow green */
-		transform: scale(0.8) translate(0, 10px);
+		transform: scale(0.8) translate(2px, -2px) rotate(-10deg);
 	}
-
 	100% {
-		color: #d92d02; /* Holiday rainbow red */
-		transform: scale(1) translate(0, 0);
+		transform: scale(1) translate(0, 0) rotate(0deg);
 	}
 }
 
 /* Apply the animation to your star icon */
-.rainBow {
-	animation: rainbowIcon 5s infinite;
+.rainBowOne {
+	animation: rainbowIcon1 4s infinite;
 	display: inline-block;
 	transition:
 		color 0.3s ease,
-		transform 0.3s ease;
+		transform 0.5s ease;
+}
+
+@keyframes rainbowIcon2 {
+	0% {
+		transform: scale(1) translate(0, 0) rotate(0deg);
+	}
+	50% {
+		transform: scale(0.8) translate(-2px, -3px) rotate(-15deg);
+	}
+	100% {
+		transform: scale(1) translate(0, 0) rotate(0deg);
+	}
+}
+
+/* Apply the animation to your star icon */
+.rainBowTwo {
+	animation: rainbowIcon2 5s infinite;
+	rotate: 45deg;
+	display: inline-block;
+	transition:
+		color 0.3s ease,
+		transform 0.5s ease;
+}
+
+@keyframes rainbowIcon3 {
+	0% {
+		transform: scale(1) translate(0, 0) rotate(0deg);
+	}
+	50% {
+		transform: scale(0.8) translate(2px, -3px) rotate(-15deg);
+	}
+	100% {
+		transform: scale(1) translate(0, 0) rotate(0deg);
+	}
+}
+
+/* Apply the animation to your star icon */
+.rainBowThree {
+	animation: rainbowIcon3 6s infinite;
+	display: inline-block;
+	transition:
+		color 0.3s ease,
+		transform 0.5s ease;
 }

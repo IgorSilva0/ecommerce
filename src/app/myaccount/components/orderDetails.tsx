@@ -26,6 +26,8 @@ const formatDate = (x: string) =>
 	new Intl.DateTimeFormat("en-GB", { year: "numeric", month: "long", day: "numeric" }).format(
 		new Date(x),
 	);
+const formatPrice = (value: number): string =>
+	new Intl.NumberFormat("gbp-GB", { style: "currency", currency: "GBP" }).format(value / 100);
 
 export function OrderDetails({
 	data,
@@ -44,6 +46,7 @@ export function OrderDetails({
 				const order = data.find((order) => order.order_id === selectedRow.order_id);
 				if (order) setDate(formatDate(order.created_at));
 				setOrder(order);
+				console.log(order);
 			} catch (error) {
 				console.error("Error on SelectedRow,data Use Effect:", error);
 			}
@@ -74,7 +77,7 @@ export function OrderDetails({
 	return (
 		<div className="flex justify-center">
 			<Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
-				<CardHeader className="flex flex-row items-start bg-muted/70">
+				<CardHeader className="flex flex-row items-start bg-muted/90 p-5 sm:px-6">
 					<div className="grid gap-0.5 fade-in">
 						<CardTitle className="group flex items-center gap-2 text-lg">
 							Order id:
@@ -140,24 +143,25 @@ export function OrderDetails({
 					<div className="grid gap-3">
 						<div className="font-semibold">Order Details</div>
 						<ul className="grid gap-3">
-							<li className="flex items-center justify-between">
-								<span className="text-muted-foreground">
-									Glimmer Lamps x <span>2</span>
-								</span>
-								<span>$250.00</span>
-							</li>
-							<li className="flex items-center justify-between">
-								<span className="text-muted-foreground">
-									Aqua Filters x <span>1</span>
-								</span>
-								<span>$49.00</span>
-							</li>
+							{order?.items.map((item, index) => (
+								<li key={index} className="flex items-center justify-between">
+									<span className="text-muted-foreground">
+										{item.product.name} x <span>{item.quantity}</span>
+									</span>
+									<span>{formatPrice(item.product.default_price.unit_amount * item.quantity)}</span>
+								</li>
+							))}
 						</ul>
 						<Separator className="my-2" />
 						<ul className="grid gap-3">
 							<li className="flex items-center justify-between">
 								<span className="text-muted-foreground">Subtotal</span>
-								<span>$299.00</span>
+								<span>
+									{order?.items.map((item) => {
+										const price = item.product.default_price.unit_amount * item.quantity;
+										return price;
+									})}
+								</span>
 							</li>
 							<li className="flex items-center justify-between">
 								<span className="text-muted-foreground">Shipping</span>

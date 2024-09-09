@@ -53,8 +53,8 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 	return (
 		<div className="mt-8 flex flex-col gap-8 lg:flex-row">
 			<div className="grid flex-1 auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-				<Tabs defaultValue="all" className="rounded-t-xl border bg-muted/70 shadow">
-					<div className="flex items-center px-5 pb-3 pt-5">
+				<Tabs defaultValue="all" className="rounded-t-xl border bg-muted/90 shadow">
+					<div className="flex items-center p-5 pb-3 sm:px-6">
 						<h2 className="text-xl font-semibold">Purchase History</h2>
 						<div className="ml-auto flex items-center gap-2">
 							<DropdownMenu>
@@ -165,7 +165,7 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 														<TableCell className="hidden md:table-cell">
 															{order.orderDate}
 														</TableCell>
-														<TableCell className="text-right">£{order.orderTotal}</TableCell>
+														<TableCell className="text-right">£ {order.orderTotal}</TableCell>
 													</TableRow>
 												))
 											) : (
