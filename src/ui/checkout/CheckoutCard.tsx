@@ -24,15 +24,15 @@ export const CheckoutCard = async ({
 	const t = await getTranslations("/cart.page");
 	return (
 		<section className="max-w-md pb-12">
-			<h2 className="text-3xl font-bold leading-none tracking-tight">{t("checkoutTitle")}</h2>
-			<p className="mb-4 mt-2 text-sm text-muted-foreground dark:text-neutral-300">
-				{t("checkoutDescription")}
-			</p>
-			<StripePayment
-				shippingRateId={cart.metadata.shippingRateId}
-				shippingRates={structuredClone(shippingRates.data)}
-				userEmail={userEmail}
-			/>
+			<h2 className="mb-4 text-3xl font-bold leading-none tracking-tight">{t("checkoutTitle")}</h2>
+
+			<div className="rounded-lg bg-white p-5 dark:bg-slate-950">
+				<StripePayment
+					shippingRateId={cart.metadata.shippingRateId}
+					shippingRates={structuredClone(shippingRates.data)}
+					userEmail={userEmail}
+				/>
+			</div>
 		</section>
 	);
 };

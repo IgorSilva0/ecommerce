@@ -54,9 +54,6 @@ export function MyAccount() {
 								<ListItem href="/myaccount" title="Orders History">
 									Dashboard
 								</ListItem>
-								<ListItem href="/myaccount" title="Manage your account">
-									Settings
-								</ListItem>
 								<YnsLink
 									href={"/"}
 									onClick={() => signout()}

@@ -3,7 +3,6 @@ import Image from "next/image";
 import { type Metadata } from "next/types";
 import { getLocale, getTranslations } from "next-intl/server";
 import * as Commerce from "commerce-kit";
-import { JsonLd, mappedProductToJsonLd } from "@/ui/JsonLd";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -76,6 +75,15 @@ export default async function SingleProductPage({
 							asChild
 							className="inline-flex min-h-12 min-w-12 items-center justify-center"
 						>
+							<YnsLink href="/">{t("home")}</YnsLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbLink
+							asChild
+							className="inline-flex min-h-12 min-w-12 items-center justify-center"
+						>
 							<YnsLink href="/products">{t("allProducts")}</YnsLink>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
@@ -108,7 +116,7 @@ export default async function SingleProductPage({
 			</Breadcrumb>
 
 			<div className="mt-4 grid gap-4 lg:grid-cols-12">
-				<div className="lg:col-span-5 lg:col-start-8">
+				<div className="lg:col-span-5 lg:col-start-7">
 					<h1 className="text-3xl font-bold leading-none tracking-tight text-foreground">
 						{product.name}
 					</h1>
@@ -123,7 +131,7 @@ export default async function SingleProductPage({
 					)}
 				</div>
 
-				<div className="lg:col-span-7 lg:row-span-3 lg:row-start-1">
+				<div className="lg:col-span-5 lg:col-start-2 lg:row-span-3 lg:row-start-1">
 					<h2 className="sr-only">{t("imagesTitle")}</h2>
 
 					{product.images.map((image) => (
@@ -163,7 +171,7 @@ export default async function SingleProductPage({
 													prefetch={true}
 													href={`/product/${variant.metadata.slug}?variant=${variant.metadata.variant}`}
 													className={cn(
-														"flex cursor-pointer items-center justify-center gap-2 rounded-md border p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-slate-800",
+														"flex cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-400 p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-slate-800",
 														isSelected &&
 															"border-black bg-neutral-50 font-medium dark:border-white dark:bg-slate-700",
 													)}
@@ -182,7 +190,6 @@ export default async function SingleProductPage({
 					<AddToCartButton productId={product.id} />
 				</div>
 			</div>
-			<JsonLd jsonLd={mappedProductToJsonLd(product)} />
 		</article>
 	);
 }

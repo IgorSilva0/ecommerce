@@ -1,8 +1,8 @@
 {
 	"Global": {
 		"metadata": {
-			"title": "Your New Store - Demo",
-			"description": "A Next.js boilerplate for building your online store instantly: simple, quick, powerful."
+			"title": "Online Shop - by Igor",
+			"description": "Your online store instantly: simple, quick, powerful."
 		},
 		"notFound": {
 			"title": "Not found",
@@ -21,12 +21,6 @@
 		"footer": {
 			"newsletterTitle": "Subscribe to our newsletter",
 			"categoriesTitle": "Products"
-		},
-		"newsletter": {
-			"emailPlaceholder": "Enter your email",
-			"subscribeButton": "Subscribe",
-			"success": "You have successfully subscribed to our newsletter.",
-			"error": "Failed to subscribe to our newsletter."
 		},
 		"nav": {
 			"search": {
@@ -72,7 +66,7 @@
 			"description": "Sorry, we couldn't find any results that match your search query. Please try refining your search."
 		},
 		"metadata": {
-			"title": "Search: {query} · Your New Store"
+			"title": "Search: {query} · Online Store"
 		},
 		"page": {
 			"title": "Searching for \"{query}\""
@@ -83,17 +77,29 @@
 	},
 	"/products": {
 		"metadata": {
-			"title": "All Products · Your New Store"
+			"title": "All Products · Online Store"
 		},
 		"page": {
-			"title": "All Products"
+			"title": "All Products",
+			"home": "Home",
+			"allProducts": "All products"
+		}
+	},
+	"/myaccount": {
+		"metadata": {
+			"title": "Order History · Online Store"
+		},
+		"page": {
+			"title": "Order History",
+			"home": "Home"
 		}
 	},
 	"/product": {
 		"metadata": {
-			"title": "{productName} · Your New Store"
+			"title": "{productName} · Online Store"
 		},
 		"page": {
+			"home": "Home",
 			"allProducts": "All products",
 			"imagesTitle": "Images",
 			"descriptionTitle": "Description",
@@ -102,25 +108,39 @@
 	},
 	"/category": {
 		"metadata": {
-			"title": "{categoryName} Category · Your New Store"
+			"title": "{categoryName} Category · Online Store"
 		},
 		"page": {
-			"title": "{categoryName}"
+			"title": "{categoryName}",
+			"home": "Home",
+			"allProducts": "All products"
+		}
+	},
+	"/login": {
+		"metadata": {
+			"title": "SignIn/up · Online Store"
+		},
+		"page": {
+			"title": "SignIn/up",
+			"home": "Home"
 		}
 	},
 	"/cart": {
 		"modal": {
 			"title": "Shopping Cart",
 			"openFullView": "(open full view)",
+			"continueShopping": "Continue shopping",
 			"quantity": "Quantity: {quantity}",
 			"total": "Total",
 			"shippingAndTaxesInfo": "Shipping and taxes will be added at the next step",
 			"goToPaymentButton": "Go to payment"
 		},
 		"metadata": {
-			"title": "Shopping Cart · Your New Store"
+			"title": "Shopping Cart · Online Store"
 		},
 		"page": {
+			"home": "Home",
+			"allProducts": "All products",
 			"title": "Your cart",
 			"checkoutTitle": "Checkout",
 			"checkoutDescription": "Provide billing and shipping details below.",
@@ -159,16 +179,19 @@
 			}
 		},
 		"empty": {
+			"checkoutTitle": "Checkout",
 			"title": "Your cart is empty",
 			"description": "Looks like you haven't added anything to your cart yet.",
-			"continueShoppingButton": "Continue shopping"
+			"continueShoppingButton": "Start shopping",
+			"allProducts": "All products"
 		}
 	},
 	"/order": {
 		"metadata": {
-			"title": "Order Confirmation · Your New Store"
+			"title": "Order Confirmation · Online Store"
 		},
 		"page": {
+			"home": "Home",
 			"title": "Order Confirmation",
 			"description": "Thank you! You'll find the details of your order below.",
 			"orderNumberTitle": "Order number",

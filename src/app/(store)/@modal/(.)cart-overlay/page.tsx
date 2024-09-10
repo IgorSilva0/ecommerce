@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowLeftFromLine, X } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import * as Commerce from "commerce-kit";
 import { calculateCartTotalNetWithoutShipping } from "commerce-kit";
@@ -8,6 +9,7 @@ import { getCartFromCookiesAction } from "@/actions/cartActions";
 import { Button } from "@/ui/shadcn/button";
 import { formatMoney, formatProductName } from "@/lib/utils";
 import { YnsLink } from "@/ui/YnsLink";
+import { DrawerClose } from "@/ui/shadcn/drawer";
 
 export default async function CartModalPage({ searchParams }: { searchParams: { add?: string } }) {
 	const originalCart = await getCartFromCookiesAction();
@@ -26,11 +28,11 @@ export default async function CartModalPage({ searchParams }: { searchParams: { 
 	return (
 		<CartAsideContainer withAnimations={true}>
 			<div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-				<div className="flex items-center justify-between">
+				<div className="flex justify-between">
 					<h2 className="text-lg font-semibold text-neutral-700 dark:text-white">{t("title")}</h2>
-					<YnsLink replace href="/cart" className="text-sm text-muted-foreground underline">
-						{t("openFullView")}
-					</YnsLink>
+					<DrawerClose>
+						<X className="h-6 w-6" />
+					</DrawerClose>
 				</div>
 
 				<div className="mt-8">
@@ -72,7 +74,12 @@ export default async function CartModalPage({ searchParams }: { searchParams: { 
 					</ul>
 				</div>
 			</div>
-
+			<div>
+				<DrawerClose className="m-4 flex items-center gap-2 text-left text-sm hover:text-neutral-400/90">
+					<ArrowLeftFromLine className="h-4 w-4" />
+					{t("continueShopping")}
+				</DrawerClose>
+			</div>
 			<div className="border-t border-neutral-200 px-4 py-6 sm:px-6">
 				<div
 					id="cart-overlay-description"

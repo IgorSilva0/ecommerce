@@ -152,7 +152,7 @@ export function OrderDetails({
 							{order?.items.map((item, index) => (
 								<li key={index} className="flex items-center justify-between">
 									<span className="text-muted-foreground">
-										{item.product.name} x <span>{item.quantity}</span>
+										{item.product.name} x {item.quantity} {item.product.metadata.variant ?? null}
 									</span>
 									<span>{formatPrice(item.product.default_price.unit_amount * item.quantity)}</span>
 								</li>

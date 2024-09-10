@@ -196,7 +196,11 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 					)}
 				</Tabs>
 			</div>
-			<OrderDetails data={data} selectedRow={selectedRow} />
+			{!loading && dataset.length ? (
+				<div className="fade-in">
+					<OrderDetails data={data} selectedRow={selectedRow} />
+				</div>
+			) : null}
 		</div>
 	);
 }

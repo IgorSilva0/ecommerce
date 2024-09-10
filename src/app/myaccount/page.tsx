@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, EyeOff, Eye, ListFilter, Filter } from "lucide-react";
+import { EyeOff, Eye, ListFilter, Filter } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { OrdersTable } from "./components/ordersTable";
 import { type OrdersDataResponse } from "./utils/types";
@@ -17,6 +17,15 @@ import {
 	DropdownMenuTrigger,
 } from "@/ui/shadcn/dropdown-menu";
 import { OrdersData } from "@/app/myaccount/utils/data";
+import { YnsLink } from "@/ui/YnsLink";
+import {
+	Breadcrumb,
+	BreadcrumbList,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbSeparator,
+	BreadcrumbPage,
+} from "@/ui/shadcn/breadcrumb";
 
 export default function Orders() {
 	const [displayCharts, setDisplayCharts] = useState(true);
@@ -58,7 +67,7 @@ export default function Orders() {
 				setLoading(false);
 				setTimeout(() => {
 					setStartShopping(true);
-				}, 3000);
+				}, 2500);
 			}, 1500);
 			return () => {
 				clearTimeout(loadingTimeout);
@@ -69,13 +78,43 @@ export default function Orders() {
 
 	return (
 		<TooltipProvider>
-			<main className="w-full flex-1 items-start">
-				<div className="flex items-center justify-center">
-					<Loader2 className="ml-2 h-4 w-4 animate-spin" />
-					<h2 className="text-center text-2xl font-semibold">Orders History</h2>
-					<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink
+							asChild
+							className="inline-flex min-h-12 min-w-12 items-center justify-center"
+						>
+							<YnsLink href="/">Home</YnsLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>Dashboard</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
+			<main className="mb-20 w-full flex-1 items-start">
+				<div className="">
+					<h1 className="text-3xl font-bold leading-none tracking-tight text-foreground">
+						Orders History
+					</h1>
 				</div>
-
+				{!loading && !ordersData.length && startShopping ? (
+					<>
+						<p className="my-2 py-3 text-base text-gray-600 dark:text-gray-400">
+							You haven&apos;t completed any purchases so far.
+						</p>
+						<div className="flex w-full">
+							<YnsLink
+								href="/products"
+								className="bg-primary-500 w-fit rounded-lg border-2 border-black bg-black px-10 py-2 text-base font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
+							>
+								Start Shopping!
+							</YnsLink>
+						</div>
+					</>
+				) : null}
 				<div className="mt-8 flex w-full items-center justify-between rounded-t-xl border border-b-0 bg-muted/90 p-5 sm:px-6">
 					<h2 className="text-xl font-semibold">Overview Charts</h2>
 					<div className="flex gap-2">
@@ -148,11 +187,6 @@ export default function Orders() {
 				<div>
 					<OrdersTable data={ordersData} />
 				</div>
-				{!loading && !ordersData.length && startShopping ? (
-					<div className="flex justify-center py-10">
-						<Button>Start Shopping!</Button>
-					</div>
-				) : null}
 			</main>
 		</TooltipProvider>
 	);

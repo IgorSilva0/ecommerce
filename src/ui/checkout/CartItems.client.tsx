@@ -8,17 +8,20 @@ import { useLocale } from "next-intl";
 import { Button } from "@/ui/shadcn/button";
 import { setQuantity } from "@/actions/addToCartAction";
 import { formatMoney } from "@/lib/utils";
+import { clearCartCookieAction } from "@/actions/cartActions";
 
 export const CartItemQuantity = ({
 	quantity,
 	productId,
 	cartId,
 	onChange,
+	lines,
 }: {
 	quantity: number;
 	productId: string;
 	cartId: string;
 	onChange: (args: { productId: string; action: "INCREASE" | "DECREASE" }) => void;
+	lines: number;
 }) => {
 	const { pending } = useFormStatus();
 
@@ -38,7 +41,15 @@ export const CartItemQuantity = ({
 		const doWork = async () => {
 			try {
 				const modifier = action === "INCREASE" ? 1 : -1;
-				await setQuantity({ cartId, productId, quantity: quantity + modifier });
+				const value = quantity + modifier;
+				if (!value && lines <= 1) {
+					await clearCartCookieAction();
+					router.refresh();
+					stateRef.current?.promise.resolve();
+					stateRef.current = null;
+					return;
+				}
+				await setQuantity({ cartId, productId, quantity: value });
 				await elements?.fetchUpdates();
 				router.refresh();
 				stateRef.current?.promise.resolve();
@@ -60,7 +71,6 @@ export const CartItemQuantity = ({
 		}
 		return stateRef.current.promise.promise;
 	};
-
 	return (
 		<span
 			className={clsx(
@@ -76,11 +86,13 @@ export const CartItemQuantity = ({
 				className="group aspect-square p-0"
 				formAction={() => formAction("DECREASE")}
 			>
-				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-neutral-100 pb-0.5 font-bold leading-none text-black transition-colors group-hover:bg-neutral-500 group-hover:text-white">
+				<span className="flex h-5 w-5 justify-center rounded-full bg-black pb-0.5 text-base font-bold leading-none text-white shadow transition-colors group-hover:bg-neutral-500 group-hover:text-white dark:bg-slate-600">
 					–
 				</span>
 			</Button>
-			<span className="inline-block min-w-8 px-1 text-center tabular-nums">{quantity}</span>
+			<span className="inline-block min-w-8 px-1 text-center text-base tabular-nums">
+				{quantity}
+			</span>
 			<Button
 				variant="ghost"
 				size="sm"
@@ -88,7 +100,7 @@ export const CartItemQuantity = ({
 				className="group aspect-square p-0"
 				formAction={() => formAction("INCREASE")}
 			>
-				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-neutral-100 pb-0.5 font-bold leading-none text-black transition-colors group-hover:bg-neutral-500 group-hover:text-white">
+				<span className="flex h-5 w-5 justify-center rounded-full bg-black pb-0.5 text-base font-bold leading-none text-white shadow transition-colors group-hover:bg-neutral-500 group-hover:text-white dark:bg-slate-600">
 					+
 				</span>
 			</Button>

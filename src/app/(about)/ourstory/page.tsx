@@ -16,7 +16,7 @@ export default function OurStory() {
 					<section className="mb-8">
 						<h2 className="mb-4 text-2xl font-semibold">Our Beginnings</h2>
 						<p className="mb-4 text-lg">
-							Your New Store was born out of a passion for [specific field or interest related to
+							Your Online Store was born out of a passion for [specific field or interest related to
 							your products]. Founded by [Your Name], our journey began with a simple idea: to
 							provide high-quality [products/services] that [solve a problem or meet a need] for our
 							customers.
@@ -33,7 +33,7 @@ export default function OurStory() {
 					<section className="mb-8">
 						<h2 className="mb-4 text-2xl font-semibold">Our Vision</h2>
 						<p className="mb-4 text-lg">
-							At Your New Store, we envision a world where [describe your vision related to the
+							At Your Online Store, we envision a world where [describe your vision related to the
 							industry or customer experience]. Our goal is to continuously innovate and improve,
 							ensuring that we not only meet but exceed our customers&apos; expectations.
 						</p>
@@ -48,10 +48,10 @@ export default function OurStory() {
 					<section className="mb-8">
 						<h2 className="mb-4 text-2xl font-semibold">Our Team</h2>
 						<p className="mb-4 text-lg">
-							Behind Your New Store is a dedicated team of professionals who share a common passion
-							for [industry/field]. Each member of our team brings unique skills and expertise,
-							contributing to our collective success and ensuring that we deliver the best possible
-							experience to our customers.
+							Behind Your Online Store is a dedicated team of professionals who share a common
+							passion for [industry/field]. Each member of our team brings unique skills and
+							expertise, contributing to our collective success and ensuring that we deliver the
+							best possible experience to our customers.
 						</p>
 						<p className="mb-4 text-lg">
 							From [briefly describe key roles or team members] to [mention any special departments
@@ -63,7 +63,7 @@ export default function OurStory() {
 					<section className="mb-8">
 						<h2 className="mb-4 text-2xl font-semibold">Our Commitment</h2>
 						<p className="mb-4 text-lg">
-							At Your New Store, our commitment to our customers is at the heart of everything we
+							At Your Online Store, our commitment to our customers is at the heart of everything we
 							do. We are dedicated to providing high-quality [products/services] and exceptional
 							customer service. Your satisfaction is our priority, and we are always here to assist
 							you and ensure you have a positive experience with us.
@@ -82,7 +82,7 @@ export default function OurStory() {
 							assist in any way we can.
 						</p>
 						<p className="mb-4 text-lg">
-							Thank you for visiting Your New Store. We are excited to share our journey with you
+							Thank you for visiting our Online Store. We are excited to share our journey with you
 							and to provide you with the best [products/services] in the industry.
 						</p>
 					</section>

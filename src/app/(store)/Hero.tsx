@@ -15,7 +15,7 @@ import { YnsLink } from "@/ui/YnsLink";
 
 const carouselItems = [
 	{
-		title: "Welcome to Your New Store",
+		title: "Welcome to Our Online Store",
 		description: "Your one-stop destination for all your shopping needs",
 		buttonText: "Shop Now",
 		imageSrc:

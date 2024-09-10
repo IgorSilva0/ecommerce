@@ -16,9 +16,9 @@ export default function Policies() {
 					<section className="mb-8">
 						<h2 className="mb-4 text-2xl font-semibold">Return and Refund Policy</h2>
 						<p className="mb-4 text-lg">
-							At Your New Store, we are committed to ensuring your satisfaction with every purchase.
-							If you are not completely satisfied, you may return items within 30 days of the
-							purchase date for a full refund or exchange. The returned product must be in its
+							At Your Online Store, we are committed to ensuring your satisfaction with every
+							purchase. If you are not completely satisfied, you may return items within 30 days of
+							the purchase date for a full refund or exchange. The returned product must be in its
 							original condition and packaging.
 						</p>
 						<p className="mb-4 text-lg">
@@ -96,7 +96,7 @@ export default function Policies() {
 							ensuring a positive shopping experience.
 						</p>
 						<p className="mb-4 text-lg">
-							Thank you for choosing Your New Store. We are committed to providing you with
+							Thank you for choosing our Online Store. We are committed to providing you with
 							top-quality products and exceptional customer service.
 						</p>
 					</section>

@@ -1,7 +1,5 @@
 import "@/app/globals.css";
-import * as Commerce from "commerce-kit";
 import { Nav } from "@/ui/nav/Nav";
-import { JsonLd, accountToWebsiteJsonLd } from "@/ui/JsonLd";
 import { TooltipProvider } from "@/ui/shadcn/tooltip";
 
 export default async function StoreLayout({
@@ -11,11 +9,6 @@ export default async function StoreLayout({
 	children: React.ReactNode;
 	modal: React.ReactNode;
 }>) {
-	const accountResult = await Commerce.accountGet();
-	const logoLink =
-		accountResult?.logo?.links?.data.find((link) => !link.expired) ||
-		(accountResult?.logo?.id ? await Commerce.fileGet(accountResult.logo.id) : null);
-
 	return (
 		<>
 			<Nav />
@@ -25,12 +18,6 @@ export default async function StoreLayout({
 					{modal}
 				</main>
 			</TooltipProvider>
-			<JsonLd
-				jsonLd={accountToWebsiteJsonLd({
-					account: accountResult?.account,
-					logoUrl: logoLink?.url,
-				})}
-			/>
 		</>
 	);
 }

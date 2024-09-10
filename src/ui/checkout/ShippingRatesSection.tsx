@@ -36,9 +36,9 @@ export const ShippingRatesSection = ({
 					<label
 						key={rate.id}
 						className={cn(
-							"grid content-end items-end rounded-md border-2 border-muted px-2 py-2 transition-colors dark:bg-slate-500",
+							"grid content-end items-end rounded-md border-2 border-muted bg-gray-300 px-2 py-2 transition-colors dark:bg-slate-500",
 							`has-[[aria-checked="true"]]:border-foreground/60`,
-							`has-[[aria-checked="true"]]:bg-gray-200`,
+							`has-[[aria-checked="true"]]:bg-gray-400`,
 							`has-[[aria-checked="true"]]:dark:border-white`,
 							`has-[[aria-checked="true"]]:dark:bg-slate-500`,
 							`has-[[aria-checked="true"]]:dark:text-white`,

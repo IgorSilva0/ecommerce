@@ -343,7 +343,7 @@ const PaymentForm = ({
 			{readyToRender && (
 				<Button
 					type="submit"
-					className="w-full rounded-full border-2 text-lg dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-black"
+					className="w-full rounded-full border-2 text-lg transition-all hover:border-black hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-black"
 					size="lg"
 					aria-disabled={isBillingAddressPending || isLoading || isTransitioning}
 					onClick={(e) => {

@@ -5,6 +5,15 @@ import { getCartFromCookiesAction } from "@/actions/cartActions";
 import { CartSummaryTable } from "@/ui/checkout/CartSummaryTable";
 import { CartEmpty } from "@/ui/checkout/CartEmpty";
 import { StripeElementsContainer } from "@/ui/checkout/StripeElementsContainer";
+import {
+	Breadcrumb,
+	BreadcrumbList,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbSeparator,
+	BreadcrumbPage,
+} from "@/ui/shadcn/breadcrumb";
+import { YnsLink } from "@/ui/YnsLink";
 
 export default async function CartLayout({ children }: { children: ReactNode }) {
 	const cart = await getCartFromCookiesAction();
@@ -15,6 +24,31 @@ export default async function CartLayout({ children }: { children: ReactNode }) 
 
 	return (
 		<StripeElementsContainer client_secret={cart.cart.client_secret}>
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink
+							asChild
+							className="inline-flex min-h-12 min-w-12 items-center justify-center"
+						>
+							<YnsLink href="/">{t("home")}</YnsLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbLink
+							asChild
+							className="inline-flex min-h-12 min-w-12 items-center justify-center"
+						>
+							<YnsLink href="/products">{t("allProducts")}</YnsLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>{t("checkoutTitle")}</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
 			<div className="min-h-[calc(100dvh-7rem)] xl:grid xl:grid-cols-12 xl:gap-x-8">
 				<div className="my-8 xl:col-span-7">
 					<div className="sticky top-1">

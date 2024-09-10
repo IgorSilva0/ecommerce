@@ -47,4 +47,5 @@ export async function clearCartCookieAction() {
 	revalidateTag(`admin-orders`);
 	revalidatePath("/cart");
 	revalidatePath("/cart-overlay");
+	return;
 }

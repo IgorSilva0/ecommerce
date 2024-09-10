@@ -1,22 +1,57 @@
 import { getTranslations } from "next-intl/server";
 import { YnsLink } from "@/ui/YnsLink";
+import {
+	Breadcrumb,
+	BreadcrumbList,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbSeparator,
+	BreadcrumbPage,
+} from "@/ui/shadcn/breadcrumb";
 
 export async function CartEmpty() {
 	const t = await getTranslations("/cart.empty");
 	return (
-		<div className="flex max-h-80 flex-1 flex-col items-center justify-center gap-4">
-			<div className="flex flex-col items-center justify-center space-y-2 text-center">
-				<ShoppingCartIcon className="h-12 w-12 text-neutral-500" />
-				<h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
-				<p className="text-neutral-500">{t("description")}</p>
+		<>
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink
+							asChild
+							className="inline-flex min-h-12 min-w-12 items-center justify-center"
+						>
+							<YnsLink href="/">Home</YnsLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbLink
+							asChild
+							className="inline-flex min-h-12 min-w-12 items-center justify-center"
+						>
+							<YnsLink href="/products">{t("allProducts")}</YnsLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>{t("checkoutTitle")}</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
+			<div className="py-auto my-auto flex h-[55dvh] flex-col items-center justify-center gap-4 md:h-[65dvh]">
+				<div className="flex flex-col items-center justify-center space-y-2 text-center">
+					<ShoppingCartIcon className="h-12 w-12" />
+					<h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
+					<p className="text-neutral-700 dark:text-neutral-400">{t("description")}</p>
+				</div>
+				<YnsLink
+					className="bg-primary-500 mt-3 w-fit rounded-lg border-2 border-black bg-black px-10 py-2 text-base font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
+					href="/"
+				>
+					{t("continueShoppingButton")}
+				</YnsLink>
 			</div>
-			<YnsLink
-				className="inline-flex h-10 items-center justify-center rounded-md bg-neutral-900 px-6 text-sm font-medium text-neutral-50 shadow transition-colors hover:bg-neutral-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50"
-				href="/"
-			>
-				{t("continueShoppingButton")}
-			</YnsLink>
-		</div>
+		</>
 	);
 }
 

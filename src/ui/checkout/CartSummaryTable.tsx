@@ -47,7 +47,7 @@ export const CartSummaryTable = ({ cart }: { cart: Commerce.Cart }) => {
 	const total = calculateCartTotalPossiblyWithTax(optimisticCart);
 
 	return (
-		<form>
+		<form className="rounded-lg bg-white dark:bg-slate-950">
 			<Table>
 				<TableHeader>
 					<TableRow>
@@ -72,7 +72,7 @@ export const CartSummaryTable = ({ cart }: { cart: Commerce.Cart }) => {
 								<TableCell className="hidden sm:table-cell sm:w-24">
 									{line.product.images[0] && (
 										<Image
-											className="aspect-square rounded-md bg-slate-100 object-cover dark:bg-slate-800"
+											className="aspect-square rounded-md bg-white object-cover dark:bg-slate-800"
 											src={line.product.images[0]}
 											width={96}
 											height={96}
@@ -101,6 +101,7 @@ export const CartSummaryTable = ({ cart }: { cart: Commerce.Cart }) => {
 										quantity={line.quantity}
 										productId={line.product.id}
 										onChange={dispatchOptimisticCartAction}
+										lines={optimisticCart.lines.length}
 									/>
 								</TableCell>
 								<TableCell className="text-right">
@@ -134,7 +135,7 @@ export const CartSummaryTable = ({ cart }: { cart: Commerce.Cart }) => {
 						</TableRow>
 					)}
 				</TableBody>
-				<TableFooter>
+				<TableFooter className="bg-muted/90">
 					{optimisticCart.cart.taxBreakdown.map((tax, idx) => (
 						<TableRow key={idx + tax.taxAmount} className="font-normal">
 							<TableCell className="hidden w-24 sm:table-cell"></TableCell>

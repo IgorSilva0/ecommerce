@@ -1,5 +1,5 @@
 "use client";
-import { PanelLeft, Settings, HeartHandshake, ScrollText, LogOut, Store } from "lucide-react";
+import { PanelLeft, ScrollText, LogOut, Store } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/ui/shadcn/sheet";
 import { Button } from "@/ui/shadcn/button";
@@ -45,7 +45,7 @@ export function NavMobileTop() {
 							<YnsLink href="/">
 								<SheetTitle className="mx-2 -mt-0.5 flex gap-1 whitespace-nowrap text-xl font-bold">
 									{/* <Package2 /> */}
-									❣️ Your New Store ❣️
+									❣️ Online Store ❣️
 								</SheetTitle>
 								<span className="sr-only">Shop</span>
 							</YnsLink>
@@ -67,24 +67,6 @@ export function NavMobileTop() {
 							>
 								<ScrollText className="h-5 w-5" />
 								Orders
-							</YnsLink>
-						</SheetClose>
-						<SheetClose asChild>
-							<YnsLink
-								href={connect ? "/myaccount/settings" : "/login"}
-								className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-							>
-								<Settings className="h-5 w-5" />
-								Settings
-							</YnsLink>
-						</SheetClose>
-						<SheetClose asChild>
-							<YnsLink
-								href="/help"
-								className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-							>
-								<HeartHandshake className="h-5 w-5" />
-								Help
 							</YnsLink>
 						</SheetClose>
 						<SheetClose asChild>

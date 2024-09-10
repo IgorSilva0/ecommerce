@@ -17,10 +17,10 @@ export default function Quality() {
 					</YnsLink>
 					<h2 className="mb-3 text-2xl font-semibold">Our Quality</h2>
 					<p className="mb-4 text-lg">
-						At Your New Store, we are committed to providing our customers with the highest quality
-						products. Our quality guarantee ensures that every item you purchase from us meets the
-						highest standards of excellence. We take pride in the craftsmanship and durability of
-						our products, and we stand behind them 100%.
+						At Your Online Store, we are committed to providing our customers with the highest
+						quality products. Our quality guarantee ensures that every item you purchase from us
+						meets the highest standards of excellence. We take pride in the craftsmanship and
+						durability of our products, and we stand behind them 100%.
 					</p>
 					<h2 className="mb-3 text-2xl font-semibold">Our Commitment to Quality</h2>
 					<p className="mb-4 text-lg">
@@ -67,7 +67,7 @@ export default function Quality() {
 						have a positive shopping experience.
 					</p>
 					<p className="mb-4 text-lg">
-						Thank you for choosing Your New Store. We look forward to serving you with the highest
+						Thank you for choosing our Online Store. We look forward to serving you with the highest
 						quality products and exceptional customer service.
 					</p>
 					<div className="flex w-full justify-center">

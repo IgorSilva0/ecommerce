@@ -10,6 +10,15 @@ import { Badge } from "@/ui/shadcn/badge";
 import { formatMoney, formatProductName } from "@/lib/utils";
 import { getCartCookieJson } from "@/lib/cart";
 import { ClearCookieClientComponent } from "@/ui/checkout/ClearCookieClientComponent";
+import {
+	Breadcrumb,
+	BreadcrumbList,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbSeparator,
+	BreadcrumbPage,
+} from "@/ui/shadcn/breadcrumb";
+import { YnsLink } from "@/ui/YnsLink";
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	const t = await getTranslations("/order.metadata");
@@ -41,7 +50,23 @@ export default async function OrderDetailsPage({
 	const locale = await getLocale();
 
 	return (
-		<article className="max-w-3xl pb-32">
+		<article className="max-w-3xl">
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink
+							asChild
+							className="inline-flex min-h-12 min-w-12 items-center justify-center"
+						>
+							<YnsLink href="/">{t("home")}</YnsLink>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>{t("title")}</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
 			<ClearCookieClientComponent cartId={order.order.id} cookieId={cookie?.id} />
 			<h1 className="mt-4 inline-flex items-center text-3xl font-bold leading-none tracking-tight">
 				{t("title")}
@@ -54,9 +79,9 @@ export default async function OrderDetailsPage({
 			</dl>
 
 			<h2 className="sr-only">{t("productsTitle")}</h2>
-			<ul role="list" className="my-8 divide-y border-y">
+			<ul role="list" className="my-8 divide-y border-y border-gray-500">
 				{order.lines.map((line) => (
-					<li key={line.product.id} className="py-8">
+					<li key={line.product.id} className="border-b border-gray-500 py-8">
 						<article className="grid grid-cols-[auto,1fr] grid-rows-[repeat(auto,3)] justify-start gap-x-4 sm:gap-x-8">
 							<h3 className="row-start-1 font-semibold leading-none text-neutral-700 dark:text-white">
 								{formatProductName(line.product.name, line.product.metadata.variant)}
@@ -137,7 +162,7 @@ export default async function OrderDetailsPage({
 					</li>
 				)}
 				{order.order.taxBreakdown[0]!.taxAmount && (
-					<li className="py-8">
+					<li className="border-t border-gray-500 py-8">
 						<article className="grid grid-cols-[auto,1fr] grid-rows-[repeat(auto,3)] justify-start gap-x-4 sm:gap-x-8">
 							<h3 className="row-start-1 font-semibold leading-none text-neutral-700 dark:text-white">
 								{order.order.taxBreakdown[0]!.taxType.toUpperCase()}
@@ -231,7 +256,7 @@ export default async function OrderDetailsPage({
 					)}
 
 					{order.order.payment_method?.type === "card" && order.order.payment_method.card && (
-						<div className="border-t pt-8 sm:col-span-2">
+						<div className="border-t border-gray-500 pt-8 sm:col-span-2">
 							<h3 className="font-semibold leading-none text-neutral-700 dark:text-white">
 								{t("paymentMethod")}
 							</h3>
@@ -259,7 +284,7 @@ export default async function OrderDetailsPage({
 						</div>
 					)}
 
-					<div className="col-span-2 grid grid-cols-2 gap-8 border-t pt-8">
+					<div className="col-span-2 grid grid-cols-2 gap-8 border-t border-gray-500 pt-8">
 						<h3 className="font-semibold leading-none text-neutral-700 dark:text-white">
 							{t("total")}
 						</h3>
@@ -272,6 +297,14 @@ export default async function OrderDetailsPage({
 						</p>
 					</div>
 				</div>
+			</div>
+			<div className="my-10 flex w-full justify-center">
+				<YnsLink
+					href="/myaccount"
+					className="bg-primary-500 w-fit rounded-lg border-2 border-black bg-black px-10 py-2 text-base font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
+				>
+					View All Orders
+				</YnsLink>
 			</div>
 		</article>
 	);
@@ -290,7 +323,10 @@ const PaymentStatus = async ({ status }: { status: PaymentIntent.Status }) => {
 	} satisfies Record<PaymentIntent.Status, ComponentProps<typeof Badge>["variant"]>;
 
 	return (
-		<Badge className="ml-2 self-end capitalize" variant={statusToVariant[status]}>
+		<Badge
+			className={`ml-2 self-end py-0 text-sm font-bold capitalize text-black ${status === "succeeded" ? "bg-green-400 shadow-green-500" : ""}`}
+			variant={statusToVariant[status]}
+		>
 			{t(status)}
 		</Badge>
 	);
