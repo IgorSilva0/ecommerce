@@ -10,6 +10,7 @@ import { signOut } from "@/utils/supabase/signout";
 
 export function NavMobileTop() {
 	const [connect, setConnected] = useState(false);
+	const [hover, setHover] = useState(false);
 
 	useEffect(() => {
 		const userON = async () => {
@@ -23,7 +24,7 @@ export function NavMobileTop() {
 			}
 		};
 		void userON();
-	}, []);
+	}, [hover]);
 
 	const signout = async () => {
 		await signOut();
@@ -34,7 +35,12 @@ export function NavMobileTop() {
 		<>
 			<Sheet>
 				<SheetTrigger asChild>
-					<Button size="icon" variant="outline" className="md:hidden">
+					<Button
+						size="icon"
+						variant="outline"
+						className="md:hidden"
+						onClick={() => setHover(!hover)}
+					>
 						<PanelLeft className="h-6 w-6" />
 						<span className="sr-only">Toggle Menu</span>
 					</Button>

@@ -47,7 +47,7 @@ export const CartSummaryTable = ({ cart }: { cart: Commerce.Cart }) => {
 	const total = calculateCartTotalPossiblyWithTax(optimisticCart);
 
 	return (
-		<form className="rounded-lg bg-white dark:bg-slate-950">
+		<form className="rounded-lg bg-white shadow-epic dark:bg-slate-950">
 			<Table>
 				<TableHeader>
 					<TableRow>
@@ -72,7 +72,7 @@ export const CartSummaryTable = ({ cart }: { cart: Commerce.Cart }) => {
 								<TableCell className="hidden sm:table-cell sm:w-24">
 									{line.product.images[0] && (
 										<Image
-											className="aspect-square rounded-md bg-white object-cover dark:bg-slate-800"
+											className="aspect-square rounded-md bg-gray-200 object-cover dark:bg-slate-800"
 											src={line.product.images[0]}
 											width={96}
 											height={96}

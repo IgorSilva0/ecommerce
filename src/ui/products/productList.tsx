@@ -101,13 +101,13 @@ export const ProductList = async ({ products }: { products: Commerce.MappedProdu
 										</div>
 									)}
 									<div className="rounded-b-xl bg-muted/90 px-4 py-3 dark:bg-slate-950">
-										<h2 className="text-base font-semibold text-neutral-700 dark:text-white">
+										<h2 className="text-sm font-semibold text-neutral-700 dark:text-white sm:text-base">
 											{product.name}
 										</h2>
-										<footer className="text-sm font-medium text-neutral-900 dark:text-white">
+										<footer className="font-medium text-neutral-900 dark:text-white">
 											{product.default_price.unit_amount && (
 												<p>
-													<span className="text-base text-green-600 dark:text-green-400">
+													<span className="text-sm text-green-600 dark:text-green-400 sm:text-base">
 														{formatMoney({
 															amount: product.default_price.unit_amount,
 															currency: product.default_price.currency,

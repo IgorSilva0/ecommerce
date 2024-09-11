@@ -75,16 +75,16 @@ export function Hero() {
 					<CarouselItem key={index}>
 						<div className="">
 							<Card>
-								<CardContent className="flex h-[25rem] cursor-grab items-center justify-center rounded-lg p-6 dark:bg-slate-950 sm:h-[24rem]">
+								<CardContent className="flex h-[23rem] cursor-grab items-center justify-center rounded-lg p-6 dark:bg-slate-950 sm:h-[24rem]">
 									<div className="flex h-full w-full flex-col-reverse items-start justify-between sm:flex-row sm:items-center">
 										<div className="mb-2 sm:px-10">
 											<h3 className="text-lg font-semibold sm:text-2xl">{item.title}</h3>
-											<p className="mb-6 text-base text-neutral-600 dark:text-neutral-300 sm:text-lg">
+											<p className="mb-5 text-sm text-neutral-600 dark:text-neutral-300 sm:mb-6 sm:text-lg">
 												{item.description}
 											</p>
 											<YnsLink
 												href="/products"
-												className="rounded-lg border-2 border-black bg-black px-4 pb-3 pt-2 font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
+												className="rounded-lg border-2 border-black bg-black px-4 pb-3 pt-2 text-sm font-semibold text-white transition-all hover:bg-transparent hover:text-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black sm:text-base"
 											>
 												{item.buttonText}
 											</YnsLink>

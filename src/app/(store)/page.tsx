@@ -19,7 +19,7 @@ export default async function Home() {
 				<Hero />
 			</section>
 			<div className="mt-20">
-				<h1 className="text-3xl font-bold leading-none tracking-tight text-foreground">
+				<h1 className="text-2xl font-bold leading-none tracking-tight text-foreground sm:text-3xl">
 					Featured Products
 				</h1>
 			</div>

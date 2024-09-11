@@ -23,7 +23,7 @@ import { userConnected } from "@/utils/supabase/userConnected";
 
 export function MyAccount() {
 	const [connect, setConnected] = useState(false);
-
+	const [hover, setHover] = useState(false);
 	useEffect(() => {
 		const userON = async () => {
 			try {
@@ -36,7 +36,7 @@ export function MyAccount() {
 			}
 		};
 		void userON();
-	}, []);
+	}, [hover]);
 
 	const signout = async () => {
 		await signOut();
@@ -47,7 +47,9 @@ export function MyAccount() {
 		<NavigationMenu>
 			<NavigationMenuList>
 				<NavigationMenuItem value="myaccount">
-					<NavigationMenuTriggerWithFixedUX>My Account</NavigationMenuTriggerWithFixedUX>
+					<NavigationMenuTriggerWithFixedUX onPointerOver={() => setHover(!hover)}>
+						My Account
+					</NavigationMenuTriggerWithFixedUX>
 					<NavigationMenuContent>
 						{connect ? (
 							<ul className="grid gap-3 p-4 md:w-[100px] lg:w-[200px]">

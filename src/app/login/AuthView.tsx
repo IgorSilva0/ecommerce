@@ -19,9 +19,5 @@ export const AuthView: React.FC<AuthViewProps> = ({ cart = false, user = false, 
 	if (user) {
 		return redirect("/myaccount");
 	}
-	return (
-		<div className="flex justify-center md:min-h-[80dvh]">
-			<Component setView={setView} cart={cart} info={info} />
-		</div>
-	);
+	return <Component setView={setView} cart={cart} info={info} />;
 };
