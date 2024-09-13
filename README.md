@@ -1,10 +1,6 @@
-Got it! I’ve updated the README to include **Playwright** for testing. Here’s the revised version:
-
----
-
 # Online Shop
 
-**Online Shop** is a modern, responsive e-commerce platform designed to deliver a seamless and engaging shopping experience. This project demonstrates my dedication to web development and showcases my skills with a variety of advanced technologies.
+**Online Shop** is a modern, responsive e-commerce platform that delivers a seamless and engaging shopping experience. This project demonstrates my dedication to web development and showcases my skills with a variety of advanced technologies.
 
 ## Key Features
 
@@ -41,7 +37,7 @@ Got it! I’ve updated the README to include **Playwright** for testing. Here’
 
 ### Frameworks and Libraries
 
-- **Next.js**: React-based framework for building the frontend.
+- **Next.js**: React-based framework for building the front end.
 - **Tailwind CSS**: Utility-first CSS framework for responsive and customizable design.
 - **Radix UI**: Provides accessible, low-level components for complex UI elements.
 - **ShadCN**: Utility for handling various UI elements and styling.
@@ -57,7 +53,7 @@ Got it! I’ve updated the README to include **Playwright** for testing. Here’
 ### Development and Testing Tools
 
 - **TypeScript**: Provides type safety and improved developer experience.
-- **Playwright**: For end-to-end testing of the application (currently under development).
+- **Playwright**: For end-to-end application testing (currently under development).
 - **Vitest**: For unit testing components and functionalities.
 - **ESLint & Prettier**: Tools for maintaining code quality and consistency.
 - **Husky**: Manages Git hooks for pre-commit checks.
@@ -67,10 +63,10 @@ Got it! I’ve updated the README to include **Playwright** for testing. Here’
 1. **Browse Products**: Users can explore products by category and select variants.
 2. **Add to Cart**: Items are added to the cart and stored in cookies for continuity.
 3. **Checkout**: Payments are processed securely through Stripe, with Test Mode available for development purposes.
-4. **User Dashboard**: After a purchase, users can access their dashboard to review analytics and order history.
+4. **User Dashboard**: Users can access their dashboard to review analytics and order history after purchase.
 
 ---
 
-Live : https://ecommerce-rho-woad.vercel.app/
+Live: https://ecommerce-rho-woad.vercel.app/
 
 Feel free to explore the platform and share your feedback. I’m continually working to enhance and refine my skills!
