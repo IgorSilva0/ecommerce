@@ -33,6 +33,11 @@
   - **Charts** showing spending by category.
   - **Order Filtering** and **Export Options** (JSON or CSV).
 
+### Test Account
+- Explore the platform and access charts and order history without making any purchases using the test credentials below:
+ - **Email: test@gmail.com**
+ - **Password: 123456**
+
 ## Technologies Used
 
 ### Frameworks and Libraries
