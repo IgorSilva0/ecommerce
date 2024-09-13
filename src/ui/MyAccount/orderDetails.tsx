@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight, Copy, MoreVertical, Check } from "lucide-react";
 import { SiGooglepay, SiVisa } from "react-icons/si";
 import React, { useEffect, useState } from "react";
-import { type OrdersDataResponse, type Order } from "../utils/types";
+import { type OrdersDataResponse, type Order } from "../../app/myaccount/utils/types";
 import {
 	exportOrderDetailsToCSV,
 	exportToJSON,
@@ -52,7 +52,6 @@ export function OrderDetails({
 				const order = data.find((order) => order.order_id === selectedRow.order_id);
 				if (order) setDate(formatDate(order.created_at));
 				setOrder(order);
-				console.log(order);
 			} catch (error) {
 				console.error("Error on SelectedRow,data Use Effect:", error);
 			}

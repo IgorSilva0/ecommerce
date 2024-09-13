@@ -1,4 +1,4 @@
-import { type Order, type OrdersDataResponse } from "../utils/types";
+import { type Order, type OrdersDataResponse } from "../../app/myaccount/utils/types";
 
 export type OrderExportData = {
 	order_id: string;
@@ -50,7 +50,8 @@ export function ordersToTable(data: OrdersDataResponse, filterYear: number, filt
 		dispatchedToCountry: order.shipping_details[0]?.address.country,
 		deliveryStatus: order.delivery_status,
 		orderStatus: order.order_status,
-		orderDate: formatDate(order.created_at),
+		orderDate: formatDate(order.created_at), // Formatted date for display
+		orderDateRaw: new Date(order.created_at), // Keep the original date for filtering
 		orderTotal: order.total_price.toLocaleString("gbp-GB", {
 			minimumFractionDigits: 2,
 			maximumFractionDigits: 2,
@@ -59,16 +60,15 @@ export function ordersToTable(data: OrdersDataResponse, filterYear: number, filt
 
 	// Filter by year and status
 	const filteredData = dataset.filter((item) => {
-		const year = new Date(item.orderDate).getFullYear();
+		const year = item.orderDateRaw.getFullYear(); // Use the original date object
 		const isYearValid = filterYear === year;
 		const isStatusValid = filterStatus === "All" ? true : filterStatus.includes(item.orderStatus);
-
 		return isYearValid && isStatusValid;
 	});
 
 	// Sort by orderDate in descending order
 	const sortedData = filteredData.sort(
-		(a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime(),
+		(a, b) => b.orderDateRaw.getTime() - a.orderDateRaw.getTime(), // Use the original date for sorting
 	);
 
 	return sortedData;

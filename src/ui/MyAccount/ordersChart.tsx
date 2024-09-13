@@ -2,7 +2,7 @@ import * as React from "react";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { PieChart } from "@mui/x-charts/PieChart";
-import { type OrdersDataResponse } from "../utils/types";
+import { type OrdersDataResponse } from "../../app/myaccount/utils/types";
 import { barDataSet, pieDataSet } from "./charts";
 
 const otherSetting = {

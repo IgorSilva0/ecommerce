@@ -1,4 +1,4 @@
-import { type OrdersDataResponse } from "../utils/types";
+import { type OrdersDataResponse } from "../../app/myaccount/utils/types";
 
 const months = [
 	"January",

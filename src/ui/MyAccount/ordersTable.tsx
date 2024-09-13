@@ -1,6 +1,6 @@
 import { File, Filter, ListFilter } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { type OrdersDataResponse } from "../utils/types";
+import { type OrdersDataResponse } from "../../app/myaccount/utils/types";
 import { OrderDetails } from "./orderDetails";
 import { ordersToTable, exportTableToCSV, exportToJSON, type OrderExportData } from "./orders";
 import { Badge } from "@/ui/shadcn/badge";
@@ -26,14 +26,20 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 	const [filterYear, setFilterYear] = useState("2024");
 	const [filterStatus, setFilterStatus] = useState("All");
 	const [loading, setLoading] = useState(true);
-	const dataset = ordersToTable(data, Number(filterYear), filterStatus);
+	const [visibleRows, setVisibleRows] = useState(10);
+	const [dataset, setDataset] = useState<OrderExportData[]>([]);
+
 	if (dataset.length && !selectedRow) setSelectedRow(dataset[0] ?? null);
 
 	useEffect(() => {
+		setDataset(ordersToTable(data, Number(filterYear), filterStatus));
+	}, [filterStatus, filterYear, data]);
+
+	useEffect(() => {
 		setLoading(true);
-		const timer = setTimeout(() => setLoading(false), 1500);
+		const timer = setTimeout(() => setLoading(false), 2000);
 		return () => clearTimeout(timer);
-	}, [filterYear, filterStatus]);
+	}, []);
 
 	const handleExport = async (x: boolean) => {
 		if (!dataset.length) return;
@@ -50,9 +56,14 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 		setSelectedRow(order);
 	};
 
+	const handleShowRows = (x: boolean) => {
+		if (x) setVisibleRows(dataset.length);
+		else setVisibleRows(10);
+	};
+
 	return (
 		<div className="mt-8 flex flex-col gap-8 lg:flex-row">
-			<div className="grid flex-1 auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+			<div className="grid flex-1 auto-rows-max items-start lg:col-span-2">
 				<Tabs defaultValue="all" className="rounded-t-xl border bg-muted/90 shadow">
 					<div className="flex items-center p-5 pb-3 sm:px-6">
 						<h2 className="text-xl font-semibold">Purchase History</h2>
@@ -88,7 +99,6 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 									<DropdownMenuRadioGroup value={filterYear} onValueChange={setFilterYear}>
 										<DropdownMenuRadioItem value="2024">2024</DropdownMenuRadioItem>
 										<DropdownMenuRadioItem value="2023">2023</DropdownMenuRadioItem>
-										<DropdownMenuRadioItem value="2022">2022</DropdownMenuRadioItem>
 									</DropdownMenuRadioGroup>
 								</DropdownMenuContent>
 							</DropdownMenu>
@@ -111,77 +121,98 @@ export function OrdersTable({ data }: { data: OrdersDataResponse }) {
 							</DropdownMenu>
 						</div>
 					</div>
+
 					{!loading ? (
-						<TabsContent value="all" className="select-none">
-							<Card
-								x-chunk="dashboard-05-chunk-3"
-								className="fade-down rounded-none border-0 shadow-none"
-							>
-								<CardContent className={!dataset.length ? "pt-6" : ""}>
-									<Table>
-										{dataset.length ? (
-											<TableHeader>
-												<TableRow>
-													<TableHead>Dispatch to</TableHead>
-													<TableHead className="hidden sm:table-cell">Delivery</TableHead>
-													<TableHead className="hidden sm:table-cell">Status</TableHead>
-													<TableHead className="hidden md:table-cell">Date</TableHead>
-													<TableHead className="text-right">Total</TableHead>
-												</TableRow>
-											</TableHeader>
-										) : null}
-										<TableBody>
+						<>
+							<TabsContent value="all" className="select-none">
+								<Card
+									x-chunk="dashboard-05-chunk-3"
+									className="fade-down rounded-none border-0 shadow-none"
+								>
+									<CardContent className={!dataset.length ? "pt-6" : ""}>
+										<Table>
 											{dataset.length ? (
-												dataset.map((order, index) => (
-													<TableRow
-														key={index}
-														onClick={() => handleRowClick(index, order)}
-														className={
-															selectedRowIndex === index
-																? "cursor-pointer bg-gray-200 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-800"
-																: "cursor-pointer"
-														}
-													>
-														<TableCell>
-															<div className="font-medium">{order.dispatchedToName}</div>
-															<div className="hidden text-sm text-muted-foreground md:inline">
-																{order.dispatchedToCity}, {order.dispatchedToCountry}
-															</div>
-														</TableCell>
-														<TableCell className="hidden sm:table-cell">
-															<Badge
-																className="border-gray-400 dark:border-gray-500"
-																variant="secondary"
-															>
-																{order.deliveryStatus}
-															</Badge>
-														</TableCell>
-														<TableCell className="hidden sm:table-cell">
-															<Badge
-																className="border-gray-400 dark:border-gray-500"
-																variant="secondary"
-															>
-																{order.orderStatus}
-															</Badge>
-														</TableCell>
-														<TableCell className="hidden md:table-cell">
-															{order.orderDate}
-														</TableCell>
-														<TableCell className="text-right">£ {order.orderTotal}</TableCell>
+												<TableHeader>
+													<TableRow>
+														<TableHead>Dispatch to</TableHead>
+														<TableHead className="hidden sm:table-cell">Delivery</TableHead>
+														<TableHead className="hidden sm:table-cell">Status</TableHead>
+														<TableHead className="hidden md:table-cell">Date</TableHead>
+														<TableHead className="text-right">Total</TableHead>
 													</TableRow>
-												))
-											) : (
-												<TableRow>
-													<TableCell colSpan={5} rowSpan={4} className="text-center text-base">
-														No orders found.
-													</TableCell>
-												</TableRow>
-											)}
-										</TableBody>
-									</Table>
-								</CardContent>
-							</Card>
-						</TabsContent>
+												</TableHeader>
+											) : null}
+											<TableBody>
+												{dataset.length ? (
+													dataset.slice(0, visibleRows).map((order, index) => (
+														<TableRow
+															key={index}
+															onClick={() => handleRowClick(index, order)}
+															className={
+																selectedRowIndex === index
+																	? "cursor-pointer bg-gray-200 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-800"
+																	: "cursor-pointer"
+															}
+														>
+															<TableCell>
+																<div className="font-medium">{order.dispatchedToName}</div>
+																<div className="hidden text-sm text-muted-foreground md:inline">
+																	{order.dispatchedToCity}, {order.dispatchedToCountry}
+																</div>
+															</TableCell>
+															<TableCell className="hidden sm:table-cell">
+																<Badge
+																	className="border-gray-400 dark:border-gray-500"
+																	variant="secondary"
+																>
+																	{order.deliveryStatus}
+																</Badge>
+															</TableCell>
+															<TableCell className="hidden sm:table-cell">
+																<Badge
+																	className="border-gray-400 dark:border-gray-500"
+																	variant="secondary"
+																>
+																	{order.orderStatus}
+																</Badge>
+															</TableCell>
+															<TableCell className="hidden md:table-cell">
+																{order.orderDate}
+															</TableCell>
+															<TableCell className="text-right">£ {order.orderTotal}</TableCell>
+														</TableRow>
+													))
+												) : (
+													<TableRow>
+														<TableCell colSpan={5} rowSpan={4} className="text-center text-base">
+															No orders found.
+														</TableCell>
+													</TableRow>
+												)}
+											</TableBody>
+										</Table>
+										{/* Show the "Show More" button only if there are more rows than visibleRows */}
+										{visibleRows < dataset.length && (
+											<button
+												onClick={() => handleShowRows(true)}
+												className="mt-2 w-full rounded-md bg-muted/90 p-2 text-sm font-semibold shadow hover:bg-muted/60"
+											>
+												Show More
+											</button>
+										)}
+										{/* Show the "Show Less" button only if visibleRows is greater than 10 */}
+										{visibleRows > 10 && (
+											<button
+												onClick={() => handleShowRows(false)}
+												className="mt-2 w-full rounded-md bg-muted/90 p-2 text-sm font-semibold shadow hover:bg-muted/60"
+											>
+												Show Less
+											</button>
+										)}
+									</CardContent>
+								</Card>
+							</TabsContent>
+						</>
 					) : (
 						<TabsContent value="all" className="fade-down">
 							<Card

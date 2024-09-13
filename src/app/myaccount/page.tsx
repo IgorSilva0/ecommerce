@@ -2,10 +2,10 @@
 
 import { EyeOff, Eye, ListFilter, Filter } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { OrdersTable } from "./components/ordersTable";
 import { type OrdersDataResponse } from "./utils/types";
+import { OrdersTable } from "@/ui/MyAccount/ordersTable";
 import { TooltipProvider } from "@/ui/shadcn/tooltip";
-import { OrdersChart } from "@/app/myaccount/components/ordersChart";
+import { OrdersChart } from "@/ui/MyAccount/ordersChart";
 import { Button } from "@/ui/shadcn/button";
 import {
 	DropdownMenu,
@@ -30,8 +30,8 @@ import {
 export default function Orders() {
 	const [displayCharts, setDisplayCharts] = useState(true);
 	const [ordersData, setOrdersData] = useState<OrdersDataResponse>([]);
-	const [filterYear, setFilterYear] = React.useState<string>("2024");
-	const [filterType, setFilterType] = React.useState<string>("Orders");
+	const [filterYear, setFilterYear] = useState<string>("2024");
+	const [filterType, setFilterType] = useState<string>("Orders");
 	const [fadeOut, setFadeOut] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [startShopping, setStartShopping] = useState(false);
@@ -67,8 +67,8 @@ export default function Orders() {
 				setLoading(false);
 				setTimeout(() => {
 					setStartShopping(true);
-				}, 2500);
-			}, 1500);
+				}, 3000);
+			}, 2000);
 			return () => {
 				clearTimeout(loadingTimeout);
 			};
@@ -147,7 +147,6 @@ export default function Orders() {
 								<DropdownMenuRadioGroup value={filterYear} onValueChange={setFilterYear}>
 									<DropdownMenuRadioItem value="2024">2024</DropdownMenuRadioItem>
 									<DropdownMenuRadioItem value="2023">2023</DropdownMenuRadioItem>
-									<DropdownMenuRadioItem value="2022">2022</DropdownMenuRadioItem>
 								</DropdownMenuRadioGroup>
 							</DropdownMenuContent>
 						</DropdownMenu>
